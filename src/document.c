@@ -59,7 +59,7 @@ int document_set_author(tex_document *doc, const char *author)
     return LIBTEX_OK;
 }
 
-int document_bf_write(const tex_document *doc, char *buffer, size_t buffer_size) 
+int document_write(const tex_document *doc, char *buffer, size_t buffer_size) 
 {
     if(doc == NULL || buffer == NULL) {
         return LIBTEX_EINVAL;

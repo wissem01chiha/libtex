@@ -31,3 +31,4 @@
 #include "libtex/document.h"
 #include "libtex/section.h"
 #include "libtex/environment.h"
+#include "libtex/equation.h"

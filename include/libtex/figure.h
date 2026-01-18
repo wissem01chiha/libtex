@@ -45,7 +45,7 @@ int figure_set_width(tex_figure* fig, const char* width);
 int figure_write(const tex_figure* fig, char* buffer, size_t buffer_size);
 
 #ifdef __cplusplus
-}; // extern "C"
+}; 
 #endif
 
 #endif // LIBTEX_FIGURE_H

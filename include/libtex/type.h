@@ -28,6 +28,10 @@
 #ifndef LIBTEX_TYPE_H
 #define LIBTEX_TYPE_H
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 typedef enum  tex_document_t
 {
     ARTICLE_DOC =0,
@@ -108,7 +112,11 @@ typedef enum tex_theorem_t
     REMARK =6,
     PROOF =7,
     CUSTOM_THEOREM =8
-    
+
 } tex_theorem_t;
+
+#ifdef __cplusplus
+};
+#endif
 
 #endif // LIBTEX_TYPE_H

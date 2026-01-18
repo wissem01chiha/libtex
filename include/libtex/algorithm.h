@@ -28,7 +28,18 @@
 #ifndef LIBTEX_ALGORITHM_H
 #define LIBTEX_ALGORITHM_H
 
+#ifdef __cplusplus
+extern "C" {
+#endif
 
+typedef struct tex_algorithm tex_algorithm;
+
+
+
+
+#ifdef __cplusplus
+};  
+#endif
 
 #endif // LIBTEX_ALGORITHM_H
 

@@ -1,34 +1,48 @@
- /**
-     * @brief Class for LaTeX itemize and enumerate environments
-     */
-    class List : public Environment
-    {
-    public:
-        enum class ListType
-        {
-            ITEMIZE,
-            ENUMERATE,
-            DESCRIPTION
-        };
+/**
+    BSD 2-Clause License
 
-        List(ListType type = ListType::ITEMIZE)
-            : Environment(type == ListType::ITEMIZE ? "itemize" : type == ListType::ENUMERATE ? "enumerate"
-                                                                                              : "description"),
-              m_type(type) {}
+    Copyright (c) 2026, wissem chiha 
 
-        void addItem(const std::string &item, const std::string &label = "")
-        {
-            m_items.push_back(item);
-            if (!label.empty())
-            {
-                m_itemLabels[m_items.size() - 1] = label;
-            }
-        }
+    Redistribution and use in source and binary forms, with or without
+    modification, are permitted provided that the following conditions are met:
 
-        std::string generate() const override;
+    1. Redistributions of source code must retain the above copyright notice, this
+    list of conditions and the following disclaimer.
 
-    private:
-        ListType m_type;
-        std::vector<std::string> m_items;
-        std::map<size_t, std::string> m_itemLabels; // For description lists
-    };
+    2. Redistributions in binary form must reproduce the above copyright notice,
+    this list of conditions and the following disclaimer in the documentation
+    and/or other materials provided with the distribution.
+
+    THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+    AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+    IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+    DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
+    FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+    DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+    SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+    CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+    OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+    OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+*/
+#ifndef LIBTEX_LIST_H
+#define LIBTEX_LIST_H
+
+#include "type.h"
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+typedef struct tex_list tex_list;
+
+tex_list* list_create(tex_list_t type, int err);
+int list_destroy(tex_list* lst);
+
+int list_add_item(tex_list* lst, const char* item, const char* label);
+int list_write(const tex_list* lst, char* buffer, size_t buffer_size);
+
+#ifdef __cplusplus
+};
+#endif
+
+#endif // LIBTEX_LIST_H

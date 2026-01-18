@@ -36,6 +36,10 @@ int figure_destroy(tex_figure *fig)
 
 int figure_set_caption(tex_figure *fig, const char *caption)
 {
+    if(fig == NULL || caption == NULL) {
+        return LIBTEX_EINVAL;
+    }
+    fig->caption = _strdup(caption);
     return LIBTEX_OK;
 }
 

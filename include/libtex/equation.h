@@ -24,29 +24,50 @@
     OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
     OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
+#ifndef LIBTEX_EQUATION_H
+#define LIBTEX_EQUATION_H
 
-    /**
-     * @brief Class for LaTeX mathematical equations
-     */
-    class Equation : public Environment
-    {
-    public:
-        Equation(bool numbered = true)
-            : Environment(numbered ? "equation" : "equation*") {}
+#ifdef __cplusplus
+extern "C" {
+#endif
 
-        void setContent(const std::string &content)
-        {
-            m_content = content;
-        }
+typedef struct tex_equation tex_equation;
 
-        void setLabel(const std::string &label)
-        {
-            m_label = label;
-        }
+tex_equation* equation_create(int numbered, int err);
+int equation_destroy(tex_equation* eq);
+int equation_set_content(tex_equation* eq, const char* content);
+int equation_set_label(tex_equation* eq, const char* label);
+int equation_write(const tex_equation* eq, char* buffer, size_t buffer_size);
 
-        std::string generate() const override;
 
-    private:
-        std::string m_content;
-        std::string m_label;
-    };
+#ifdef __cplusplus
+}; 
+#endif
+
+#endif // LIBTEX_EQUATION_H
+
+    // /**
+    //  * @brief Class for LaTeX mathematical equations
+    //  */
+    // class Equation : public Environment
+    // {
+    // public:
+    //     Equation(bool numbered = true)
+    //         : Environment(numbered ? "equation" : "equation*") {}
+
+    //     void setContent(const std::string &content)
+    //     {
+    //         m_content = content;
+    //     }
+
+    //     void setLabel(const std::string &label)
+    //     {
+    //         m_label = label;
+    //     }
+
+    //     std::string generate() const override;
+
+    // private:
+    //     std::string m_content;
+    //     std::string m_label;
+    // };

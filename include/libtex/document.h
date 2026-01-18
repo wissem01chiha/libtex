@@ -55,7 +55,7 @@ int document_add_package(tex_document* doc,
 int document_add_section(tex_document* doc,
                          const tex_section* sec);
 
-int document_bf_write(const tex_document* doc,
+int document_write(const tex_document* doc,
                     char* buffer, 
                     size_t buffer_size);
 
@@ -64,7 +64,7 @@ int document_fs_write(const tex_document* doc,
 
 
 #ifdef __cplusplus
-}; // extern "C"
+}; 
 #endif
 
 #endif // LIBTEX_DOCUMENT_H
