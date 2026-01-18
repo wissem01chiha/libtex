@@ -24,41 +24,10 @@
     OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
     OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
-
-
-    /**
-     * @brief Class for LaTeX figures
-     */
-    class Figure : public Environment
-    {
-    public:
-        Figure(const std::string &imagePath, const std::string &position = "h")
-            : Environment("figure"), m_imagePath(imagePath)
-        {
-            m_options["position"] = position;
-        }
-
-        void setCaption(const std::string &caption)
-        {
-            m_caption = caption;
-        }
-
-        void setLabel(const std::string &label)
-        {
-            m_label = label;
-        }
-
-        void setWidth(const std::string &width)
-        {
-            m_width = width;
-        }
-
-        std::string generate() const override;
-
-    private:
-        std::string m_imagePath;
-        std::string m_caption;
-        std::string m_label;
-        std::string m_width = "0.8\\textwidth";
-        std::map<std::string, std::string> m_options;
-    };
+#include "libtex/version.h"
+#include "libtex/errno.h"
+#include "libtex/figure.h"
+#include "libtex/type.h"
+#include "libtex/document.h"
+#include "libtex/section.h"
+#include "libtex/environment.h"

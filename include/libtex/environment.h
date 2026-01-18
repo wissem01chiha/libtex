@@ -25,36 +25,55 @@
     OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
+#ifndef LIBTEX_ENVIRONMENT_H
+#define LIBTEX_ENVIRONMENT_H
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+typedef struct tex_environment tex_environment;
+
+int environment_create(const char* name, tex_environment** env, int err);
+int environment_destroy(tex_environment* env);
+
+int environment_begin_write(const tex_environment* env,
+                      char* buffer, 
+                      size_t buffer_size);
 
 
-    /**
-     * @brief Class to represent a LaTeX document section
-     */
-    class Section
-    {
-    public:
-        enum class Level
-        {
-            CHAPTER = -1,     // For chapters (only for reports and books)
-            SECTION = 0,      // For sections
-            SUBSECTION = 1,   // For subsections
-            SUBSUBSECTION = 2 // For subsubsections
-        };
+int environment_end_write(const tex_environment* env,
+                    char* buffer, 
+                    size_t buffer_size);
+                    
+#ifdef __cplusplus
+}; 
+#endif
 
-        Section(const std::string &title, Level level = Level::SECTION)
-            : m_title(title), m_level(level) {}
+#endif // LIBTEX_ENVIRONMENT_H
+ 
+ 
+//  /**
+//      * @brief Base class for LaTeX environment
+//      */
+//     class Environment
+//     {
+//     public:
+//         Environment(const std::string &name) : m_name(name) {}
+//         virtual ~Environment() = default;
 
-        void addContent(const std::string &content)
-        {
-            m_content.push_back(content);
-        }
+//         virtual std::string begin() const
+//         {
+//             return "\\begin{" + m_name + "}\n";
+//         }
 
-        std::string generate() const;
+//         virtual std::string end() const
+//         {
+//             return "\\end{" + m_name + "}\n";
+//         }
 
-    private:
-        std::string m_title;
-        Level m_level;
-        std::vector<std::string> m_content;
-    };
+//         virtual std::string generate() const = 0;
 
-   
+//     protected:
+//         std::string m_name;
+//     };

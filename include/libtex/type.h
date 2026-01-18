@@ -25,11 +25,90 @@
     OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-#ifndef TEXIO_ERRNO_H_
-#define TEXIO_ERRNO_H_
+#ifndef LIBTEX_TYPE_H
+#define LIBTEX_TYPE_H
 
-#include <errno.h>
+typedef enum  tex_document_t
+{
+    ARTICLE_DOC =0,
+    REPORT_DOC =1,
+    BOOK_DOC =2,
+    PRESENTATION_DOC =3
 
+} tex_document_t;
 
+typedef enum tex_language_t
+{
+    ENGLISH =0,  
+    FRENCH,
+    GERMAN,
+    SPANISH,
+    ITALIAN,
+    PORTUGUESE,
+    DUTCH,
+    RUSSIAN,
+    CHINESE,
+    JAPANESE,
+    ARABIC
 
-#endif // TEXIO_ERRNO_H_
+} tex_language_t;
+
+typedef enum tex_bibstyle_t
+{
+    PLAIN =0,    
+    ALPHA =1,    
+    ABBRV =2,    
+    ACM =3,      
+    IEEE =4,     
+    APA =5,      
+    CHICAGO =6,  
+    MLA =7,      
+    HARVARD =8,  
+    CUSTOM_BIBSTYLE =9 
+
+} tex_bibstyle_t;
+
+typedef enum tex_sectionlevel_t
+{
+    CHAPTER = 0,      
+    SECTION = 1,       
+    SUBSECTION = 2,    
+    SUBSUBSECTION = 3 
+
+} tex_sectionlevel_t;
+
+typedef enum tex_list_t
+{
+    ITEMIZE =0,
+    ENUMERATE =1,
+    DESCRIPTION =2
+
+} tex_list_t;
+
+typedef enum tex_bib_t
+{
+    ARTICLE =0,
+    BOOK =1,
+    INPROCEEDINGS =2,
+    TECHREPORT =3,
+    PHDTHESIS =4,
+    MASTERSTHESIS =5,
+    MISC =6
+
+} tex_bib_t;
+
+typedef enum tex_theorem_t
+{
+    THEOREM =0,
+    LEMMA =1,
+    PROPOSITION =2,
+    COROLLARY =3,
+    DEFINITION =4,
+    EXAMPLE =5,
+    REMARK =6,
+    PROOF =7,
+    CUSTOM_THEOREM =8
+    
+} tex_theorem_t;
+
+#endif // LIBTEX_TYPE_H

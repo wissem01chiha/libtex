@@ -1,5 +1,4 @@
 /**
-
     BSD 2-Clause License
 
     Copyright (c) 2026, wissem chiha 
@@ -26,7 +25,28 @@
     OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-#include "texio/version.h"
-#include "texio/errno.h"
-#include "texio/figure.h"
-#include "texio/type.h"
+    /**
+     * @brief Class for LaTeX mathematical equations
+     */
+    class Equation : public Environment
+    {
+    public:
+        Equation(bool numbered = true)
+            : Environment(numbered ? "equation" : "equation*") {}
+
+        void setContent(const std::string &content)
+        {
+            m_content = content;
+        }
+
+        void setLabel(const std::string &label)
+        {
+            m_label = label;
+        }
+
+        std::string generate() const override;
+
+    private:
+        std::string m_content;
+        std::string m_label;
+    };

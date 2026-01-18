@@ -25,29 +25,18 @@
     OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
+#ifndef LIBTEX_SECTION_H
+#define LIBTEX_SECTION_H
 
-    /**
-     * @brief Class for LaTeX mathematical equations
-     */
-    class Equation : public Environment
-    {
-    public:
-        Equation(bool numbered = true)
-            : Environment(numbered ? "equation" : "equation*") {}
+#include "type.h"
 
-        void setContent(const std::string &content)
-        {
-            m_content = content;
-        }
+typedef struct tex_section tex_section;
 
-        void setLabel(const std::string &label)
-        {
-            m_label = label;
-        }
+tex_section* section_create(const char* title, tex_sectionlevel_t level, int err);
+int section_destroy(tex_section* sec);
 
-        std::string generate() const override;
+int section_add_content(tex_section* sec, const char* content);
 
-    private:
-        std::string m_content;
-        std::string m_label;
-    };
+int section_write(const tex_section* sec, char* buffer, size_t buffer_size);
+
+#endif // LIBTEX_SECTION_H
