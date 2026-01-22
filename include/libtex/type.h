@@ -1,6 +1,4 @@
 /**
-    BSD 2-Clause License
-
     Copyright (c) 2026, wissem chiha 
 
     Redistribution and use in source and binary forms, with or without
@@ -44,16 +42,16 @@ typedef enum  tex_document_t
 typedef enum tex_language_t
 {
     ENGLISH =0,  
-    FRENCH,
-    GERMAN,
-    SPANISH,
-    ITALIAN,
-    PORTUGUESE,
-    DUTCH,
-    RUSSIAN,
-    CHINESE,
-    JAPANESE,
-    ARABIC
+    FRENCH=1,
+    GERMAN=2,
+    SPANISH=3,
+    ITALIAN=4,
+    PORTUGUESE=5,
+    DUTCH=6,
+    RUSSIAN=7,
+    CHINESE=8,
+    JAPANESE=9,
+    ARABIC=10
 
 } tex_language_t;
 
@@ -72,14 +70,14 @@ typedef enum tex_bibstyle_t
 
 } tex_bibstyle_t;
 
-typedef enum tex_sectionlevel_t
+typedef enum tex_section_t
 {
     CHAPTER = 0,      
     SECTION = 1,       
     SUBSECTION = 2,    
     SUBSUBSECTION = 3 
 
-} tex_sectionlevel_t;
+} tex_section_t;
 
 typedef enum tex_list_t
 {
@@ -114,6 +112,43 @@ typedef enum tex_theorem_t
     CUSTOM_THEOREM =8
 
 } tex_theorem_t;
+
+typedef enum tex_transition_t
+{
+    NONE=0,
+    FADE=1,
+    PUSH=2,
+    COVER=3,
+    UNCOVER=4,
+    SPLIT=5,
+    BLINDS=6,
+    WIPE=7
+} tex_transition_t;
+
+typedef enum tex_color_theme_t
+{
+    DEFAULT=0,
+    BEAVER=1,
+    CRANE=2,
+    DOLPHIN=3,
+    DOVE=4,
+    FLY=5,
+    SEAGULL=6,
+    WOLVERINE=7
+} tex_color_theme_t;
+
+typedef enum tex_theme_t
+{
+    DEFAULT=0,
+    BERKELEY=1,
+    MADRID=2,
+    ANTIBES=3,
+    COPENHAGEN=4,
+    BERLIN=5,
+    MANHATTAN=6,
+    WARSAW=7,
+    SINGAPORE=8
+} tex_theme_t;
 
 #ifdef __cplusplus
 };

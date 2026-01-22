@@ -1,6 +1,4 @@
 /**
-    BSD 2-Clause License
-
     Copyright (c) 2026, wissem chiha 
 
     Redistribution and use in source and binary forms, with or without
@@ -24,10 +22,18 @@
     OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
     OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
-    /**
-     * @brief Class for LaTeX report documents
-     */
-    class Report : public Document
+
+#ifndef LIBTEX_REPORT_H
+#define LIBTEX_REPORT_H
+
+#include "document.h"
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+
+    class Report  
     {
     public:
         Report(const std::string &title = "", const std::string &author = "",
@@ -71,3 +77,9 @@
         bool m_includeListOfFigures = false;
         bool m_includeListOfTables = false;
     };
+
+#ifdef __cplusplus
+};
+#endif
+
+#endif // LIBTEX_REPORT_H

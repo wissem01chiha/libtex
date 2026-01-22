@@ -1,7 +1,4 @@
 /**
-
-    BSD 2-Clause License
-
     Copyright (c) 2026, wissem chiha 
 
     Redistribution and use in source and binary forms, with or without
@@ -26,6 +23,12 @@
     OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
+#ifndef LIBTEX_TABLE_H
+#define LIBTEX_TABLE_H
+
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 /**
      * @brief Class for LaTeX tables
@@ -63,3 +66,9 @@
         std::string m_label;
         std::map<std::string, std::string> m_options;
     };
+
+#ifdef __cplusplus
+};
+#endif
+
+#endif // LIBTEX_TABLE_H

@@ -1,6 +1,4 @@
 /**
-    BSD 2-Clause License
-
     Copyright (c) 2026, wissem chiha 
 
     Redistribution and use in source and binary forms, with or without
@@ -24,6 +22,7 @@
     OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
     OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
+
 #ifndef LIBTEX_VERSION_H
 #define LIBTEX_VERSION_H
 

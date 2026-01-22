@@ -4,13 +4,13 @@
 struct tex_section {
 
     char* title;
-    tex_sectionlevel_t level;
+    tex_section_t level;
     struct tex_section** subsection;
     size_t subsection_count;
     char** content;
 };
 
-tex_section* section_create(const char* title, tex_sectionlevel_t level, int err)
+tex_section* section_create(const char* title, tex_section_t level, int err)
 {
     tex_section* sec = calloc(1, sizeof(tex_section));
     if (sec == NULL) {

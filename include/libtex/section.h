@@ -1,6 +1,4 @@
 /**
-    BSD 2-Clause License
-
     Copyright (c) 2026, wissem chiha 
 
     Redistribution and use in source and binary forms, with or without
@@ -30,13 +28,20 @@
 
 #include "type.h"
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 typedef struct tex_section tex_section;
 
-tex_section* section_create(const char* title, tex_sectionlevel_t level, int err);
+tex_section* section_create(const char* title, tex_section_t level, int err);
 int section_destroy(tex_section* sec);
 
 int section_add_content(tex_section* sec, const char* content);
-
 int section_write(const tex_section* sec, char* buffer, size_t buffer_size);
+
+#ifdef __cplusplus
+};
+#endif
 
 #endif // LIBTEX_SECTION_H

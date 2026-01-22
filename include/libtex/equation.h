@@ -1,6 +1,4 @@
 /**
-    BSD 2-Clause License
-
     Copyright (c) 2026, wissem chiha 
 
     Redistribution and use in source and binary forms, with or without
@@ -24,6 +22,7 @@
     OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
     OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
+
 #ifndef LIBTEX_EQUATION_H
 #define LIBTEX_EQUATION_H
 
@@ -35,6 +34,7 @@ typedef struct tex_equation tex_equation;
 
 tex_equation* equation_create(int numbered, int err);
 int equation_destroy(tex_equation* eq);
+
 int equation_set_content(tex_equation* eq, const char* content);
 int equation_set_label(tex_equation* eq, const char* label);
 int equation_write(const tex_equation* eq, char* buffer, size_t buffer_size);

@@ -1,6 +1,4 @@
 /**
-    BSD 2-Clause License
-
     Copyright (c) 2026, wissem chiha 
 
     Redistribution and use in source and binary forms, with or without
@@ -25,6 +23,14 @@
     OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
+#ifndef LIBTEX_ARTICLE_H
+#define LIBTEX_ARTICLE_H
+
+#include "document.h"
+
+#ifdef __cplusplus
+extern "C" {
+#endif
 
     /**
      * @brief Class for LaTeX article documents
@@ -102,3 +108,9 @@
         bool m_includeIndex = false;               // To enable/disable the index
         bool m_includeTableOfContents = false;     // To enable/disable the table of contents
     };
+
+#ifdef __cplusplus
+};
+#endif
+
+#endif // LIBTEX_ARTICLE_H

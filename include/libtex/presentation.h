@@ -1,6 +1,4 @@
 /**
-    BSD 2-Clause License
-
     Copyright (c) 2026, wissem chiha 
 
     Redistribution and use in source and binary forms, with or without
@@ -24,57 +22,21 @@
     OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
     OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
-    /**
-     * @brief Class for LaTeX presentation documents (Beamer)
-     */
-    class Presentation : public Document
+
+#ifndef LIBTEX_PRESENTATION_H
+#define LIBTEX_PRESENTATION_H
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+    class Presentation  
     {
-    public:
-        /**
-         * @brief Theme for Beamer presentations
-         */
-        enum class Theme
-        {
-            DEFAULT,
-            BERKELEY,
-            MADRID,
-            ANTIBES,
-            COPENHAGEN,
-            BERLIN,
-            MANHATTAN,
-            WARSAW,
-            SINGAPORE
-        };
 
-        /**
-         * @brief Color theme for Beamer presentations
-         */
-        enum class ColorTheme
-        {
-            DEFAULT,
-            BEAVER,
-            CRANE,
-            DOLPHIN,
-            DOVE,
-            FLY,
-            SEAGULL,
-            WOLVERINE
-        };
 
-        /**
-         * @brief Transition effect for slides
-         */
-        enum class Transition
-        {
-            NONE,
-            FADE,
-            PUSH,
-            COVER,
-            UNCOVER,
-            SPLIT,
-            BLINDS,
-            WIPE
-        };
+  
+
+
 
         Presentation(const std::string &title = "", const std::string &author = "",
                      const std::string &date = "\\today", Language language = Language::ENGLISH,
@@ -187,4 +149,8 @@
         std::string getLevelCommand(Section::Level level) const;
     };
 
-    
+#ifdef __cplusplus
+};
+#endif
+
+#endif // LIBTEX_PRESENTATION_H
