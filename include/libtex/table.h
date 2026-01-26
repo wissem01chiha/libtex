@@ -30,42 +30,42 @@
 extern "C" {
 #endif
 
-/**
-     * @brief Class for LaTeX tables
-     */
-    class Table : public Environment
-    {
-    public:
-        Table(const std::vector<std::string> &headers, const std::string &position = "h")
-            : Environment("table"), m_headers(headers)
-        {
-            m_options["position"] = position;
-        }
+// /**
+//      * @brief Class for LaTeX tables
+//      */
+//     class Table : public Environment
+//     {
+//     public:
+//         Table(const std::vector<std::string> &headers, const std::string &position = "h")
+//             : Environment("table"), m_headers(headers)
+//         {
+//             m_options["position"] = position;
+//         }
 
-        void setCaption(const std::string &caption)
-        {
-            m_caption = caption;
-        }
+//         void setCaption(const std::string &caption)
+//         {
+//             m_caption = caption;
+//         }
 
-        void setLabel(const std::string &label)
-        {
-            m_label = label;
-        }
+//         void setLabel(const std::string &label)
+//         {
+//             m_label = label;
+//         }
 
-        void addRow(const std::vector<std::string> &row)
-        {
-            m_rows.push_back(row);
-        }
+//         void addRow(const std::vector<std::string> &row)
+//         {
+//             m_rows.push_back(row);
+//         }
 
-        std::string generate() const override;
+//         std::string generate() const override;
 
-    private:
-        std::vector<std::string> m_headers;
-        std::vector<std::vector<std::string>> m_rows;
-        std::string m_caption;
-        std::string m_label;
-        std::map<std::string, std::string> m_options;
-    };
+//     private:
+//         std::vector<std::string> m_headers;
+//         std::vector<std::vector<std::string>> m_rows;
+//         std::string m_caption;
+//         std::string m_label;
+//         std::map<std::string, std::string> m_options;
+//     };
 
 #ifdef __cplusplus
 };

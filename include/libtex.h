@@ -34,5 +34,8 @@
 #include "libtex/section.h"
 #include "libtex/environment.h"
 #include "libtex/equation.h"
+#include "libtex/report.h"
+#include "libtex/presentation.h"
+#include "libtex/bibliography.h"
 
 #endif // LIBTEX_H

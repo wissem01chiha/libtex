@@ -32,51 +32,17 @@
 extern "C" {
 #endif
 
+typedef struct tex_report tex_report;
 
-    class Report  
-    {
-    public:
-        Report(const std::string &title = "", const std::string &author = "",
-               const std::string &date = "\\today", Language language = Language::ENGLISH)
-            : Document(DocumentType::REPORT, title, author, date, language)
-        {
-            // Add default packages commonly used in reports
-            addPackage("geometry", "margin=1in");
-            addPackage("amsmath");
-            addPackage("graphicx");
-            addPackage("hyperref");
-            addPackage("tocloft");
-        }
+int report_create(tex_report** report, const char* title, const char* author,
+                  const char* date, int language, int err);
+int report_destroy(tex_report* report);
 
-        void setAbstract(const std::string &abstract)
-        {
-            m_abstract = abstract;
-        }
-
-        void includeTableOfContents(bool include = true)
-        {
-            m_includeTableOfContents = include;
-        }
-
-        void includeListOfFigures(bool include = true)
-        {
-            m_includeListOfFigures = include;
-        }
-
-        void includeListOfTables(bool include = true)
-        {
-            m_includeListOfTables = include;
-        }
-
-        std::string generatePreamble() const override;
-        std::string generateDocument() const override;
-
-    private:
-        std::string m_abstract;
-        bool m_includeTableOfContents = false;
-        bool m_includeListOfFigures = false;
-        bool m_includeListOfTables = false;
-    };
+int report_set_abstract(tex_report* report, const char* abstract);
+int report_include_table_of_contents(tex_report* report, int include);
+int report_include_list_of_figures(tex_report* report, int include);
+int report_include_list_of_tables(tex_report* report, int include);
+int report_generate(tex_report* report, char** output, size_t* output_size);
 
 #ifdef __cplusplus
 };
