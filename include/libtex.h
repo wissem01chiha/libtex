@@ -29,7 +29,7 @@
 #include "libtex/version.h"
 #include "libtex/errno.h"
 #include "libtex/figure.h"
-#include "libtex/type.h"
+#include "libtex/textype.h"
 #include "libtex/document.h"
 #include "libtex/section.h"
 #include "libtex/environment.h"
@@ -37,5 +37,8 @@
 #include "libtex/report.h"
 #include "libtex/presentation.h"
 #include "libtex/bibliography.h"
+#include "libtex/table.h"
+#include "libtex/texutil.h"
+#include "libtex/book.h"
 
 #endif // LIBTEX_H

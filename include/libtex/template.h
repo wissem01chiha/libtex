@@ -23,9 +23,7 @@
     OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-// /**
-//      * @brief Class to represent a document template
-//      */
+
 //     class DocumentTemplate
 //     {
 //     public:

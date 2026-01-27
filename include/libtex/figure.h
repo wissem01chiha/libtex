@@ -26,6 +26,7 @@
 #ifndef LIBTEX_FIGURE_H
 #define LIBTEX_FIGURE_H
 
+#include "textype.h"
 #include <stddef.h>
 
 #ifdef __cplusplus 
@@ -35,7 +36,7 @@ extern "C" {
 typedef struct tex_figure tex_figure;
 
 tex_figure* figure_create(const char* image_path, const char* position);
-int figure_destroy(tex_figure* fig);
+int figure_delete(tex_figure* fig);
 
 int figure_set_caption(tex_figure* fig, const char* caption);
 int figure_set_label(tex_figure* fig, const char* label);

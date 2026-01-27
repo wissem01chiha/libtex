@@ -114,3 +114,5 @@ extern "C" {
 #ifdef __cplusplus
 };
 #endif
+
+#endif // LIBTEX_BOOK_H

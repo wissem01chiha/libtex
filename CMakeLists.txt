@@ -13,46 +13,61 @@ list(APPEND CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/cmake")
 
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
-option(LIBTEX_BUILD_SHARED "Build shared lib" OFF)
-option(LIBTEX_BUILD_TESTS "Build tests" ON)
-option(LIBTEX_BUILD_EXAMPLES "Build examples" ON)
-option(LIBTEX_BUILD_DOC "Build documentation" ON)
-option(LIBTEX_DO_INSTALL "Install libtex" OFF)
+option(BUILD_SHARED "Build shared lib" OFF)
+option(BUILD_TESTS "Build tests" ON)
+option(BUILD_REGRESS "Build regression tests" ON)
+option(BUILD_DOC "Build documentation" ON)
+option(DO_INSTALL "Install libtex" OFF)
+option(ENABLE_COVERAGE "Enable coverage reporting" OFF)
+option(BUILD_TOOLS "Build tools in the script directory" ON)
 
 include_directories(
     ${CMAKE_CURRENT_SOURCE_DIR}/include
 )
 
-set(tex_sources
+set(sources
     src/figure.c
     src/version.c
     src/document.c
     src/section.c
     src/environment.c
+    src/theorem.c
+    src/book.c
+    src/texutil.c
+    src/equation.c
 )
 
-set(tex_headers
+set(headers
     include/libtex/figure.h
     include/libtex/theorem.h
     include/libtex/errno.h
     include/libtex/type.h
     include/libtex/version.h
+    include/libtex/document.h
+    include/libtex/section.h
+    include/libtex/environment.h
+    include/libtex/book.h
 )
 
-set(tex_flags
+set(tests
+    test/document_fs_write_test.c
+    test/getusername_test.c
+)
+
+set(flags
     -Wall
 )
 
 if(MSVC)
-    list(APPEND tex_flags
+    list(APPEND flags
         /W4
     )
 endif()
 
-if(LIBTEX_BUILD_SHARED)
-    add_library(libtex SHARED ${tex_sources})
+if(BUILD_SHARED)
+    add_library(libtex SHARED ${sources})
 else()
-    add_library(libtex STATIC ${tex_sources})
+    add_library(libtex STATIC ${sources})
 endif()
 
 target_include_directories(libtex
@@ -61,40 +76,29 @@ target_include_directories(libtex
         $<INSTALL_INTERFACE:include>
 )
 
-target_compile_options(libtex PRIVATE ${tex_flags})
+target_compile_options(libtex PRIVATE ${flags})
 target_compile_features(libtex PUBLIC c_std_99)
 
-if(LIBTEX_BUILD_TESTS)
+if(BUILD_TESTS)
     include(CTest)
     enable_testing()
+    foreach(testfile ${tests})
+        get_filename_component(testname ${testfile} NAME_WE)
+        add_executable(${testname} ${testfile})
+        add_dependencies(${testname} libtex)
+        target_link_libraries(${testname} PRIVATE libtex)
+        target_compile_options(${testname} PRIVATE ${flags})
+        add_test(NAME ${testname} COMMAND ${testname})
+    endforeach()
 endif()
 
-if(LIBTEX_BUILD_EXAMPLES)
-     
+if(ENABLE_COVERAGE)
+  find_program(LCOV lcov REQUIRED)
+  find_program(GENHTML genhtml REQUIRED)
 endif()
 
-if(LIBTEX_DO_INSTALL)
 
-    include(GNUInstallDirs)
-    set(CMAKE_INSTALL_PREFIX ${CMAKE_CURRENT_SOURCE_DIR}/install CACHE PATH "Install path" FORCE)
-    install(TARGETS libtex
-        LIBRARY DESTINATION lib
-        ARCHIVE DESTINATION lib
-    )
+if(DO_INSTALL)
 
-    install(DIRECTORY include/ DESTINATION include)
-
-    set(CPACK_PROJECT_NAME ${PROJECT_NAME})
-    set(CPACK_PROJECT_VERSION ${PROJECT_VERSION})
-    set(CPACK_GENERATOR "DEB")
-    set(CPACK_DEBIAN_PACKAGE_MAINTAINER "Wissem Chiha") 
-    set(CPACK_DEBIAN_PACKAGE_SHLIBDEPS ON)
-    set(CPACK_DEBIAN_PACKAGE_DEPENDS "libc6 (>= 2.4)")
-    set(CPACK_DEBIAN_PACKAGE_SECTION "libs")
-    set(CPACK_DEBIAN_PACKAGE_DESCRIPTION "LIBTEX – C Library for Generating LaTeX TEX Documents")  
-    set(CPACK_DEBIAN_PACKAGE_HOMEPAGE "https://github.com/wissem01chiha/libtex")  
-    set(CPACK_DEBIAN_PACKAGE_PRIORITY "optional") 
-
-    include(CPack)
-
+  
 endif()

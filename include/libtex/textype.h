@@ -23,8 +23,8 @@
     OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-#ifndef LIBTEX_TYPE_H
-#define LIBTEX_TYPE_H
+#ifndef LIBTEX_TEXTYPE_H
+#define LIBTEX_TEXTYPE_H
 
 #ifdef __cplusplus
 extern "C" {
@@ -127,7 +127,7 @@ typedef enum tex_transition_t
 
 typedef enum tex_color_theme_t
 {
-    DEFAULT=0,
+    DEFAULT_COLOR=0,
     BEAVER=1,
     CRANE=2,
     DOLPHIN=3,
@@ -139,7 +139,7 @@ typedef enum tex_color_theme_t
 
 typedef enum tex_theme_t
 {
-    DEFAULT=0,
+    DEFAULT_THEME=0,
     BERKELEY=1,
     MADRID=2,
     ANTIBES=3,
@@ -154,4 +154,4 @@ typedef enum tex_theme_t
 };
 #endif
 
-#endif // LIBTEX_TYPE_H
+#endif // LIBTEX_TEXTYPE_H

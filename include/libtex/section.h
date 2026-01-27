@@ -26,7 +26,7 @@
 #ifndef LIBTEX_SECTION_H
 #define LIBTEX_SECTION_H
 
-#include "type.h"
+#include "textype.h"
 
 #ifdef __cplusplus
 extern "C" {
@@ -35,7 +35,7 @@ extern "C" {
 typedef struct tex_section tex_section;
 
 tex_section* section_create(const char* title, tex_section_t level, int err);
-int section_destroy(tex_section* sec);
+int section_delete(tex_section* sec);
 
 int section_add_content(tex_section* sec, const char* content);
 int section_write(const tex_section* sec, char* buffer, size_t buffer_size);

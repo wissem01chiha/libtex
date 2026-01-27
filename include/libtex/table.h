@@ -26,46 +26,27 @@
 #ifndef LIBTEX_TABLE_H
 #define LIBTEX_TABLE_H
 
+#include "textype.h"
+
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-// /**
-//      * @brief Class for LaTeX tables
-//      */
-//     class Table : public Environment
-//     {
-//     public:
-//         Table(const std::vector<std::string> &headers, const std::string &position = "h")
-//             : Environment("table"), m_headers(headers)
-//         {
-//             m_options["position"] = position;
-//         }
+typedef struct tex_table_row tex_table_row;
+typedef struct tex_table tex_table;
 
-//         void setCaption(const std::string &caption)
-//         {
-//             m_caption = caption;
-//         }
+tex_table_row* tex_table_row_create(size_t size, int err);
 
-//         void setLabel(const std::string &label)
-//         {
-//             m_label = label;
-//         }
+tex_table* table_create(const char* title, int err);
+int table_delete(tex_table* tab);
 
-//         void addRow(const std::vector<std::string> &row)
-//         {
-//             m_rows.push_back(row);
-//         }
+int table_set_caption(tex_table* tab, const char* caption);
+int table_set_label(tex_table* tab, const char* label);
 
-//         std::string generate() const override;
+int table_add_row(tex_table* tab, tex_table_row* rw);
 
-//     private:
-//         std::vector<std::string> m_headers;
-//         std::vector<std::vector<std::string>> m_rows;
-//         std::string m_caption;
-//         std::string m_label;
-//         std::map<std::string, std::string> m_options;
-//     };
+int table_write(const tex_table* tab, char* buffer, size_t buffer_size);
+
 
 #ifdef __cplusplus
 };

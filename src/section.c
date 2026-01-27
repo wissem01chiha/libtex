@@ -23,7 +23,7 @@ tex_section* section_create(const char* title, tex_section_t level, int err)
     return sec;
 }
 
-int section_destroy(tex_section *sec)
+int section_delete(tex_section *sec)
 {
     if(sec == NULL) {
         return LIBTEX_EINVAL;

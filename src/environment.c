@@ -1,4 +1,6 @@
 #include "libtex.h"
+#include <stdlib.h>
+#include <string.h>
 
 struct tex_environment {
     char* name;
@@ -17,7 +19,7 @@ int environment_create(const char* name, tex_environment** env, int err)
     return err;
 }
 
-int environment_destroy(tex_environment *env)
+int environment_delete(tex_environment *env)
 {
     if (env != NULL) {
         free(env->name);
@@ -74,8 +76,8 @@ int environment_write(const tex_environment *env, char *buffer, size_t buffer_si
     if(env_bg_wrt_err != LIBTEX_OK) {
         return env_bg_wrt_err;
     }
-    size_t buffer_size =  buffer_size - strlen(buffer);
-    env_end_wrt_err = environment_end_write(env, buffer + strlen(buffer),buffer_size);
+    size_t buffer_size_ =  buffer_size - strlen(buffer);
+    env_end_wrt_err = environment_end_write(env, buffer + strlen(buffer),buffer_size_);
     if(env_end_wrt_err != LIBTEX_OK) {
         return env_end_wrt_err;
     }

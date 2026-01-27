@@ -26,7 +26,7 @@
 #ifndef LIBTEX_LIST_H
 #define LIBTEX_LIST_H
 
-#include "type.h"
+#include "textype.h"
 
 #ifdef __cplusplus
 extern "C" {
@@ -35,7 +35,7 @@ extern "C" {
 typedef struct tex_list tex_list;
 
 tex_list* list_create(tex_list_t type, int err);
-int list_destroy(tex_list* lst);
+int list_delete(tex_list* lst);
 
 int list_add_item(tex_list* lst, const char* item, const char* label);
 int list_write(const tex_list* lst, char* buffer, size_t buffer_size);

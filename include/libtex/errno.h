@@ -35,6 +35,7 @@
 #endif
 
 #define LIBTEX_OK      0
+
 #define LIBTEX_EOF     (-4095)
 #define LIBTEX_UNKNOWN (-4094)
 #define LIBTEX_NOMEM  (-4093)
@@ -49,23 +50,23 @@
 #define LIBTEX_EACCES  (-4084)
 #define LIBTEX_ENOENT  (-4083)
 #define LIBTEX_EINVAL  (-4082)
-#define LIBTEX_ERANGE  (-4081)
-#define LIBTEX_EILSEQ  (-4080)
-#define LIBTEX_STRUNCATE (-4079)
+#define LIBTEX_ENUPTR  (-4081)
+#define LIBTEX_ERANGE  (-4080)
+#define LIBTEX_EOVERFLOW (-4079)
 
-#define LIBTEX_ESECTION  (-5100)
 #define LIBTEX_EDOCUMENT (-5200)
-#define LIBTEX_EENVBEGIN (-5101) 
-#define LIBTEX_EENVEND (-5102) 
-#define LIBTEX_EBRACES (-5103)  
-#define LIBTEX_ECOMMAND (-5104)  
+#define LIBTEX_ESECTION  (-5100)
+#define LIBTEX_EFIGURE  (-5300)
+#define LIBTEX_ETABLE  (-5400)
+#define LIBTEX_ELIST  (-5500)
+#define LIBTEX_EBOOK  (-5600)
+#define LIBTEX_EPTT  (-5700)
+#define LIBTEX_EREPORT  (-5800)
 
-#define LIBTEX_ECITE  (-5300)
-#define LIBTEX_EFIGURE (-5301)
-#define LIBTEX_ETABLE (-5302)
-#define LIBTEX_ELABEL (-5303)
+#define LIBTEX_ECITE  (-6000)
+#define LIBTEX_ELABEL (-6100)
 
 #define LIBTEX_EUTF8  LIBTEX_ERR(EILSEQ)
-#define LIBTEX_ECHARSET     (-5400)
+#define LIBTEX_ECHARSET     (-9400)
 
 #endif // LIBTEX_ERRNO_H

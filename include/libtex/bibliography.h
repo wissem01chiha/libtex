@@ -34,7 +34,7 @@ typedef struct tex_bibliography tex_bibliography;
 
 int bibliography_create(tex_bibliography** bibliography, const char* bib_file,
                            int style, const char* custom_style, int err);
-int bibliography_destroy(tex_bibliography* bibliography);
+int bibliography_delete(tex_bibliography* bibliography);
 
 int bibliography_set_bib_file(tex_bibliography* bibliography, const char* bib_file, int use_external_file);
 int bibliography_add_entry(tex_bibliography* bibliography, const char* entry_type,

@@ -24,10 +24,9 @@
    POSSIBILITY OF SUCH DAMAGE.
 */
 
-#ifndef LIBTEX_DOCUMENT_H
-#define LIBTEX_DOCUMENT_H
+#ifndef LIBTEX_TEXUTIL_H
+#define LIBTEX_TEXUTIL_H
 
-#include "section.h"
 #include "textype.h"
 
 #ifdef __cplusplus
@@ -35,32 +34,25 @@ extern "C"
 {
 #endif
 
-  typedef struct tex_document tex_document;
+#ifdef _MSC_VER
+#define strdup _strdup
+#endif
 
-  tex_document *document_create (tex_document_t type, const char *title,
-                                 const char *author, const char *date,
-                                 int language, int *err);
+#ifndef _MSC_VER
+#include <pwd.h>
+#include <unistd.h>
+#endif
 
-  int document_delete (tex_document *doc);
+  const char *getusername (int err);
 
-  int document_set_title (tex_document *doc, const char *title);
-  int document_set_author (tex_document *doc, const char *author);
-  int document_set_date (tex_document *doc, const char *date);
-  int document_set_language (tex_document *doc, tex_language_t language);
+  const char *getdocumentclass (tex_document_t doc_t);
 
-  int document_add_content (tex_document *doc, const char *content);
+  const char* getdocumentlang(tex_language_t lang_t);
 
-  int document_add_package (tex_document *doc, const char *package,
-                            const char *options);
-  int document_add_section (tex_document *doc, const tex_section *sec);
-
-  int document_write (const tex_document *doc, char *buffer,
-                      size_t buffer_size);
-
-  int document_fs_write (const tex_document *doc, const char *file);
+  const char* getdate(int err);
 
 #ifdef __cplusplus
 };
 #endif
 
-#endif // LIBTEX_DOCUMENT_H
+#endif // LIBTEX_TEXUTIL_H

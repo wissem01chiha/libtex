@@ -42,7 +42,7 @@ tex_list *list_create(tex_list_t type, int err)
     return NULL;
 }
 
-int list_destroy(tex_list *lst)
+int list_delete(tex_list *lst)
 {
     return 0;
 }

@@ -36,7 +36,7 @@ typedef struct tex_report tex_report;
 
 int report_create(tex_report** report, const char* title, const char* author,
                   const char* date, int language, int err);
-int report_destroy(tex_report* report);
+int report_delete(tex_report* report);
 
 int report_set_abstract(tex_report* report, const char* abstract);
 int report_include_table_of_contents(tex_report* report, int include);

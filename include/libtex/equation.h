@@ -26,6 +26,8 @@
 #ifndef LIBTEX_EQUATION_H
 #define LIBTEX_EQUATION_H
 
+#include "textype.h"
+
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -33,7 +35,7 @@ extern "C" {
 typedef struct tex_equation tex_equation;
 
 tex_equation* equation_create(int numbered, int err);
-int equation_destroy(tex_equation* eq);
+int equation_delete(tex_equation* eq);
 
 int equation_set_content(tex_equation* eq, const char* content);
 int equation_set_label(tex_equation* eq, const char* label);
@@ -46,9 +48,9 @@ int equation_write(const tex_equation* eq, char* buffer, size_t buffer_size);
 
 #endif // LIBTEX_EQUATION_H
 
-    // /**
-    //  * @brief Class for LaTeX mathematical equations
-    //  */
+
+
+
     // class Equation : public Environment
     // {
     // public:

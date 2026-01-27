@@ -23,7 +23,7 @@ tex_figure *figure_create(const char *image_path, const char *position)
     return fig;
 }
 
-int figure_destroy(tex_figure *fig)
+int figure_delete(tex_figure *fig)
 {
     if (fig == NULL) {
         return 0;

@@ -37,7 +37,7 @@ typedef struct tex_presentation tex_presentation;
 int presentation_create(tex_presentation** presentation, const char* title,
                         const char* author, const char* date, int language,
                         int theme, int color_theme, int err);
-int presentation_destroy(tex_presentation* presentation);
+int presentation_delete(tex_presentation* presentation);
 
 int presentation_set_institute(tex_presentation* presentation, const char* institute);
 int presentation_set_subtitle(tex_presentation* presentation, const char* subtitle);

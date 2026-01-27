@@ -33,7 +33,7 @@ extern "C" {
 typedef struct tex_environment tex_environment;
 
 int environment_create(const char* name, tex_environment** env, int err);
-int environment_destroy(tex_environment* env);
+int environment_delete(tex_environment* env);
 
 int environment_begin_write(const tex_environment* env,
                       char* buffer, 
