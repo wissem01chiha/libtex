@@ -1,6 +1,4 @@
-#include "libtex.h"
-
-
+#include "tex.h"
 
 // /**
 //      * @brief Class for LaTeX itemize and enumerate environments
@@ -16,7 +14,8 @@
 //         };
 
 //         List(ListType type = ListType::ITEMIZE)
-//             : Environment(type == ListType::ITEMIZE ? "itemize" : type == ListType::ENUMERATE ? "enumerate"
+//             : Environment(type == ListType::ITEMIZE ? "itemize" : type ==
+//             ListType::ENUMERATE ? "enumerate"
 //                                                                                               : "description"),
 //               m_type(type) {}
 
@@ -37,12 +36,14 @@
 //         std::map<size_t, std::string> m_itemLabels; // For description lists
 //     };
 
-tex_list *list_create(tex_list_t type, int err)
+tex_list *
+list_create (tex_list_t type, int err)
 {
-    return NULL;
+  return NULL;
 }
 
-int list_delete(tex_list *lst)
+int
+list_delete (tex_list *lst)
 {
-    return 0;
+  return 0;
 }

@@ -1,61 +1,77 @@
-#include "libtex.h"
+#include "tex.h"
 #include <stdlib.h>
+#include <stdio.h>
 
-struct tex_section {
-
-    char* title;
-    tex_section_t level;
-    struct tex_section** subsection;
-    size_t subsection_count;
-    char** content;
+struct tex_section
+{
+  char *title;
+  tex_section_t level;
+  struct tex_section **subsection;
+  size_t subsection_count;
+  char **content;
 };
 
-tex_section* section_create(const char* title, tex_section_t level, int err)
+tex_section *
+section_create (const char *title, tex_section_t level, int err)
 {
-    tex_section* sec = calloc(1, sizeof(tex_section));
-    if (sec == NULL) {
-        err = LIBTEX_NOMEM;
-        return NULL;
+  tex_section *sec = calloc (1, sizeof (tex_section));
+  if (sec == NULL)
+    {
+      err = TEX_NOMEM;
+      return NULL;
     }
-    sec->title = _strdup(title);
-    sec->level = level;
-    err = LIBTEX_OK;
-    return sec;
+  sec->title = strdup (title);
+  sec->level = level;
+  err = TEX_OK;
+  return sec;
 }
 
-int section_delete(tex_section *sec)
+int
+section_delete (tex_section *sec)
 {
-    if(sec == NULL) {
-        return LIBTEX_EINVAL;
+  if (sec == NULL)
+    {
+      return TEX_EINVAL;
     }
-    free(sec->title);
-    free(sec->content);
-    free(sec);
-    return LIBTEX_OK;
+  free (sec->title);
+  free (sec->content);
+  free (sec);
+  return TEX_OK;
 }
 
-int section_add_content(tex_section *sec, const char *content)
+int
+section_add_content (tex_section *sec, const char *content)
 {
-    if(sec == NULL || content == NULL) {
-        return LIBTEX_EINVAL;
+  if (sec == NULL || content == NULL)
+    {
+      return TEX_EINVAL;
     }
-    sec->content = content;
-    return LIBTEX_OK;
+  sec->content = content;
+  return TEX_OK;
 }
 
-int section_write(const tex_section *sec, char *buffer, size_t buffer_size) 
+int
+section_write (const tex_section *sec, char *buffer, size_t buffer_size)
 {
-    if(sec == NULL || buffer == NULL) {
-        return LIBTEX_EINVAL;
+  if (sec == NULL || buffer == NULL)
+    {
+      return TEX_EINVAL;
     }
-    if(sec->level == CHAPTER){
-        snprintf(buffer, buffer_size, "\\chapter{%s}\n", sec->title);
-    } else if(sec->level == SECTION){
-        snprintf(buffer, buffer_size, "\\section{%s}\n", sec->title);
-    } else if(sec->level == SUBSECTION){
-        snprintf(buffer, buffer_size, "\\subsection{%s}\n", sec->title);
-    } else if(sec->level == SUBSUBSECTION){
-        snprintf(buffer, buffer_size, "\\subsubsection{%s}\n", sec->title); 
+  if (sec->level == CHAPTER)
+    {
+      snprintf (buffer, buffer_size, "\\chapter{%s}\n", sec->title);
     }
-    return LIBTEX_OK;
+  else if (sec->level == SECTION)
+    {
+      snprintf (buffer, buffer_size, "\\section{%s}\n", sec->title);
+    }
+  else if (sec->level == SUBSECTION)
+    {
+      snprintf (buffer, buffer_size, "\\subsection{%s}\n", sec->title);
+    }
+  else if (sec->level == SUBSUBSECTION)
+    {
+      snprintf (buffer, buffer_size, "\\subsubsection{%s}\n", sec->title);
+    }
+  return TEX_OK;
 }

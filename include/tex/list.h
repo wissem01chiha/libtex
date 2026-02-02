@@ -24,8 +24,8 @@
    POSSIBILITY OF SUCH DAMAGE.
 */
 
-#ifndef LIBTEX_TEXUTIL_H
-#define LIBTEX_TEXUTIL_H
+#ifndef TEX_LIST_H
+#define TEX_LIST_H
 
 #include "textype.h"
 
@@ -34,25 +34,16 @@ extern "C"
 {
 #endif
 
-#ifdef _MSC_VER
-#define strdup _strdup
-#endif
+  typedef struct tex_list tex_list;
 
-#ifndef _MSC_VER
-#include <pwd.h>
-#include <unistd.h>
-#endif
+  tex_list *list_create (tex_list_t type, int err);
+  int list_delete (tex_list *lst);
 
-  const char *getusername (int err);
-
-  const char *getdocumentclass (tex_document_t doc_t);
-
-  const char* getdocumentlang(tex_language_t lang_t);
-
-  const char* getdate(int err);
+  int list_add_item (tex_list *lst, const char *item, const char *label);
+  int list_write (const tex_list *lst, char *buffer, size_t buffer_size);
 
 #ifdef __cplusplus
 };
 #endif
 
-#endif // LIBTEX_TEXUTIL_H
+#endif // TEX_LIST_H

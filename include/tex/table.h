@@ -24,10 +24,9 @@
    POSSIBILITY OF SUCH DAMAGE.
 */
 
-#ifndef LIBTEX_DOCUMENT_H
-#define LIBTEX_DOCUMENT_H
+#ifndef TEX_TABLE_H
+#define TEX_TABLE_H
 
-#include "section.h"
 #include "textype.h"
 
 #ifdef __cplusplus
@@ -35,32 +34,23 @@ extern "C"
 {
 #endif
 
-  typedef struct tex_document tex_document;
+  typedef struct tex_table_row tex_table_row;
+  typedef struct tex_table tex_table;
 
-  tex_document *document_create (tex_document_t type, const char *title,
-                                 const char *author, const char *date,
-                                 int language, int *err);
+  tex_table_row *tex_table_row_create (size_t size, int err);
 
-  int document_delete (tex_document *doc);
+  tex_table *table_create (const char *title, int err);
+  int table_delete (tex_table *tab);
 
-  int document_set_title (tex_document *doc, const char *title);
-  int document_set_author (tex_document *doc, const char *author);
-  int document_set_date (tex_document *doc, const char *date);
-  int document_set_language (tex_document *doc, tex_language_t language);
+  int table_set_caption (tex_table *tab, const char *caption);
+  int table_set_label (tex_table *tab, const char *label);
 
-  int document_add_content (tex_document *doc, const char *content);
+  int table_add_row (tex_table *tab, tex_table_row *rw);
 
-  int document_add_package (tex_document *doc, const char *package,
-                            const char *options);
-  int document_add_section (tex_document *doc, const tex_section *sec);
-
-  int document_write (const tex_document *doc, char *buffer,
-                      size_t buffer_size);
-
-  int document_fs_write (const tex_document *doc, const char *file);
+  int table_write (const tex_table *tab, char *buffer, size_t buffer_size);
 
 #ifdef __cplusplus
 };
 #endif
 
-#endif // LIBTEX_DOCUMENT_H
+#endif // TEX_TABLE_H

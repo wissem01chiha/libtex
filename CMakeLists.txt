@@ -7,7 +7,7 @@ if(POLICY CMP0092)
   cmake_policy(SET CMP0092 NEW)  
 endif()
 
-project(libtex LANGUAGES C)
+project(autotex LANGUAGES C)
 
 list(APPEND CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/cmake")
 
@@ -65,19 +65,19 @@ if(MSVC)
 endif()
 
 if(BUILD_SHARED)
-    add_library(libtex SHARED ${sources})
+    add_library(${PROJECT_NAME} SHARED ${sources})
 else()
-    add_library(libtex STATIC ${sources})
+    add_library(${PROJECT_NAME} STATIC ${sources})
 endif()
 
-target_include_directories(libtex
+target_include_directories(${PROJECT_NAME}
     PUBLIC
         $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
         $<INSTALL_INTERFACE:include>
 )
 
-target_compile_options(libtex PRIVATE ${flags})
-target_compile_features(libtex PUBLIC c_std_99)
+target_compile_options(${PROJECT_NAME} PRIVATE ${flags})
+target_compile_features(${PROJECT_NAME} PUBLIC c_std_99)
 
 if(BUILD_TESTS)
     include(CTest)
@@ -85,8 +85,8 @@ if(BUILD_TESTS)
     foreach(testfile ${tests})
         get_filename_component(testname ${testfile} NAME_WE)
         add_executable(${testname} ${testfile})
-        add_dependencies(${testname} libtex)
-        target_link_libraries(${testname} PRIVATE libtex)
+        add_dependencies(${testname} ${PROJECT_NAME})
+        target_link_libraries(${testname} PRIVATE ${PROJECT_NAME})
         target_compile_options(${testname} PRIVATE ${flags})
         add_test(NAME ${testname} COMMAND ${testname})
     endforeach()

@@ -1,2 +1,2 @@
-#include "libtex.h"
+#include "tex.h"
 #include <stdlib.h>

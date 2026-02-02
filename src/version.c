@@ -1,1 +1,1 @@
-#include "libtex.h"
+#include "tex.h"

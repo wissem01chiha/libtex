@@ -1,13 +1,19 @@
-#include "libtex.h"
+#include "tex.h"
 #include <stdlib.h>
+#include <time.h>
 
 #ifdef _MSC_VER
+#define strdup _strdup
 #include <Lmcons.h>
 #include <windows.h>
+#else
+#include <pwd.h>
+#include <sys/types.h>
+#include <unistd.h>
 #endif
 
 const char *
-getusername (int err)
+getusername (int *err)
 {
 #ifndef _MSC_VER
   uid_t uid = getuid ();
@@ -15,77 +21,52 @@ getusername (int err)
   if (pw == NULL)
     {
       if (err)
-        *err = LIBTEX_ENUPTR;
+        *err = TEX_ENUPTR;
       return "";
     }
   if (err)
-    *err = LIBTEX_OK;
+    *err = TEX_OK;
   return pw->pw_name;
 #else
   static char username[UNLEN + 1];
   DWORD username_len = UNLEN + 1;
   if (!GetUserName (username, &username_len))
     {
-        err = LIBTEX_ENUPTR;
+      *err = TEX_ENUPTR;
       return "";
     }
-    err = LIBTEX_OK;
+  *err = TEX_OK;
   return username;
 #endif
 }
 
 const char *
-getdocumentclass (tex_document_t doc_t)
+getdate (int *err)
 {
-  switch (doc_t)
+  static char buffer[64];
+  time_t t;
+  struct tm *tm_info;
+
+  t = time (NULL);
+  if (t == ((time_t)-1))
     {
-    case ARTICLE_DOC:
-      return "article";
-    case BOOK_DOC:
-      return "book";
-    case REPORT_DOC:
-      return "report";
-    case PRESENTATION_DOC:
-      return "beamer";
-    default:
-      return "";
+      *err = TEX_IOERR;
+      return NULL;
     }
-}
 
-const char *
-getdocumentlang(tex_language_t lang_t)
-{
-    switch (lang_t) {
-    case ENGLISH:
-        return "english";      
-    case FRENCH:
-        return "french";      
-    case GERMAN:
-        return "ngerman";      
-    case SPANISH:
-        return "spanish";      
-    case ITALIAN:
-        return "italian";      
-    case PORTUGUESE:
-        return "portuguese";   
-    case DUTCH:
-        return "dutch";       
-    case RUSSIAN:
-        return "russian";     
-    case CHINESE:
-        return "chinese";      
-    case JAPANESE:
-        return "japanese";     
-    case ARABIC:
-        return "arabic";       
-    default:
-        return "english";    
+  tm_info = localtime (&t);
+  if (tm_info == NULL)
+    {
+      *err = TEX_IOERR;
+      return NULL;
     }
-}
 
-const char *
-getdate (int err)
-{
-    err =LIBTEX_OK;
-  return NULL;
+  if (strftime (buffer, sizeof (buffer), "%Y-%m-%d", tm_info) == 0)
+    {
+      *err = TEX_IOERR;
+      return NULL;
+    }
+
+  *err = TEX_OK;
+  return buffer;
 }

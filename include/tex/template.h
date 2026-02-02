@@ -1,11 +1,11 @@
 /**
-    Copyright (c) 2026, wissem chiha 
+    Copyright (c) 2026, wissem chiha
 
     Redistribution and use in source and binary forms, with or without
     modification, are permitted provided that the following conditions are met:
 
-    1. Redistributions of source code must retain the above copyright notice, this
-    list of conditions and the following disclaimer.
+    1. Redistributions of source code must retain the above copyright notice,
+   this list of conditions and the following disclaimer.
 
     2. Redistributions in binary form must reproduce the above copyright notice,
     this list of conditions and the following disclaimer in the documentation
@@ -13,16 +13,16 @@
 
     THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
     AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
-    IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
-    DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
-    FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
-    DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
-    SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
-    CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
-    OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
-    OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+    IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+   ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE
+   LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+   CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+   SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+   INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+   CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+   ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+   POSSIBILITY OF SUCH DAMAGE.
 */
-
 
 //     class DocumentTemplate
 //     {
@@ -38,7 +38,8 @@
 //          * @param package Package name
 //          * @param options Package options
 //          */
-//         void addPackage(const std::string &package, const std::string &options = "")
+//         void addPackage(const std::string &package, const std::string
+//         &options = "")
 //         {
 //             m_packages[package] = options;
 //         }
@@ -76,7 +77,8 @@
 //          * @param center Center header content
 //          * @param right Right header content
 //          */
-//         void setHeader(const std::string &left, const std::string &center, const std::string &right)
+//         void setHeader(const std::string &left, const std::string &center,
+//         const std::string &right)
 //         {
 //             m_headerLeft = left;
 //             m_headerCenter = center;
@@ -89,7 +91,8 @@
 //          * @param center Center footer content
 //          * @param right Right footer content
 //          */
-//         void setFooter(const std::string &left, const std::string &center, const std::string &right)
+//         void setFooter(const std::string &left, const std::string &center,
+//         const std::string &right)
 //         {
 //             m_footerLeft = left;
 //             m_footerCenter = center;
@@ -120,24 +123,30 @@
 //             {
 //                 doc.addPackage("fancyhdr");
 //                 std::stringstream headerFooterConfig;
-                
-//                 // Define \thetitle and \theauthor commands if they do not exist
-//                 headerFooterConfig << "\\providecommand{\\thetitle}{" << doc.getTitle() << "}\n";
-//                 headerFooterConfig << "\\providecommand{\\theauthor}{" << doc.getAuthor() << "}\n";
-//                 headerFooterConfig << "\\pagestyle{" << m_headerFooterStyle << "}\n";
 
-//                 if (!m_headerLeft.empty() || !m_headerCenter.empty() || !m_headerRight.empty())
+//                 // Define \thetitle and \theauthor commands if they do not
+//                 exist headerFooterConfig << "\\providecommand{\\thetitle}{"
+//                 << doc.getTitle() << "}\n"; headerFooterConfig <<
+//                 "\\providecommand{\\theauthor}{" << doc.getAuthor() << "}\n";
+//                 headerFooterConfig << "\\pagestyle{" << m_headerFooterStyle
+//                 << "}\n";
+
+//                 if (!m_headerLeft.empty() || !m_headerCenter.empty() ||
+//                 !m_headerRight.empty())
 //                 {
-//                     headerFooterConfig << "\\lhead{" << m_headerLeft << "}\n";
-//                     headerFooterConfig << "\\chead{" << m_headerCenter << "}\n";
-//                     headerFooterConfig << "\\rhead{" << m_headerRight << "}\n";
+//                     headerFooterConfig << "\\lhead{" << m_headerLeft <<
+//                     "}\n"; headerFooterConfig << "\\chead{" << m_headerCenter
+//                     << "}\n"; headerFooterConfig << "\\rhead{" <<
+//                     m_headerRight << "}\n";
 //                 }
 
-//                 if (!m_footerLeft.empty() || !m_footerCenter.empty() || !m_footerRight.empty())
+//                 if (!m_footerLeft.empty() || !m_footerCenter.empty() ||
+//                 !m_footerRight.empty())
 //                 {
-//                     headerFooterConfig << "\\lfoot{" << m_footerLeft << "}\n";
-//                     headerFooterConfig << "\\cfoot{" << m_footerCenter << "}\n";
-//                     headerFooterConfig << "\\rfoot{" << m_footerRight << "}\n";
+//                     headerFooterConfig << "\\lfoot{" << m_footerLeft <<
+//                     "}\n"; headerFooterConfig << "\\cfoot{" << m_footerCenter
+//                     << "}\n"; headerFooterConfig << "\\rfoot{" <<
+//                     m_footerRight << "}\n";
 //                 }
 
 //                 doc.addInPreamble(headerFooterConfig.str());

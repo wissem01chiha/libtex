@@ -1,4 +1,4 @@
-#include "libtex.h"
+#include "tex.h"
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -8,7 +8,7 @@ main (void)
   int err = 0;
   const char *username = getusername (&err);
 
-  if (err != LIBTEX_OK)
+  if (err != TEX_OK)
     {
       fprintf (stderr, "getusername failed with error code %d\n", err);
       return 1;

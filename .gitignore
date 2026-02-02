@@ -42,6 +42,7 @@
 
 # build folders
 build/
+builddir/
 
 # Visual Studio folders
 out/ 

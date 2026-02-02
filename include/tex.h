@@ -23,33 +23,22 @@
     OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-#ifndef LIBTEX_ENVIRONMENT_H
-#define LIBTEX_ENVIRONMENT_H
+#ifndef TEX_H
+#define TEX_H
 
-#ifdef __cplusplus
-extern "C" {
-#endif
+#include "tex/version.h"
+#include "tex/errno.h"
+#include "tex/figure.h"
+#include "tex/textype.h"
+#include "tex/document.h"
+#include "tex/section.h"
+#include "tex/environment.h"
+#include "tex/equation.h"
+#include "tex/report.h"
+#include "tex/presentation.h"
+#include "tex/bibliography.h"
+#include "tex/table.h"
+#include "tex/texutil.h"
+#include "tex/book.h"
 
-typedef struct tex_environment tex_environment;
-
-int environment_create(const char* name, tex_environment** env, int err);
-int environment_delete(tex_environment* env);
-
-int environment_begin_write(const tex_environment* env,
-                      char* buffer, 
-                      size_t buffer_size);
-
-
-int environment_end_write(const tex_environment* env,
-                    char* buffer, 
-                    size_t buffer_size);
-
-int environment_write(const tex_environment* env,
-                    char* buffer, 
-                    size_t buffer_size);
-
-#ifdef __cplusplus
-}; 
-#endif
-
-#endif // LIBTEX_ENVIRONMENT_H
+#endif // TEX_H
