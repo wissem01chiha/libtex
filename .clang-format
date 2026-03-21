@@ -1,5 +1,0 @@
-BasedOnStyle: GNU
-IndentWidth: 2
-UseTab: Never
-BreakBeforeBraces: GNU
-ColumnLimit: 80

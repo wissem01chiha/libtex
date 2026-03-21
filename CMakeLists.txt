@@ -1,3 +1,5 @@
+# SPDX-FileCopyrightText: Copyright (c) Wissem Chiha
+# SPDX-License-Identifier: BSD 2-Clause
 cmake_minimum_required(VERSION 3.10)
 
 if(POLICY CMP0091)
@@ -7,7 +9,7 @@ if(POLICY CMP0092)
   cmake_policy(SET CMP0092 NEW)  
 endif()
 
-project(autotex LANGUAGES C)
+project(texio LANGUAGES C CXX)
 
 list(APPEND CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/cmake")
 

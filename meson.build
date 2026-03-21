@@ -1,8 +1,11 @@
-project('autotex', 'c',
+# SPDX-FileCopyrightText: Copyright (c) Wissem Chiha
+# SPDX-License-Identifier: BSD 2-Clause
+project('texio',
+ 'c',
   version : '0.1',
   default_options : ['warning_level=3'])
 
-  inc = include_directories('include', 'include/tex')
+  inc = include_directories('include', 'include/texio')
 
   sources = [
   'src/figure.c',
@@ -16,7 +19,7 @@ project('autotex', 'c',
   'src/equation.c',
 ]
 
-autotex = library('autotex', sources,
+texio = library('texio', sources,
   include_directories : inc,
   install : true
 )
@@ -30,7 +33,7 @@ foreach t : test_sources
   testname = t.split('/')[-1].split('.')[0]
   exe = executable(testname, t,
     include_directories : inc,
-    link_with : autotex
+    link_with : texio
   )
   test(testname, exe)
 endforeach
