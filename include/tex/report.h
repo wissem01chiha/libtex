@@ -30,24 +30,23 @@
 #include "document.h"
 
 #ifdef __cplusplus
-extern "C"
-{
+extern "C" {
 #endif
 
-  typedef struct tex_report tex_report;
+typedef struct tex_report tex_report;
 
-  int report_create (tex_report **report, const char *title, const char *author,
-                     const char *date, int language, int err);
-  int report_delete (tex_report *report);
+int report_create(tex_report** report, const char* title, const char* author,
+                  const char* date, int language, int err);
+int report_delete(tex_report* report);
 
-  int report_set_abstract (tex_report *report, const char *abstract);
-  int report_include_table_of_contents (tex_report *report, int include);
-  int report_include_list_of_figures (tex_report *report, int include);
-  int report_include_list_of_tables (tex_report *report, int include);
-  int report_generate (tex_report *report, char **output, size_t *output_size);
+int report_set_abstract(tex_report* report, const char* abstract);
+int report_include_table_of_contents(tex_report* report, int include);
+int report_include_list_of_figures(tex_report* report, int include);
+int report_include_list_of_tables(tex_report* report, int include);
+int report_generate(tex_report* report, char** output, size_t* output_size);
 
 #ifdef __cplusplus
 };
 #endif
 
-#endif // TEX_REPORT_H
+#endif  // TEX_REPORT_H

@@ -33,4 +33,4 @@
 
 #define TEX_VERSION_STRING "0.1.0"
 
-#endif // TEX_VERSION_H
+#endif  // TEX_VERSION_H

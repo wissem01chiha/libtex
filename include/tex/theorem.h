@@ -30,22 +30,21 @@
 #include "textype.h"
 
 #ifdef __cplusplus
-extern "C"
-{
+extern "C" {
 #endif
 
-  typedef struct tex_theorem tex_theorem;
+typedef struct tex_theorem tex_theorem;
 
-  tex_theorem *theorem_create (const char *title, tex_theorem_t type, int *err);
-  int theorem_delete (tex_theorem *th);
+tex_theorem* theorem_create(const char* title, tex_theorem_t type, int* err);
+int theorem_delete(tex_theorem* th);
 
-  int theorem_set_content (tex_theorem *th, const char *content);
-  int theorem_set_title (tex_theorem *th, const char *title);
+int theorem_set_content(tex_theorem* th, const char* content);
+int theorem_set_title(tex_theorem* th, const char* title);
 
-  int theorem_write (const tex_theorem *th, char *buffer, size_t buffer_size);
+int theorem_write(const tex_theorem* th, char* buffer, size_t buffer_size);
 
 #ifdef __cplusplus
 };
 #endif
 
-#endif // TEX_THEOREM_H
+#endif  // TEX_THEOREM_H

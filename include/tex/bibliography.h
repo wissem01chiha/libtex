@@ -28,34 +28,32 @@
 #define TEX_BIBLIOGRAPHY_H
 
 #ifdef __cplusplus
-extern "C"
-{
+extern "C" {
 #endif
 
-  typedef struct tex_bibliography tex_bibliography;
+typedef struct tex_bibliography tex_bibliography;
 
-  int bibliography_create (tex_bibliography **bibliography,
-                           const char *bib_file, int style,
-                           const char *custom_style, int err);
-  int bibliography_delete (tex_bibliography *bibliography);
+int bibliography_create(tex_bibliography** bibliography, const char* bib_file,
+                        int style, const char* custom_style, int err);
+int bibliography_delete(tex_bibliography* bibliography);
 
-  int bibliography_set_bib_file (tex_bibliography *bibliography,
-                                 const char *bib_file, int use_external_file);
-  int bibliography_add_entry (tex_bibliography *bibliography,
-                              const char *entry_type, const char *key,
-                              const char **fields, const char **values,
-                              size_t field_count);
-  int bibliography_set_style (tex_bibliography *bibliography, int style);
-  int bibliography_set_custom_style (tex_bibliography *bibliography,
-                                     const char *custom_style);
-  int bibliography_generate (tex_bibliography *bibliography,
-                             const char *output_dir);
+int bibliography_set_bib_file(tex_bibliography* bibliography,
+                              const char* bib_file, int use_external_file);
+int bibliography_add_entry(tex_bibliography* bibliography,
+                           const char* entry_type, const char* key,
+                           const char** fields, const char** values,
+                           size_t field_count);
+int bibliography_set_style(tex_bibliography* bibliography, int style);
+int bibliography_set_custom_style(tex_bibliography* bibliography,
+                                  const char* custom_style);
+int bibliography_generate(tex_bibliography* bibliography,
+                          const char* output_dir);
 
 #ifdef __cplusplus
 };
 #endif
 
-#endif // TEX_BIBLIOGRAPHY_H
+#endif  // TEX_BIBLIOGRAPHY_H
 
 //      * @brief Class to manage bibliographies in LaTeX documents
 //      */

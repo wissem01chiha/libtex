@@ -67,7 +67,7 @@
 #define TEX_ECITE (-6000)
 #define TEX_ELABEL (-6100)
 
-#define TEX_EUTF8 TEX_ERR (EILSEQ)
+#define TEX_EUTF8 TEX_ERR(EILSEQ)
 #define TEX_ECHARSET (-9400)
 
-#endif // TEX_ERRNO_H
+#endif  // TEX_ERRNO_H

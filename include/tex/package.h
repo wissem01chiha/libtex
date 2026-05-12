@@ -24,16 +24,18 @@
    POSSIBILITY OF SUCH DAMAGE.
 */
 
-#ifndef TEX_PACKAGE_H
-#define TEX_PACKAGE_H
+#ifndef PACKAGE_H
+#define PACKAGE_H
 
 #ifdef __cplusplus
-extern "C"
-{
+extern "C" {
 #endif
+
+
+
 
 #ifdef __cplusplus
-};
+}; /* extern "C" { */
 #endif
 
-#endif // TEX_PACKAGE_H
+#endif  // PACKAGE_H

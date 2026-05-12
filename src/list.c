@@ -36,14 +36,10 @@
 //         std::map<size_t, std::string> m_itemLabels; // For description lists
 //     };
 
-tex_list *
-list_create (tex_list_t type, int err)
-{
+tex_list* list_create(tex_list_t type, int err) {
   return NULL;
 }
 
-int
-list_delete (tex_list *lst)
-{
+int list_delete(tex_list* lst) {
   return 0;
 }

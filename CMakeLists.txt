@@ -1,29 +1,20 @@
 cmake_minimum_required(VERSION 3.10)
 
-if(POLICY CMP0091)
-  cmake_policy(SET CMP0091 NEW) 
-endif()
-if(POLICY CMP0092)
-  cmake_policy(SET CMP0092 NEW)  
-endif()
-
-project(autotex LANGUAGES C)
+project(libtex LANGUAGES C)
 
 list(APPEND CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/cmake")
 
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
-option(BUILD_SHARED "Build shared lib" OFF)
-option(BUILD_TESTS "Build tests" ON)
-option(BUILD_REGRESS "Build regression tests" ON)
-option(BUILD_DOC "Build documentation" ON)
-option(DO_INSTALL "Install libtex" OFF)
-option(ENABLE_COVERAGE "Enable coverage reporting" OFF)
-option(BUILD_TOOLS "Build tools in the script directory" ON)
+option(LIBTEX_BUILD_SHARED "Build shared lib" OFF)
+option(LIBTEX_BUILD_TESTS "Build tests" ON)
+option(LIBTEX_BUILD_REGRESS "Build regression tests" ON)
+option(LIBTEX_BUILD_DOC "Build documentation" ON)
+option(LIBTEX_DO_INSTALL "Install libtex" OFF)
+option(LIBTEX_ENABLE_COVERAGE "Enable coverage reporting" OFF)
+option(LIBTEX_BUILD_TOOLS "Build tools in the script directory" ON)
 
-include_directories(
-    ${CMAKE_CURRENT_SOURCE_DIR}/include
-)
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include)
 
 set(sources
     src/figure.c
@@ -59,12 +50,12 @@ set(flags
 )
 
 if(MSVC)
-    list(APPEND flags
+    list(APPEND flags 
         /W4
     )
 endif()
 
-if(BUILD_SHARED)
+if(LIBTEX_BUILD_SHARED)
     add_library(${PROJECT_NAME} SHARED ${sources})
 else()
     add_library(${PROJECT_NAME} STATIC ${sources})
@@ -79,7 +70,7 @@ target_include_directories(${PROJECT_NAME}
 target_compile_options(${PROJECT_NAME} PRIVATE ${flags})
 target_compile_features(${PROJECT_NAME} PUBLIC c_std_99)
 
-if(BUILD_TESTS)
+if(LIBTEX_BUILD_TESTS)
     include(CTest)
     enable_testing()
     foreach(testfile ${tests})
@@ -92,13 +83,15 @@ if(BUILD_TESTS)
     endforeach()
 endif()
 
-if(ENABLE_COVERAGE)
+configure_file(${CMAKE_CURRENT_SOURCE_DIR}/texconf.h.in ${PROJECT_BINARY_DIR}/texconf.h)
+
+if(LIBTEX_ENABLE_COVERAGE)
   find_program(LCOV lcov REQUIRED)
   find_program(GENHTML genhtml REQUIRED)
 endif()
 
 
-if(DO_INSTALL)
+if(LIBTEX_DO_INSTALL)
 
   
 endif()

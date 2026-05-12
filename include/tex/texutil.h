@@ -28,16 +28,15 @@
 #define TEX_TEXUTIL_H
 
 #ifdef __cplusplus
-extern "C"
-{
+extern "C" {
 #endif
 
-  const char *getusername (int *err);
+const char* getusername(int* err);
 
-  const char *getdate (int *err);
+const char* getdate(int* err);
 
 #ifdef __cplusplus
 };
 #endif
 
-#endif // TEX_TEXUTIL_H
+#endif  // TEX_TEXUTIL_H

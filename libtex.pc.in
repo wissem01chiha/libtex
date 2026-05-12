@@ -1,0 +1,12 @@
+prefix=@CMAKE_INSTALL_PREFIX@
+exec_prefix=${prefix}
+bindir=@bindir@
+libdir=@libdir@
+includedir=@includedir@
+
+Name: ${PROJECT_NAME}
+Description: A C library for writing Latex Tex files.
+Version: @PROJECT_VERSION@
+Libs: @PKG_CONFIG_RPATH@ -L${libdir} -ltex
+Libs.private: @LIBS@
+Cflags: -I${includedir}

@@ -30,24 +30,23 @@
 #include "textype.h"
 
 #ifdef __cplusplus
-extern "C"
-{
+extern "C" {
 #endif
 
-  typedef struct tex_equation tex_equation;
+typedef struct tex_equation tex_equation;
 
-  tex_equation *equation_create (int numbered, int err);
-  int equation_delete (tex_equation *eq);
+tex_equation* equation_create(int numbered, int err);
+int equation_delete(tex_equation* eq);
 
-  int equation_set_content (tex_equation *eq, const char *content);
-  int equation_set_label (tex_equation *eq, const char *label);
-  int equation_write (const tex_equation *eq, char *buffer, size_t buffer_size);
+int equation_set_content(tex_equation* eq, const char* content);
+int equation_set_label(tex_equation* eq, const char* label);
+int equation_write(const tex_equation* eq, char* buffer, size_t buffer_size);
 
 #ifdef __cplusplus
 };
 #endif
 
-#endif // TEX_EQUATION_H
+#endif  // TEX_EQUATION_H
 
 // class Equation : public Environment
 // {

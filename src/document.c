@@ -1,36 +1,24 @@
-#include "tex.h"
+#include "document.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include "tex.h"
 
-struct tex_document
-{
-  tex_document_t type;
-  tex_language_t language;
-  tex_section *sec;
-  char *title;
-  char *author;
-  char *date;
-  char *content;
-};
-
-tex_document *
-document_create (tex_document_t type, const char *title, int *err)
-{
-  tex_document *doc = calloc (1, sizeof (tex_document));
-  if (doc == NULL)
-    {
-      if (err)
-        *err = TEX_ENUPTR;
-      return NULL;
-    }
+tex_document* document_create(tex_document_t type, const char* title,
+                              int* err) {
+  tex_document* doc = calloc(1, sizeof(tex_document));
+  if (doc == NULL) {
+    if (err)
+      *err = TEX_ENUPTR;
+    return NULL;
+  }
 
   doc->type = type;
   doc->language = ENGLISH;
 
-  doc->title = title ? strdup (title) : NULL;
-  doc->author = strdup (getusername (err));
-  doc->date = strdup (getdate (err));
+  doc->title = title ? strdup(title) : NULL;
+  doc->author = strdup(getusername(err));
+  doc->date = strdup(getdate(err));
 
   doc->content = NULL;
 
@@ -39,162 +27,136 @@ document_create (tex_document_t type, const char *title, int *err)
   return doc;
 }
 
-int
-document_delete (tex_document *doc)
-{
-  if (doc == NULL)
-    {
-      return TEX_OK;
-    }
-  free (doc->title);
-  free (doc->author);
-  free (doc->date);
-  free (doc);
+int document_delete(tex_document* doc) {
+  if (doc == NULL) {
+    return TEX_OK;
+  }
+  free(doc->title);
+  free(doc->author);
+  free(doc->date);
+  free(doc);
   return TEX_OK;
 }
 
-int
-document_set_title (tex_document *doc, const char *title)
-{
-  if (doc == NULL || title == NULL)
-    {
-      return TEX_ENUPTR;
-    }
-  doc->title = strdup (title);
+int document_set_title(tex_document* doc, const char* title) {
+  if (doc == NULL || title == NULL) {
+    return TEX_ENUPTR;
+  }
+  doc->title = strdup(title);
   return TEX_OK;
 }
 
-int
-document_set_author (tex_document *doc, const char *author)
-{
-  if (doc == NULL || author == NULL)
-    {
-      return TEX_ENUPTR;
-    }
-  doc->author = strdup (author);
+int document_set_author(tex_document* doc, const char* author) {
+  if (doc == NULL || author == NULL) {
+    return TEX_ENUPTR;
+  }
+  doc->author = strdup(author);
   return TEX_OK;
 }
 
-int
-document_set_date (tex_document *doc, const char *date)
-{
-  if (doc == NULL || date == NULL)
-    {
-      return TEX_ENUPTR;
-    }
-  doc->date = strdup (date);
+int document_set_date(tex_document* doc, const char* date) {
+  if (doc == NULL || date == NULL) {
+    return TEX_ENUPTR;
+  }
+  doc->date = strdup(date);
   return TEX_OK;
 }
 
-int
-document_set_language (tex_document *doc, tex_language_t language)
-{
-  if (doc == NULL)
-    {
-      return TEX_ENUPTR;
-    }
+int document_set_language(tex_document* doc, tex_language_t language) {
+  if (doc == NULL) {
+    return TEX_ENUPTR;
+  }
   doc->language = language;
   return TEX_OK;
 }
 
-int
-document_add_content (tex_document *doc, const char *content)
-{
-  if (doc == NULL || content == NULL)
-    {
-      return TEX_ENUPTR;
-    }
-  doc->content = strdup (content);
+int document_add_content(tex_document* doc, const char* content) {
+  if (doc == NULL || content == NULL) {
+    return TEX_ENUPTR;
+  }
+  doc->content = strdup(content);
   return TEX_OK;
 }
 
-int
-document_write (const tex_document *doc, char *buffer, size_t buffer_size)
-{
-  if (doc == NULL)
-    {
-      return TEX_ENUPTR;
-    }
+int document_add_section(tex_document* doc, const tex_section* sec) {
+  return 0;
+}
 
-  if (buffer == NULL)
-    {
-      return TEX_EINVAL;
-    }
+int document_write(const tex_document* doc, char* buffer, size_t buffer_size) {
+  if (doc == NULL) {
+    return TEX_ENUPTR;
+  }
 
-  int written
-      = snprintf (buffer, buffer_size,
-                  "\\documentclass{%s}\n"
-                  "\\begin{document}\n"
-                  "\\title{%s}\n"
-                  "\\author{%s}\n"
-                  "\\date{%s}\n"
-                  "\\maketitle\n"
-                  "%s\n"
-                  "\\end{document}\n",
-                  document_get_class (doc->type), doc->title ? doc->title : "",
-                  doc->author, doc->date, doc->content ? doc->content : "");
+  if (buffer == NULL) {
+    return TEX_EINVAL;
+  }
 
-  if (written < 0 || (size_t)written >= buffer_size)
-    {
-      return TEX_EOVERFLOW;
-    }
+  int written =
+      snprintf(buffer, buffer_size,
+               "\\documentclass{%s}\n"
+               "\\begin{document}\n"
+               "\\title{%s}\n"
+               "\\author{%s}\n"
+               "\\date{%s}\n"
+               "\\maketitle\n"
+               "%s\n"
+               "\\end{document}\n",
+               document_get_class(doc->type), doc->title ? doc->title : "",
+               doc->author, doc->date, doc->content ? doc->content : "");
+
+  if (written < 0 || (size_t)written >= buffer_size) {
+    return TEX_EOVERFLOW;
+  }
 
   return TEX_OK;
 }
 
-int
-document_fs_write (const tex_document *doc, const char *filename)
-{
-  if (doc == NULL)
-    {
-      return TEX_ENUPTR;
-    }
+int document_fs_write(const tex_document* doc, const char* filename) {
+  if (doc == NULL) {
+    return TEX_ENUPTR;
+  }
   char buffer[2048];
-  int bufferr = document_write (doc, buffer, sizeof (buffer));
-  if (bufferr != TEX_OK)
-    {
-      return bufferr;
-    }
+  int bufferr = document_write(doc, buffer, sizeof(buffer));
+  if (bufferr != TEX_OK) {
+    return bufferr;
+  }
 
-  FILE *fptr = fopen (filename, "w");
-  if (fptr == NULL)
-    {
-      return TEX_IOERR;
-    }
+  FILE* fptr = fopen(filename, "w");
+  if (fptr == NULL) {
+    return TEX_IOERR;
+  }
 
-  if (fputs (buffer, fptr) == EOF)
-    {
-      fclose (fptr);
-      return TEX_IOERR;
-    }
+  if (fputs(buffer, fptr) == EOF) {
+    fclose(fptr);
+    return TEX_IOERR;
+  }
 
-  fclose (fptr);
+  fclose(fptr);
   return TEX_OK;
 }
 
-const char *
-document_get_class (tex_document_t doc_t)
-{
-  switch (doc_t)
-    {
-    case ARTICLE_DOC:
+int document_add_package(tex_document* doc, const char* package,
+                         const char* options) {
+  return 0;
+}
+
+const char* document_get_class(tex_document_t doc_t) {
+  switch (doc_t) {
+    case TEXDOC_ARTICLE:
       return "article";
-    case BOOK_DOC:
+    case TEXDOC_BOOK:
       return "book";
-    case REPORT_DOC:
+    case TEXDOC_REPORT:
       return "report";
-    case PRESENTATION_DOC:
+    case TEXDOC_PRESENTATION:
       return "beamer";
     default:
       return "";
-    }
+  }
 }
 
-const char *
-document_get_language (tex_language_t lang_t)
-{
-  switch (lang_t)
-    {
+const char* document_get_language(tex_language_t lang_t) {
+  switch (lang_t) {
     case ENGLISH:
       return "english";
     case FRENCH:
@@ -219,5 +181,5 @@ document_get_language (tex_language_t lang_t)
       return "arabic";
     default:
       return "english";
-    }
+  }
 }
