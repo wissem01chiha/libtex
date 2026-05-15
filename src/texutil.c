@@ -2,7 +2,7 @@
 #include <time.h>
 #include "tex.h"
 
-#ifdef _MSC_VER
+#if defined(_WIN32) || defined(_MSC_VER)
 #include <Lmcons.h>
 #include <windows.h>
 #else

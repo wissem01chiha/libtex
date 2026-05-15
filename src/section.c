@@ -25,11 +25,11 @@ int section_delete(tex_section* sec) {
   return TEX_ERROR_NONE;
 }
 
-int section_add_content(tex_section* sec, const char* content) {
-  if (sec == NULL || content == NULL) {
+int section_add_content(tex_section* sec, const char* _content) {
+  if (sec == NULL || _content == NULL) {
     return TEX_EINVAL;
   }
-  sec->content = content;
+  sec->content = _content;
   return TEX_ERROR_NONE;
 }
 

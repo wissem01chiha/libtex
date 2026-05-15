@@ -44,7 +44,7 @@ typedef struct tex_section {
   char* title;
   tex_section_t level;
   struct tex_section* subsection;
-  char** content;
+  char* content;
   struct tex_section* next;
 } tex_section;
 
