@@ -5,10 +5,10 @@
 int
 main (void)
 {
-  int err = 0;
-  const char *username = getusername (&err);
+  tex_error_t err = TEX_ERROR_NONE;
+  const char *username = tex_get_username (&err);
 
-  if (err != TEX_OK)
+  if (err != TEX_ERROR_NONE)
     {
       fprintf (stderr, "getusername failed with error code %d\n", err);
       return 1;

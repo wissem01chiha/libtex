@@ -33,45 +33,9 @@ extern "C" {
 
 
 
-typedef enum tex_bibstyle_t {
-  PLAIN = 0,
-  ALPHA = 1,
-  ABBRV = 2,
-  ACM = 3,
-  IEEE = 4,
-  APA = 5,
-  CHICAGO = 6,
-  MLA = 7,
-  HARVARD = 8,
-  CUSTOM_BIBSTYLE = 9
-
-} tex_bibstyle_t;
 
 
 
-typedef enum tex_bib_t {
-  ARTICLE = 0,
-  BOOK = 1,
-  INPROCEEDINGS = 2,
-  TECHREPORT = 3,
-  PHDTHESIS = 4,
-  MASTERSTHESIS = 5,
-  MISC = 6
-
-} tex_bib_t;
-
-typedef enum tex_theorem_t {
-  THEOREM = 0,
-  LEMMA = 1,
-  PROPOSITION = 2,
-  COROLLARY = 3,
-  DEFINITION = 4,
-  EXAMPLE = 5,
-  REMARK = 6,
-  PROOF = 7,
-  CUSTOM_THEOREM = 8
-
-} tex_theorem_t;
 
 typedef enum tex_transition_t {
   NONE = 0,

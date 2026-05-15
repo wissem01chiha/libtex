@@ -11,7 +11,7 @@ tex_section* section_create(const char* title, tex_section_t level, int err) {
   }
   sec->title = strdup(title);
   sec->level = level;
-  err = TEX_OK;
+  err = TEX_ERROR_NONE;
   return sec;
 }
 
@@ -22,7 +22,7 @@ int section_delete(tex_section* sec) {
   free(sec->title);
   free(sec->content);
   free(sec);
-  return TEX_OK;
+  return TEX_ERROR_NONE;
 }
 
 int section_add_content(tex_section* sec, const char* content) {
@@ -30,7 +30,7 @@ int section_add_content(tex_section* sec, const char* content) {
     return TEX_EINVAL;
   }
   sec->content = content;
-  return TEX_OK;
+  return TEX_ERROR_NONE;
 }
 
 int section_write(const tex_section* sec, char* buffer, size_t buffer_size) {
@@ -46,5 +46,5 @@ int section_write(const tex_section* sec, char* buffer, size_t buffer_size) {
   } else if (sec->level == SUBSUBSECTION) {
     snprintf(buffer, buffer_size, "\\subsubsection{%s}\n", sec->title);
   }
-  return TEX_OK;
+  return TEX_ERROR_NONE;
 }

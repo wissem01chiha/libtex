@@ -3,7 +3,6 @@
 #include "tex.h"
 
 #ifdef _MSC_VER
-#define strdup _strdup
 #include <Lmcons.h>
 #include <windows.h>
 #else
@@ -12,7 +11,7 @@
 #include <unistd.h>
 #endif
 
-const char* getusername(int* err) {
+const char* tex_get_username(tex_error_t* err) {
 #ifndef _MSC_VER
   uid_t uid = getuid();
   struct passwd* pw = getpwuid(uid);
@@ -22,7 +21,7 @@ const char* getusername(int* err) {
     return "";
   }
   if (err)
-    *err = TEX_OK;
+    *err = TEX_ERROR_NONE;
   return pw->pw_name;
 #else
   static char username[UNLEN + 1];
@@ -31,12 +30,12 @@ const char* getusername(int* err) {
     *err = TEX_ENUPTR;
     return "";
   }
-  *err = TEX_OK;
+  *err = TEX_ERROR_NONE;
   return username;
 #endif
 }
 
-const char* getdate(int* err) {
+const char* tex_get_date(tex_error_t* err) {
   static char buffer[64];
   time_t t;
   struct tm* tm_info;
@@ -58,6 +57,6 @@ const char* getdate(int* err) {
     return NULL;
   }
 
-  *err = TEX_OK;
+  *err = TEX_ERROR_NONE;
   return buffer;
 }

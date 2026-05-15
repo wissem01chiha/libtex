@@ -15,14 +15,14 @@ jobs:
             pkgtgt: package package_source
             cmake-args:
 
-          - name: Windows MSVC Win64
+          - name: Windows MSVC
             os: windows-latest
             compiler: cl
             cflags: /W3
             cmake-args: -A x64
             pkgtgt: PACKAGE
 
-          - name: Windows GCC
+          - name: Windows MinGW
             os: windows-latest
             compiler: gcc
             cflags: -Wall -Wextra

@@ -36,8 +36,9 @@ typedef struct {
   char label;
 } tex_algorithm;
 
+
 #ifdef __cplusplus
-};
+}; /* extern "C" { */
 #endif
 
 #endif  // ALGORITHM_H

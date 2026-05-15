@@ -4,7 +4,7 @@
 
 int main (){
 
-  int err;
+  tex_error_t err = TEX_ERROR_NONE;
   tex_document *doc = document_create (TEXDOC_REPORT, "Document Title",
                                         &err);
   if (doc == NULL)
@@ -14,7 +14,7 @@ int main (){
   const char *filename = "document_fs_write_test.tex";
 
   int write_err = document_fs_write (doc, filename);
-  if (write_err != TEX_OK)
+  if (write_err != TEX_ERROR_NONE)
     {
       fprintf (stderr, "document_fs_write failed with code %d\n", write_err);
       document_delete (doc);

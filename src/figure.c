@@ -20,29 +20,35 @@ int figure_delete(tex_figure* fig) {
   free(fig->image_path);
   free(fig->position);
   free(fig);
-  return TEX_OK;
+  return TEX_ERROR_NONE;
 }
 
 int figure_set_caption(tex_figure* fig, const char* caption) {
   if (fig == NULL || caption == NULL) {
-    return TEX_EINVAL;
+    return TEX_ERROR_INVALID_FIGURE;
   }
   fig->caption = strdup(caption);
-  return TEX_OK;
+  return TEX_ERROR_NONE;
 }
 
 int figure_set_label(tex_figure* fig, const char* label) {
+  if(fig==NULL){
+    return TEX_ERROR_INVALID_FIGURE;
+  }
   fig->label = label;
-  return TEX_OK;
+  return TEX_ERROR_NONE;
 }
 
 int figure_set_width(tex_figure* fig, const char* width) {
-  return TEX_OK;
+    if(fig==NULL){
+    return TEX_ERROR_INVALID_FIGURE;
+  }
+  return TEX_ERROR_NONE;
 }
 
 int figure_write(const tex_figure* fig, char* buffer, size_t buffer_size) {
   if (fig==NULL){
     return -1;
   }
-  return TEX_OK;
+  return TEX_ERROR_NONE;
 }

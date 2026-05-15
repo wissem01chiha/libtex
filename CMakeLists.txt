@@ -55,7 +55,7 @@ if(NOT DEFINED CMAKE_BUILD_TYPE AND NOT IS_MULTI)
 endif(NOT DEFINED CMAKE_BUILD_TYPE AND NOT IS_MULTI)
 
 if (CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT)
-    set(CMAKE_INSTALL_PREFIX "${CMAKE_CURRENT_BINARY_DIR}/install" 
+    set(CMAKE_INSTALL_PREFIX "${CMAKE_CURRENT_BINARY_DIR}/install"
     CACHE PATH "Default install path" FORCE)
 endif()
 
@@ -96,6 +96,7 @@ set(libtex_sources
     src/texutil.c
     src/equation.c
     src/language.c
+    src/list.c
 )
 
 set(libtex_headers
@@ -112,7 +113,7 @@ set(libtex_headers
 
 set(libtex_test_sources
     test/document_fs_write_test.c
-    test/getusername_test.c
+    test/tex_get_username_test.c
 )
 
 set(libtex_flags
@@ -120,7 +121,7 @@ set(libtex_flags
 )
 
 if(MSVC)
-    list(APPEND libtex_flags 
+    list(APPEND libtex_flags
         /W4
     )
 endif()
@@ -128,7 +129,7 @@ endif()
 # ============================================================================
 # Configure Files
 # ============================================================================
-configure_file(${CMAKE_CURRENT_SOURCE_DIR}/texconf.h.in 
+configure_file(${CMAKE_CURRENT_SOURCE_DIR}/texconf.h.in
 ${PROJECT_BINARY_DIR}/texconf.h)
 
 # ============================================================================

@@ -33,6 +33,29 @@
 extern "C" {
 #endif
 
+typedef enum tex_bibstyle_t {
+  PLAIN = 0,
+  ALPHA = 1,
+  ABBRV = 2,
+  ACM = 3,
+  IEEE = 4,
+  APA = 5,
+  CHICAGO = 6,
+  MLA = 7,
+  HARVARD = 8,
+  CUSTOM_BIBSTYLE = 9
+} tex_bibstyle_t;
+
+typedef enum tex_bib_t {
+  ARTICLE = 0,
+  BOOK = 1,
+  INPROCEEDINGS = 2,
+  TECHREPORT = 3,
+  PHDTHESIS = 4,
+  MASTERSTHESIS = 5,
+  MISC = 6
+} tex_bib_t;
+
 typedef struct tex_bibliography tex_bibliography;
 
 int bibliography_create(tex_bibliography** bibliography, const char* bib_file,
@@ -51,8 +74,9 @@ int bibliography_set_custom_style(tex_bibliography* bibliography,
 int bibliography_generate(tex_bibliography* bibliography,
                           const char* output_dir);
 
+
 #ifdef __cplusplus
-};
+}; /* extern "C" { */
 #endif
 
 #endif  // BIBLIOGRAPHY_H

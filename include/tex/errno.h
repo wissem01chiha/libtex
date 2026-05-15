@@ -27,6 +27,21 @@
 #ifndef ERRNO_H
 #define ERRNO_H
 
+typedef enum tex_error_t{
+  TEX_ERROR_NONE = 0,
+  TEX_ERROR_MEMALLOC_FAILED,
+  TEX_ERROR_INVALID_DOCUMENT,
+  TEX_ERROR_INVALID_SECTION,
+  TEX_ERROR_INVALID_FIGURE,
+  TEX_ERROR_INVALID_BUFFER,
+  TEX_ERROR_INVALID_TABLE,
+  TEX_ERROR_INVALID_LIST,
+  TEX_ERROR_BUFFER_OVERFLOW,
+  TEX_ERROR_USER
+} tex_error_t;
+
+
+
 #include <errno.h>
 
 #if EDOM > 0
@@ -35,7 +50,7 @@
 #define TEX_ERR(x) (x)
 #endif
 
-#define TEX_OK 0
+#define TEX_ERROR_NONE 0
 
 #define TEX_EOF (-4095)
 #define TEX_UNKNOWN (-4094)
@@ -69,5 +84,6 @@
 
 #define TEX_EUTF8 TEX_ERR(EILSEQ)
 #define TEX_ECHARSET (-9400)
+
 
 #endif  // ERRNO_H

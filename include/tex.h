@@ -38,8 +38,10 @@
 #include "tex/report.h"
 #include "tex/section.h"
 #include "tex/table.h"
+#include "tex/list.h"
 #include "tex/language.h"
 #include "tex/texutil.h"
 #include "tex/version.h"
+#include "tex/errno.h"
 
 #endif  // TEX_H
