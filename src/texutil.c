@@ -2,7 +2,7 @@
 #include <time.h>
 #include "tex.h"
 
-#if defined(_WIN32) || defined(_MSC_VER)
+#ifdef _WIN32 
 #include <Lmcons.h>
 #include <windows.h>
 #else
@@ -12,7 +12,7 @@
 #endif
 
 const char* tex_get_username(tex_error_t* err) {
-#ifndef _MSC_VER
+#ifndef _WIN32
   uid_t uid = getuid();
   struct passwd* pw = getpwuid(uid);
   if (pw == NULL) {
