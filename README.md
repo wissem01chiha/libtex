@@ -1,8 +1,7 @@
 <!-- omit in toc -->
 # libtex
 
-A C library for writing Latex Tex files.
-
+[![CMake](https://github.com/wissem01chiha/libtex/actions/workflows/cmake.yml/badge.svg)](https://github.com/wissem01chiha/libtex/actions/workflows/cmake.yml)
 ![GitHub License](https://img.shields.io/github/license/wissem01chiha/libtex)
 [![CodeFactor](https://www.codefactor.io/repository/github/wissem01chiha/libtex/badge)](https://www.codefactor.io/repository/github/wissem01chiha/libtex)
 

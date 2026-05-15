@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>  // for strdup
 #include "tex.h"
 
 tex_section* section_create(const char* title, tex_section_t level, int err) {
