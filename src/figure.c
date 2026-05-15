@@ -8,8 +8,8 @@ tex_figure* figure_create(const char* image_path, const char* position) {
   if (fig == NULL) {
     return NULL;
   }
-  fig->image_path = _strdup(image_path);
-  fig->position = _strdup(position);
+  fig->image_path = strdup(image_path);
+  fig->position = strdup(position);
   return fig;
 }
 
@@ -27,7 +27,7 @@ int figure_set_caption(tex_figure* fig, const char* caption) {
   if (fig == NULL || caption == NULL) {
     return TEX_EINVAL;
   }
-  fig->caption = _strdup(caption);
+  fig->caption = strdup(caption);
   return TEX_OK;
 }
 

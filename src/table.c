@@ -25,7 +25,7 @@ tex_table* table_create(const char* caption, int err) {
   tex_table* tab = calloc(1, sizeof(tex_table));
 
   if (caption != NULL) {
-    tab->caption = _strdup(caption);
+    tab->caption = strdup(caption);
   }
   err = TEX_OK;
   return tab;
