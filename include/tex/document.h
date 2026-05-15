@@ -28,6 +28,7 @@
 #define DOCUMENT_H
 
 #include "section.h"
+#include "language.h"
 
 #ifdef __cplusplus
 extern "C" {
@@ -63,8 +64,6 @@ int document_set_date(tex_document* doc, const char* date);
 int document_set_language(tex_document* doc, tex_language_t language);
 
 const char* document_get_class(tex_document_t doc_t);
-
-const char* document_get_language(tex_language_t lang_t);
 
 int document_add_content(tex_document* doc, const char* content);
 

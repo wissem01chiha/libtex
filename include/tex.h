@@ -38,7 +38,7 @@
 #include "tex/report.h"
 #include "tex/section.h"
 #include "tex/table.h"
-#include "tex/textype.h"
+#include "tex/language.h"
 #include "tex/texutil.h"
 #include "tex/version.h"
 

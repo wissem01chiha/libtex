@@ -31,19 +31,7 @@
 extern "C" {
 #endif
 
-typedef enum tex_language_t {
-  ENGLISH = 0,
-  FRENCH = 1,
-  GERMAN = 2,
-  SPANISH = 3,
-  ITALIAN = 4,
-  PORTUGUESE = 5,
-  DUTCH = 6,
-  RUSSIAN = 7,
-  CHINESE = 8,
-  JAPANESE = 9,
-  ARABIC = 10
-} tex_language_t;
+
 
 typedef enum tex_bibstyle_t {
   PLAIN = 0,

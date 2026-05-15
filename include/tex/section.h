@@ -27,6 +27,8 @@
 #ifndef SECTION_H
 #define SECTION_H
 
+#include <stddef.h>
+
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -38,12 +40,12 @@ typedef enum tex_section_t {
   SUBSUBSECTION = 3
 } tex_section_t;
 
-typedef struct {
+typedef struct tex_section {
   char* title;
   tex_section_t level;
-  tex_section* subsection;
+  struct tex_section* subsection;
   char** content;
-  tex_section* next;
+  struct tex_section* next;
 } tex_section;
 
 tex_section* section_create(const char* title, tex_section_t level, int err);

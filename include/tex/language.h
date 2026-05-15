@@ -24,12 +24,32 @@
   POSSIBILITY OF SUCH DAMAGE.
 */
 
-#ifndef TEXTCONF_H
-#define TEXTCONF_H
+#ifndef LANGUAGE_H
+#define LANGUAGE_H
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+typedef enum tex_language_t {
+  ENGLISH = 0,
+  FRENCH = 1,
+  GERMAN = 2,
+  SPANISH = 3,
+  ITALIAN = 4,
+  PORTUGUESE = 5,
+  DUTCH = 6,
+  RUSSIAN = 7,
+  CHINESE = 8,
+  JAPANESE = 9,
+  ARABIC = 10
+} tex_language_t;
 
 
+const char* tex_language_to_string(tex_language_t lang);
 
+#ifdef __cplusplus
+}; /* extern "C" { */
+#endif
 
-
-
-#endif // TEXTCONF_H
+#endif // LANGUAGE_H

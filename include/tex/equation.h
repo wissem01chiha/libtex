@@ -24,8 +24,8 @@
    POSSIBILITY OF SUCH DAMAGE.
 */
 
-#ifndef TEX_EQUATION_H
-#define TEX_EQUATION_H
+#ifndef EQUATION_H
+#define EQUATION_H
 
 #include "textype.h"
 
@@ -43,10 +43,10 @@ int equation_set_label(tex_equation* eq, const char* label);
 int equation_write(const tex_equation* eq, char* buffer, size_t buffer_size);
 
 #ifdef __cplusplus
-};
+}; /* extern "C" { */
 #endif
 
-#endif  // TEX_EQUATION_H
+#endif  // EQUATION_H
 
 // class Equation : public Environment
 // {

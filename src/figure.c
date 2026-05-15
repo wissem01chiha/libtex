@@ -8,8 +8,8 @@ tex_figure* figure_create(const char* image_path, const char* position) {
   if (fig == NULL) {
     return NULL;
   }
-  fig->image_path = strdup(image_path);
-  fig->position = strdup(position);
+  fig->image_path = _strdup(image_path);
+  fig->position = _strdup(position);
   return fig;
 }
 
@@ -27,11 +27,12 @@ int figure_set_caption(tex_figure* fig, const char* caption) {
   if (fig == NULL || caption == NULL) {
     return TEX_EINVAL;
   }
-  fig->caption = strdup(caption);
+  fig->caption = _strdup(caption);
   return TEX_OK;
 }
 
 int figure_set_label(tex_figure* fig, const char* label) {
+  fig->label = label;
   return TEX_OK;
 }
 
@@ -40,5 +41,8 @@ int figure_set_width(tex_figure* fig, const char* width) {
 }
 
 int figure_write(const tex_figure* fig, char* buffer, size_t buffer_size) {
+  if (fig==NULL){
+    return -1;
+  }
   return TEX_OK;
 }

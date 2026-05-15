@@ -5,7 +5,7 @@
 int main (){
 
   int err;
-  tex_document *doc = document_create (REPORT_DOC, "Document Title",
+  tex_document *doc = document_create (TEXDOC_REPORT, "Document Title",
                                         &err);
   if (doc == NULL)
     {

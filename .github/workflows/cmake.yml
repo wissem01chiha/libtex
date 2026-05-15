@@ -1,0 +1,64 @@
+name: CMake
+on: [push, pull_request]
+jobs:
+  ci-cmake:
+    name: ${{ matrix.name }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - name: Ubuntu GCC
+            os: ubuntu-latest
+            compiler: gcc
+            cflags: -Wall -Wextra
+            pkgtgt: package package_source
+            cmake-args:
+
+          - name: Windows MSVC Win64
+            os: windows-latest
+            compiler: cl
+            cflags: /W3
+            cmake-args: -A x64
+            pkgtgt: PACKAGE
+
+          - name: Windows GCC
+            os: windows-latest
+            compiler: gcc
+            cflags: -Wall -Wextra
+            cmake-args: -G Ninja
+            pkgtgt: package
+
+          - name: macOS Clang
+            os: macos-latest
+            compiler: clang
+            cflags: -Wall -Wextra
+            pkgtgt: package
+            cmake-args:
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v6
+
+    - name: Generate project files
+      run: cmake -S . -B ../build ${{ matrix.cmake-args }} -D CMAKE_BUILD_TYPE=${{ matrix.build-config || 'Release' }}
+      env:
+        CC: ${{ matrix.compiler }}
+        CFLAGS: ${{ matrix.cflags }}
+
+    - name: Compile source code
+      run: cmake --build ../build --config ${{ matrix.build-config || 'Release' }}
+
+    - name: Run test cases
+      run: ctest -C Release --output-on-failure --max-width 120
+      working-directory: ../build
+
+    - name: Upload build errors
+      uses: actions/upload-artifact@v6
+      if: failure()
+      with:
+        name: ${{ matrix.name }} (cmake)
+        path: |
+          ../build/CMakeFiles/CMakeOutput.log
+          ../build/CMakeFiles/CMakeError.log
+        retention-days: 7

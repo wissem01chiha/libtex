@@ -1,4 +1,4 @@
-project('autotex', 'c',
+project('libtex', 'c',
   version : '0.1',
   default_options : ['warning_level=3'])
 
@@ -16,7 +16,7 @@ project('autotex', 'c',
   'src/equation.c',
 ]
 
-autotex = library('autotex', sources,
+libtex = library('libtex', sources,
   include_directories : inc,
   install : true
 )

@@ -1,4 +1,3 @@
-#include "document.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -152,34 +151,5 @@ const char* document_get_class(tex_document_t doc_t) {
       return "beamer";
     default:
       return "";
-  }
-}
-
-const char* document_get_language(tex_language_t lang_t) {
-  switch (lang_t) {
-    case ENGLISH:
-      return "english";
-    case FRENCH:
-      return "french";
-    case GERMAN:
-      return "ngerman";
-    case SPANISH:
-      return "spanish";
-    case ITALIAN:
-      return "italian";
-    case PORTUGUESE:
-      return "portuguese";
-    case DUTCH:
-      return "dutch";
-    case RUSSIAN:
-      return "russian";
-    case CHINESE:
-      return "chinese";
-    case JAPANESE:
-      return "japanese";
-    case ARABIC:
-      return "arabic";
-    default:
-      return "english";
   }
 }
