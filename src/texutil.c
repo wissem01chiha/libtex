@@ -2,7 +2,7 @@
 #include <time.h>
 #include "tex.h"
 
-#ifdef _WIN32 
+#ifdef _WIN32
 #include <Lmcons.h>
 #include <windows.h>
 #else
