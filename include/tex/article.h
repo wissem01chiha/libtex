@@ -1,5 +1,4 @@
-/**
-  Copyright (c) 2026, wissem chiha
+/** Copyright (c) 2026, wissem chiha
 
   Redistribution and use in source and binary forms, with or without
   modification, are permitted provided that the following conditions are met:
@@ -28,17 +27,37 @@
 #define ARTICLE_H
 
 #include "document.h"
+#include "errno.h"
 
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-// /**
-//  * @brief Class for LaTeX article documents
-//  */
-// class Article : public Document
-// {
-// public:
+typedef struct tex_article tex_article;
+
+struct tex_article {
+  tex_document* document;
+};
+
+tex_article* article_create(tex_error_t* err);
+tex_error_t article_delete(tex_article* art);
+
+// inherited member functions from text_document
+tex_error_t article_set_title(tex_article* doc, const char* title);
+tex_error_t article_set_author(tex_article* doc, const char* author);
+tex_error_t article_set_date(tex_article* doc, const char* date);
+tex_error_t article_set_language(tex_article* doc, tex_language_t language);
+tex_error_t article_add_content(tex_article* doc, const char* content);
+tex_error_t article_add_section(tex_article* doc, const tex_section* sec);
+
+// enable or disable the index in the document
+tex_error_t article_enable_index(tex_article* doc);
+
+
+
+
+
+
 //     Article(const std::string &title = "", const std::string &author = "",
 //             const std::string &date = "\\today", Language language =
 //             Language::ENGLISH)

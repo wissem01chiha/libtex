@@ -22,22 +22,15 @@
   ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
   POSSIBILITY OF SUCH DAMAGE.
 */
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include "tex.h"
 
-#ifndef VERSION_H
-#define VERSION_H
+tex_error_t article_enable_index(tex_article* doc) {
+  return 0;
+}
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#define LIBTEX_VERSION_MAJOR 0
-#define LIBTEX_VERSION_MINOR 1
-#define LIBTEX_VERSION_PATCH 0
-
-#define LIBTEX_VERSION_STRING "0.1.0"
-
-#ifdef __cplusplus
-}; /* extern "C" { */
-#endif
-
-#endif  // VERSION_H
+tex_article* article_create(tex_error_t* err) {
+  return NULL;
+}

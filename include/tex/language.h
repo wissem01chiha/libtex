@@ -1,5 +1,4 @@
-/**
-  Copyright (c) 2026, wissem chiha
+/** Copyright (c) 2026, wissem chiha
 
   Redistribution and use in source and binary forms, with or without
   modification, are permitted provided that the following conditions are met:
@@ -26,6 +25,8 @@
 
 #ifndef LANGUAGE_H
 #define LANGUAGE_H
+
+#include "errno.h"
 
 #ifdef __cplusplus
 extern "C" {

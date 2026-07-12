@@ -1,5 +1,4 @@
-/**
-  Copyright (c) 2026, wissem chiha
+/** Copyright (c) 2026, wissem chiha
 
   Redistribution and use in source and binary forms, with or without
   modification, are permitted provided that the following conditions are met:
@@ -28,6 +27,7 @@
 #define BIBLIOGRAPHY_H
 
 #include <stddef.h>
+#include "errno.h"
 
 #ifdef __cplusplus
 extern "C" {
@@ -58,8 +58,13 @@ typedef enum tex_bib_t {
 
 typedef struct tex_bibliography tex_bibliography;
 
+struct tex_bibliography
+{
+  int e;
+};
+
 int bibliography_create(tex_bibliography** bibliography, const char* bib_file,
-                        int style, const char* custom_style, int err);
+                        int style, const char* custom_style, tex_error_t* err);
 int bibliography_delete(tex_bibliography* bibliography);
 
 int bibliography_set_bib_file(tex_bibliography* bibliography,
@@ -81,16 +86,7 @@ int bibliography_generate(tex_bibliography* bibliography,
 
 #endif  // BIBLIOGRAPHY_H
 
-//      * @brief Class to manage bibliographies in LaTeX documents
-//      */
-//     class Bibliography
-//     {
-//     public:
-//         /**
-//          * @brief Constructor for an external .bib file
-//          * @param bibFile Path to the .bib file (without extension)
-//          * @param style Bibliography style
-//          */
+
 //         Bibliography(const std::string &bibFile, BibStyle style =
 //         BibStyle::PLAIN)
 //             : m_bibFile(bibFile), m_style(style), m_customStyle(""),

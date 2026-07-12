@@ -1,5 +1,4 @@
-/**
-  Copyright (c) 2026, wissem chiha
+/** Copyright (c) 2026, wissem chiha
 
   Redistribution and use in source and binary forms, with or without
   modification, are permitted provided that the following conditions are met:
@@ -27,6 +26,8 @@
 #ifndef ERRNO_H
 #define ERRNO_H
 
+#include <errno.h>
+
 typedef enum tex_error_t{
   TEX_ERROR_NONE = 0,
   TEX_ERROR_MEMALLOC_FAILED,
@@ -40,9 +41,6 @@ typedef enum tex_error_t{
   TEX_ERROR_USER
 } tex_error_t;
 
-
-
-#include <errno.h>
 
 #if EDOM > 0
 #define TEX_ERR(x) (-(x))

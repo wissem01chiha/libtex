@@ -1,7 +1,7 @@
 # SPDX-FileCopyrightText: Copyright (c) 2026, Wissem Chiha
 cmake_minimum_required(VERSION 3.12...3.31)
 
-project(libtex LANGUAGES C)
+project(tex LANGUAGES C)
 
 # ============================================================================
 # Properties
@@ -15,14 +15,14 @@ set(PROJECT_DESCRIPTION "A C library for writing Latex Tex files.")
 # ============================================================================
 set(CPACK_PACKAGE_VENDOR "libtex-project")
 set(CPACK_PACKAGE_DESCRIPTION_FILE ${CMAKE_SOURCE_DIR}/README.md)
-set(CPACK_RESOURCE_FILE_LICENSE ${CMAKE_SOURCE_DIR}/LICENSE)
+set(CPACK_RESOURCE_FILE_LICENSE ${CMAKE_SOURCE_DIR}/LICENSE.md)
 set(CPACK_RESOURCE_FILE_README ${CMAKE_SOURCE_DIR}/README.md)
 set(CPACK_COMPONENTS_ALL Development Documentation Runtime)
 
 # ============================================================================
 # CTest
 # ============================================================================
-set (CTEST_OUTPUT_ON_FAILURE TRUE)
+set(CTEST_OUTPUT_ON_FAILURE TRUE)
 
 # ============================================================================
 # CMake
@@ -73,6 +73,7 @@ endif()
 if(LIBTEX_BUILD_TESTS)
     include(CTest)
     enable_testing()
+    add_subdirectory(test)
 endif()
 
 # ============================================================================
@@ -169,9 +170,9 @@ endif()
 # ============================================================================
 # Pkg-Config
 # ============================================================================
-set(TEX_PC "${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}.pc")
+set(TEX_PC "${CMAKE_CURRENT_BINARY_DIR}/libtex.pc")
 configure_file(
-    ${CMAKE_CURRENT_SOURCE_DIR}/${PROJECT_NAME}.pc.in
+    ${CMAKE_CURRENT_SOURCE_DIR}/libtex.pc.in
     ${TEX_PC}
     @ONLY
 )
@@ -240,7 +241,7 @@ endif()
 set(CPACK_PACKAGE_VENDOR "Wissem Chiha")
 set(CPACK_PACKAGE_DESCRIPTION_SUMMARY "Open Packaging Convention Library")
 set(CMAKE_PROJECT_HOMEPAGE_URL "https://github.com/wissem01chiha/libtex")
-set(CPACK_RESOURCE_FILE_LICENSE "${PROJECT_SOURCE_DIR}/LICENSE.txt")
+set(CPACK_RESOURCE_FILE_LICENSE "${PROJECT_SOURCE_DIR}/LICENSE.md")
 set(CPACK_PACKAGE_VERSION_MAJOR "${PROJECT_VERSION_MAJOR}")
 set(CPACK_PACKAGE_VERSION_MINOR "${PROJECT_VERSION_MINOR}")
 set(CPACK_PACKAGE_VERSION_PATCH "${PROJECT_VERSION_PATCH}")
