@@ -64,7 +64,7 @@ tex_error_t document_set_date(tex_document* doc, const char* date) {
 
 tex_error_t document_set_language(tex_document* doc, tex_language_t language) {
   if (doc == NULL) {
-   return TEX_ERROR_INVALID_DOCUMENT;
+    return TEX_ERROR_INVALID_DOCUMENT;
   }
   doc->language = language;
   return TEX_ERROR_NONE;
@@ -82,13 +82,14 @@ tex_error_t document_add_section(tex_document* doc, const tex_section* sec) {
   if (doc == NULL) {
     return TEX_ERROR_INVALID_DOCUMENT;
   }
-  if(sec==NULL){
+  if (sec == NULL) {
     return TEX_ERROR_INVALID_SECTION;
   }
   return TEX_ERROR_NONE;
 }
 
-tex_error_t document_write(const tex_document* doc, char* buffer, size_t buffer_size) {
+tex_error_t document_write(const tex_document* doc, char* buffer,
+                           size_t buffer_size) {
   if (doc == NULL) {
     return TEX_ERROR_INVALID_DOCUMENT;
   }
@@ -119,7 +120,7 @@ tex_error_t document_write(const tex_document* doc, char* buffer, size_t buffer_
 
 tex_error_t document_fs_write(const tex_document* doc, const char* filename) {
   if (doc == NULL) {
-   return TEX_ERROR_INVALID_DOCUMENT;
+    return TEX_ERROR_INVALID_DOCUMENT;
   }
   char buffer[2048];
   tex_error_t bufferr = document_write(doc, buffer, sizeof(buffer));
@@ -142,7 +143,7 @@ tex_error_t document_fs_write(const tex_document* doc, const char* filename) {
 }
 
 tex_error_t document_add_package(tex_document* doc, const char* package,
-                         const char* options) {
+                                 const char* options) {
   return TEX_ERROR_NONE;
 }
 

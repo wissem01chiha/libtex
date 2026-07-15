@@ -26,9 +26,9 @@
 #ifndef DOCUMENT_H
 #define DOCUMENT_H
 
-#include "section.h"
-#include "language.h"
 #include "errno.h"
+#include "language.h"
+#include "section.h"
 
 #ifdef __cplusplus
 extern "C" {
@@ -51,7 +51,8 @@ typedef struct {
   char* content;
 } tex_document;
 
-tex_document* document_create(tex_document_t type, const char* title, tex_error_t* err);
+tex_document* document_create(tex_document_t type, const char* title,
+                              tex_error_t* err);
 tex_error_t document_delete(tex_document* doc);
 
 tex_error_t document_set_title(tex_document* doc, const char* title);
@@ -62,11 +63,12 @@ const char* document_get_class(tex_document_t doc_t);
 tex_error_t document_add_content(tex_document* doc, const char* content);
 tex_error_t document_add_section(tex_document* doc, const tex_section* sec);
 
-tex_error_t document_write(const tex_document* doc, char* buffer, size_t buffer_size);
+tex_error_t document_write(const tex_document* doc, char* buffer,
+                           size_t buffer_size);
 tex_error_t document_fs_write(const tex_document* doc, const char* file);
 
 tex_error_t document_add_package(tex_document* doc, const char* package,
-                         const char* options);
+                                 const char* options);
 
 #ifdef __cplusplus
 }; /* extern "C" { */

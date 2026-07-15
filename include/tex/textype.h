@@ -30,12 +30,6 @@
 extern "C" {
 #endif
 
-
-
-
-
-
-
 typedef enum tex_transition_t {
   NONE = 0,
   FADE = 1,

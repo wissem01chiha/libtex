@@ -40,7 +40,7 @@ typedef enum tex_list_t {
 
 typedef struct tex_list {
   tex_list_t type;
-}tex_list;
+} tex_list;
 
 tex_list* list_create(tex_list_t type, tex_error_t* err);
 tex_error_t list_delete(tex_list* lst);
@@ -48,7 +48,6 @@ tex_error_t list_delete(tex_list* lst);
 tex_error_t list_add_item(tex_list* lst, const char* item, const char* label);
 
 tex_error_t list_write(const tex_list* lst, char* buffer, size_t buffer_size);
-
 
 #ifdef __cplusplus
 }; /* extern "C" { */

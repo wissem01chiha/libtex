@@ -32,7 +32,7 @@ int figure_set_caption(tex_figure* fig, const char* caption) {
 }
 
 int figure_set_label(tex_figure* fig, const char* label) {
-  if(fig==NULL){
+  if (fig == NULL) {
     return TEX_ERROR_INVALID_FIGURE;
   }
   fig->label = label;
@@ -40,14 +40,14 @@ int figure_set_label(tex_figure* fig, const char* label) {
 }
 
 int figure_set_width(tex_figure* fig, const char* width) {
-    if(fig==NULL){
+  if (fig == NULL) {
     return TEX_ERROR_INVALID_FIGURE;
   }
   return TEX_ERROR_NONE;
 }
 
 int figure_write(const tex_figure* fig, char* buffer, size_t buffer_size) {
-  if (fig==NULL){
+  if (fig == NULL) {
     return -1;
   }
   return TEX_ERROR_NONE;

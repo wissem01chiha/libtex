@@ -48,7 +48,7 @@ typedef struct {
   tex_theorem_t type;
   const char* title;
   const char* content;
-}tex_theorem;
+} tex_theorem;
 
 tex_theorem* theorem_create(const char* title, tex_theorem_t type, int* err);
 int theorem_delete(tex_theorem* th);

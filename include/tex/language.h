@@ -46,11 +46,10 @@ typedef enum tex_language_t {
   ARABIC = 10
 } tex_language_t;
 
-
 const char* tex_language_to_string(tex_language_t lang);
 
 #ifdef __cplusplus
 }; /* extern "C" { */
 #endif
 
-#endif // LANGUAGE_H
+#endif  // LANGUAGE_H

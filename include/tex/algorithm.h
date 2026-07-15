@@ -23,8 +23,8 @@
   POSSIBILITY OF SUCH DAMAGE.
 */
 
-#ifndef ALGORITHM_H
-#define ALGORITHM_H
+#ifndef Algorithm_h_
+#define Algorithm_h_
 
 #include "errno.h"
 
@@ -42,21 +42,29 @@ struct tex_algorithm {
 tex_algorithm* algorithm_create(tex_error_t* err);
 void alorithm_set_caption(tex_algorithm* algorithm, const char* caption);
 int algorithm_add_line(tex_algorithm* algorithm, const char* line, int indent);
-int algorithm_add_comment(tex_algorithm* algorithm, const char* comment, int indent);
-int algorithm_add_for_loop(tex_algorithm* algorithm, const char* condition, int indent);
-int algorithm_add_while_loop(tex_algorithm* algorithm, const char* condition, int indent);
-int algorithm_add_if(tex_algorithm* algorithm, const char* condition, int indent);
+int algorithm_add_comment(tex_algorithm* algorithm, const char* comment,
+                          int indent);
+int algorithm_add_for_loop(tex_algorithm* algorithm, const char* condition,
+                           int indent);
+int algorithm_add_while_loop(tex_algorithm* algorithm, const char* condition,
+                             int indent);
+int algorithm_add_if(tex_algorithm* algorithm, const char* condition,
+                     int indent);
 int algorithm_add_else(tex_algorithm* algorithm, int indent);
-int algorithm_add_else_if(tex_algorithm* algorithm, const char* condition, int indent);
-int algorithm_add_end(tex_algorithm* algorithm, const char* statement, int indent);
-int algorithm_add_return(tex_algorithm* algorithm, const char* value, int indent);
+int algorithm_add_else_if(tex_algorithm* algorithm, const char* condition,
+                          int indent);
+int algorithm_add_end(tex_algorithm* algorithm, const char* statement,
+                      int indent);
+int algorithm_add_return(tex_algorithm* algorithm, const char* value,
+                         int indent);
 int algorithm_add_break(tex_algorithm* algorithm, int indent);
 int algorithm_add_continue(tex_algorithm* algorithm, int indent);
-int algorithm_add_function(tex_algorithm* algorithm, const char* name, const char* args, int indent);
+int algorithm_add_function(tex_algorithm* algorithm, const char* name,
+                           const char* args, int indent);
 int algorithm_add_function_end(tex_algorithm* algorithm, int indent);
 
 #ifdef __cplusplus
 }; /* extern "C" { */
 #endif
 
-#endif  // ALGORITHM_H
+#endif  // Algorithm_h_

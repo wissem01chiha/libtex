@@ -26,10 +26,10 @@
 #ifndef BOOK_H
 #define BOOK_H
 
+#include <stdbool.h>
 #include "document.h"
 #include "errno.h"
 #include "section.h"
-#include <stdbool.h>
 
 #ifdef __cplusplus
 extern "C" {
@@ -37,15 +37,14 @@ extern "C" {
 
 typedef struct tex_book tex_book;
 
-struct tex_book
-{
-    tex_document* document;
-    const char*  abstract;  
-    tex_section* appendices[10];
-    bool toc;
-    bool lof;
-    bool lot;
-    bool index;
+struct tex_book {
+  tex_document* document;
+  const char* abstract;
+  tex_section* appendices[10];
+  bool toc;
+  bool lof;
+  bool lot;
+  bool index;
 };
 
 tex_book* book_create(tex_error_t* err);
@@ -59,10 +58,7 @@ tex_error_t book_add_content(tex_book* doc, const char* content);
 tex_error_t book_add_section(tex_book* doc, const tex_section* sec);
 
 tex_error_t book_add_package(tex_book* doc, const char* package,
-                         const char* options);
-
-
-
+                             const char* options);
 
 // const std::string &title = "", const std::string &author = "",
 //          const std::string &date = "\\today", Language language =

@@ -58,8 +58,7 @@ typedef enum tex_bib_t {
 
 typedef struct tex_bibliography tex_bibliography;
 
-struct tex_bibliography
-{
+struct tex_bibliography {
   int e;
 };
 
@@ -79,13 +78,11 @@ int bibliography_set_custom_style(tex_bibliography* bibliography,
 int bibliography_generate(tex_bibliography* bibliography,
                           const char* output_dir);
 
-
 #ifdef __cplusplus
 }; /* extern "C" { */
 #endif
 
 #endif  // BIBLIOGRAPHY_H
-
 
 //         Bibliography(const std::string &bibFile, BibStyle style =
 //         BibStyle::PLAIN)

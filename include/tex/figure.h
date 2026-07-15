@@ -33,7 +33,7 @@
 extern "C" {
 #endif
 
-typedef struct  {
+typedef struct {
   char* image_path;
   char* caption;
   char* label;

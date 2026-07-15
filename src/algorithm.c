@@ -32,10 +32,10 @@ tex_algorithm* algorithm_create(tex_error_t* err) {
 }
 
 void alorithm_set_caption(tex_algorithm* algorithm, const char* caption) {
-    if(algorithm==NULL || caption==NULL){
-        return;
-    }
-    algorithm->caption =strdup(caption);
+  if (algorithm == NULL || caption == NULL) {
+    return;
+  }
+  algorithm->caption = strdup(caption);
 }
 
 int algorithm_add_line(tex_algorithm* algorithm, const char* line, int indent) {

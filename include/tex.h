@@ -26,23 +26,22 @@
 #ifndef TEX_H
 #define TEX_H
 
+#include "tex/algorithm.h"
+#include "tex/article.h"
 #include "tex/bibliography.h"
 #include "tex/book.h"
-#include "tex/article.h"
-#include "tex/algorithm.h"
 #include "tex/document.h"
 #include "tex/environment.h"
 #include "tex/equation.h"
 #include "tex/errno.h"
 #include "tex/figure.h"
+#include "tex/language.h"
+#include "tex/list.h"
 #include "tex/presentation.h"
 #include "tex/report.h"
 #include "tex/section.h"
 #include "tex/table.h"
-#include "tex/list.h"
-#include "tex/language.h"
 #include "tex/texutil.h"
 #include "tex/version.h"
-#include "tex/errno.h"
 
 #endif  // TEX_H

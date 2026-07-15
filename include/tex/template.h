@@ -23,7 +23,6 @@
   POSSIBILITY OF SUCH DAMAGE.
 */
 
-
 //     class DocumentTemplate
 //     {
 //     public:

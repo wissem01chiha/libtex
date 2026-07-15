@@ -3,8 +3,8 @@
 #include <string.h>
 #include "tex.h"
 
-const char* tex_language_to_string(tex_language_t lang){
-switch (lang) {
+const char* tex_language_to_string(tex_language_t lang) {
+  switch (lang) {
     case ENGLISH:
       return "english";
     case FRENCH:

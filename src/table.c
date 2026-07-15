@@ -11,8 +11,8 @@ tex_table_row* tex_table_row_create(size_t size, tex_error_t* err) {
 tex_table* table_create(const char* caption, tex_error_t* err) {
 
   tex_table* tab = calloc(1, sizeof(tex_table));
-  if(tab==NULL){
-    *err =TEX_ERROR_MEMALLOC_FAILED;
+  if (tab == NULL) {
+    *err = TEX_ERROR_MEMALLOC_FAILED;
   }
   if (caption != NULL) {
     tab->caption = strdup(caption);

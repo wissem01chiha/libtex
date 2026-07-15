@@ -26,14 +26,14 @@
 #ifndef TABLE_H
 #define TABLE_H
 
-#include "errno.h"
 #include <stddef.h>
+#include "errno.h"
 
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-typedef struct  {
+typedef struct {
   size_t size;
   size_t capacity;
   char* content;

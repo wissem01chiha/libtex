@@ -23,8 +23,8 @@
   POSSIBILITY OF SUCH DAMAGE.
 */
 
-#ifndef ARTICLE_H
-#define ARTICLE_H
+#ifndef Article_h_
+#define Article_h_
 
 #include "document.h"
 #include "errno.h"
@@ -42,7 +42,8 @@ struct tex_article {
 tex_article* article_create(tex_error_t* err);
 tex_error_t article_delete(tex_article* art);
 
-// inherited member functions from text_document
+/* Inherited member functions from text_document */
+
 tex_error_t article_set_title(tex_article* doc, const char* title);
 tex_error_t article_set_author(tex_article* doc, const char* author);
 tex_error_t article_set_date(tex_article* doc, const char* date);
@@ -50,13 +51,7 @@ tex_error_t article_set_language(tex_article* doc, tex_language_t language);
 tex_error_t article_add_content(tex_article* doc, const char* content);
 tex_error_t article_add_section(tex_article* doc, const tex_section* sec);
 
-// enable or disable the index in the document
 tex_error_t article_enable_index(tex_article* doc);
-
-
-
-
-
 
 //     Article(const std::string &title = "", const std::string &author = "",
 //             const std::string &date = "\\today", Language language =
@@ -135,4 +130,4 @@ tex_error_t article_enable_index(tex_article* doc);
 };
 #endif
 
-#endif  // ARTICLE_H
+#endif  // Article_h_
