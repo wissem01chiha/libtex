@@ -23,33 +23,32 @@
   POSSIBILITY OF SUCH DAMAGE.
 */
 
-#ifndef LANGUAGE_H
-#define LANGUAGE_H
+#pragma once
 
 #include "errno.h"
 
 #ifdef __cplusplus
-extern "C" {
+extern "C"
+{
 #endif
 
-typedef enum tex_language_t {
-  ENGLISH = 0,
-  FRENCH = 1,
-  GERMAN = 2,
-  SPANISH = 3,
-  ITALIAN = 4,
-  PORTUGUESE = 5,
-  DUTCH = 6,
-  RUSSIAN = 7,
-  CHINESE = 8,
-  JAPANESE = 9,
-  ARABIC = 10
-} tex_language_t;
+  typedef enum tex_language_t
+  {
+    ENGLISH    = 0,
+    FRENCH     = 1,
+    GERMAN     = 2,
+    SPANISH    = 3,
+    ITALIAN    = 4,
+    PORTUGUESE = 5,
+    DUTCH      = 6,
+    RUSSIAN    = 7,
+    CHINESE    = 8,
+    JAPANESE   = 9,
+    ARABIC     = 10
+  } tex_language_t;
 
-const char* tex_language_to_string(tex_language_t lang);
+  const char *tex_language_to_string(tex_language_t lang);
 
 #ifdef __cplusplus
 }; /* extern "C" { */
 #endif
-
-#endif  // LANGUAGE_H

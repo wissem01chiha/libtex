@@ -23,15 +23,13 @@
   POSSIBILITY OF SUCH DAMAGE.
 */
 
-#ifndef PACKAGE_H
-#define PACKAGE_H
+#pragma once
 
 #ifdef __cplusplus
-extern "C" {
+extern "C"
+{
 #endif
 
 #ifdef __cplusplus
 }; /* extern "C" { */
 #endif
-
-#endif  // PACKAGE_H

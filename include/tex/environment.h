@@ -23,31 +23,28 @@
   POSSIBILITY OF SUCH DAMAGE.
 */
 
-#ifndef ENVIRONMENT_H
-#define ENVIRONMENT_H
+#pragma once
 
 #include "errno.h"
 
 #ifdef __cplusplus
-extern "C" {
+extern "C"
+{
 #endif
 
-typedef struct tex_environment tex_environment;
+  typedef struct tex_environment tex_environment;
 
-int environment_create(const char* name, tex_environment** env, int err);
-int environment_delete(tex_environment* env);
+  int environment_create(const char *name, tex_environment **env, int err);
+  int environment_delete(tex_environment *env);
 
-int environment_begin_write(const tex_environment* env, char* buffer,
-                            size_t buffer_size);
+  int environment_begin_write(const tex_environment *env,
+                              char                  *buffer,
+                              size_t                 buffer_size);
 
-int environment_end_write(const tex_environment* env, char* buffer,
-                          size_t buffer_size);
+  int environment_end_write(const tex_environment *env, char *buffer, size_t buffer_size);
 
-int environment_write(const tex_environment* env, char* buffer,
-                      size_t buffer_size);
+  int environment_write(const tex_environment *env, char *buffer, size_t buffer_size);
 
 #ifdef __cplusplus
 }; /* extern "C" { */
 #endif
-
-#endif  // ENVIRONMENT_H

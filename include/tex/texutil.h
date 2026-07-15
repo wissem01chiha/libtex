@@ -29,19 +29,20 @@
 #include "errno.h"
 
 #ifdef __cplusplus
-extern "C" {
+extern "C"
+{
 #endif
 
 #ifdef _MSC_VER
-#define strdup _strdup
+#  define strdup _strdup
 #endif
 
-const char* tex_get_username(tex_error_t* err);
+  const char *tex_get_username(tex_error_t *err);
 
-const char* tex_get_date(tex_error_t* err);
+  const char *tex_get_date(tex_error_t *err);
 
 #ifdef __cplusplus
 }; /* extern "C" { */
 #endif
 
-#endif  // TEXUTIL_H
+#endif // TEXUTIL_H

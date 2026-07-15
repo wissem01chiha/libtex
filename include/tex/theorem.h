@@ -29,37 +29,40 @@
 #include <stddef.h>
 
 #ifdef __cplusplus
-extern "C" {
+extern "C"
+{
 #endif
 
-typedef enum tex_theorem_t {
-  THEOREM = 0,
-  LEMMA = 1,
-  PROPOSITION = 2,
-  COROLLARY = 3,
-  DEFINITION = 4,
-  EXAMPLE = 5,
-  REMARK = 6,
-  PROOF = 7,
-  CUSTOM_THEOREM = 8
-} tex_theorem_t;
+  typedef enum tex_theorem_t
+  {
+    THEOREM        = 0,
+    LEMMA          = 1,
+    PROPOSITION    = 2,
+    COROLLARY      = 3,
+    DEFINITION     = 4,
+    EXAMPLE        = 5,
+    REMARK         = 6,
+    PROOF          = 7,
+    CUSTOM_THEOREM = 8
+  } tex_theorem_t;
 
-typedef struct {
-  tex_theorem_t type;
-  const char* title;
-  const char* content;
-} tex_theorem;
+  typedef struct
+  {
+    tex_theorem_t type;
+    const char   *title;
+    const char   *content;
+  } tex_theorem;
 
-tex_theorem* theorem_create(const char* title, tex_theorem_t type, int* err);
-int theorem_delete(tex_theorem* th);
+  tex_theorem *theorem_create(const char *title, tex_theorem_t type, int *err);
+  int          theorem_delete(tex_theorem *th);
 
-int theorem_set_content(tex_theorem* th, const char* content);
-int theorem_set_title(tex_theorem* th, const char* title);
+  int theorem_set_content(tex_theorem *th, const char *content);
+  int theorem_set_title(tex_theorem *th, const char *title);
 
-int theorem_write(const tex_theorem* th, char* buffer, size_t buffer_size);
+  int theorem_write(const tex_theorem *th, char *buffer, size_t buffer_size);
 
 #ifdef __cplusplus
 }; /* extern "C" { */
 #endif
 
-#endif  // THEOREM_H
+#endif // THEOREM_H

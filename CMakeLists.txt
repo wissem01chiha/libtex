@@ -45,15 +45,8 @@ option(LIBTEX_BUILD_TOOLS "Build tools in the script directory" ON)
 option(LIBTEX_ASAN "Enable AddressSanitizer (ASan)" OFF)
 
 # ============================================================================
-# Build Type
+# Install Configuration
 # ============================================================================
-get_property(IS_MULTI GLOBAL PROPERTY GENERATOR_IS_MULTI_CONFIG)
-
-if(NOT DEFINED CMAKE_BUILD_TYPE AND NOT IS_MULTI)
-    message(STATUS "No CMAKE_BUILD_TYPE set -- using Release")
-    set(CMAKE_BUILD_TYPE Release)
-endif(NOT DEFINED CMAKE_BUILD_TYPE AND NOT IS_MULTI)
-
 if (CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT)
     set(CMAKE_INSTALL_PREFIX "${CMAKE_CURRENT_BINARY_DIR}/install"
     CACHE PATH "Default install path" FORCE)
@@ -87,17 +80,21 @@ list(APPEND libtex_includes
 # Source Files
 # ============================================================================
 set(libtex_sources
-    src/figure.c
-    src/version.c
-    src/document.c
-    src/section.c
-    src/environment.c
-    src/theorem.c
+    src/algorithm.c
+    src/article.c
+    src/bibliography.c
     src/book.c
-    src/texutil.c
+    src/document.c
+    src/environment.c
     src/equation.c
+    src/figure.c
     src/language.c
     src/list.c
+    src/section.c
+    src/table.c
+    src/texutil.c
+    src/theorem.c
+    src/version.c
 )
 
 set(libtex_headers

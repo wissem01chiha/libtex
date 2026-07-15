@@ -29,32 +29,35 @@
 #include <stddef.h>
 
 #ifdef __cplusplus
-extern "C" {
+extern "C"
+{
 #endif
 
-typedef enum tex_section_t {
-  CHAPTER = 0,
-  SECTION = 1,
-  SUBSECTION = 2,
-  SUBSUBSECTION = 3
-} tex_section_t;
+  typedef enum tex_section_t
+  {
+    CHAPTER       = 0,
+    SECTION       = 1,
+    SUBSECTION    = 2,
+    SUBSUBSECTION = 3
+  } tex_section_t;
 
-typedef struct tex_section {
-  char* title;
-  tex_section_t level;
-  struct tex_section* subsection;
-  char* content;
-  struct tex_section* next;
-} tex_section;
+  typedef struct tex_section
+  {
+    char               *title;
+    tex_section_t       level;
+    struct tex_section *subsection;
+    char               *content;
+    struct tex_section *next;
+  } tex_section;
 
-tex_section* section_create(const char* title, tex_section_t level, int err);
-int section_delete(tex_section* sec);
+  tex_section *section_create(const char *title, tex_section_t level, int err);
+  int          section_delete(tex_section *sec);
 
-int section_add_content(tex_section* sec, const char* content);
-int section_write(const tex_section* sec, char* buffer, size_t buffer_size);
+  int section_add_content(tex_section *sec, const char *content);
+  int section_write(const tex_section *sec, char *buffer, size_t buffer_size);
 
 #ifdef __cplusplus
 };
 #endif
 
-#endif  // SECTION_H
+#endif // SECTION_H

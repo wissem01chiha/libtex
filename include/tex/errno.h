@@ -23,12 +23,12 @@
   POSSIBILITY OF SUCH DAMAGE.
 */
 
-#ifndef ERRNO_H
-#define ERRNO_H
+#pragma once
 
 #include <errno.h>
 
-typedef enum tex_error_t {
+typedef enum tex_error_t
+{
   TEX_ERROR_NONE = 0,
   TEX_ERROR_MEMALLOC_FAILED,
   TEX_ERROR_INVALID_DOCUMENT,
@@ -42,9 +42,9 @@ typedef enum tex_error_t {
 } tex_error_t;
 
 #if EDOM > 0
-#define TEX_ERR(x) (-(x))
+#  define TEX_ERR(x) (-(x))
 #else
-#define TEX_ERR(x) (x)
+#  define TEX_ERR(x) (x)
 #endif
 
 #define TEX_ERROR_NONE 0
@@ -81,5 +81,3 @@ typedef enum tex_error_t {
 
 #define TEX_EUTF8 TEX_ERR(EILSEQ)
 #define TEX_ECHARSET (-9400)
-
-#endif  // ERRNO_H

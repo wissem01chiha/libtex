@@ -23,55 +23,53 @@
   POSSIBILITY OF SUCH DAMAGE.
 */
 
-#ifndef DOCUMENT_H
-#define DOCUMENT_H
+#pragma once
 
 #include "errno.h"
 #include "language.h"
 #include "section.h"
 
 #ifdef __cplusplus
-extern "C" {
+extern "C"
+{
 #endif
 
-typedef enum tex_document_t {
-  TEXDOC_ARTICLE = 0,
-  TEXDOC_REPORT = 1,
-  TEXDOC_BOOK = 2,
-  TEXDOC_PRESENTATION = 3
-} tex_document_t;
+  typedef enum tex_document_t
+  {
+    TEXDOC_ARTICLE      = 0,
+    TEXDOC_REPORT       = 1,
+    TEXDOC_BOOK         = 2,
+    TEXDOC_PRESENTATION = 3
+  } tex_document_t;
 
-typedef struct {
-  tex_document_t type;
-  tex_language_t language;
-  tex_section* section;
-  char* title;
-  char* author;
-  char* date;
-  char* content;
-} tex_document;
+  typedef struct
+  {
+    tex_document_t type;
+    tex_language_t language;
+    tex_section   *section;
+    char          *title;
+    char          *author;
+    char          *date;
+    char          *content;
+  } tex_document;
 
-tex_document* document_create(tex_document_t type, const char* title,
-                              tex_error_t* err);
-tex_error_t document_delete(tex_document* doc);
+  tex_document *document_create(tex_document_t type, const char *title, tex_error_t *err);
+  tex_error_t   document_delete(tex_document *doc);
 
-tex_error_t document_set_title(tex_document* doc, const char* title);
-tex_error_t document_set_author(tex_document* doc, const char* author);
-tex_error_t document_set_date(tex_document* doc, const char* date);
-tex_error_t document_set_language(tex_document* doc, tex_language_t language);
-const char* document_get_class(tex_document_t doc_t);
-tex_error_t document_add_content(tex_document* doc, const char* content);
-tex_error_t document_add_section(tex_document* doc, const tex_section* sec);
+  tex_error_t document_set_title(tex_document *doc, const char *title);
+  tex_error_t document_set_author(tex_document *doc, const char *author);
+  tex_error_t document_set_date(tex_document *doc, const char *date);
+  tex_error_t document_set_language(tex_document *doc, tex_language_t language);
+  const char *document_get_class(tex_document_t doc_t);
+  tex_error_t document_add_content(tex_document *doc, const char *content);
+  tex_error_t document_add_section(tex_document *doc, const tex_section *sec);
 
-tex_error_t document_write(const tex_document* doc, char* buffer,
-                           size_t buffer_size);
-tex_error_t document_fs_write(const tex_document* doc, const char* file);
+  tex_error_t
+  document_add_package(tex_document *doc, const char *package, const char *options);
 
-tex_error_t document_add_package(tex_document* doc, const char* package,
-                                 const char* options);
+  tex_error_t document_write(const tex_document *doc, char *buffer, size_t buffer_size);
+  tex_error_t document_fs_write(const tex_document *doc, const char *file);
 
 #ifdef __cplusplus
 }; /* extern "C" { */
 #endif
-
-#endif  // DOCUMENT_H

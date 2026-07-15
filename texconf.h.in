@@ -23,12 +23,4 @@
   POSSIBILITY OF SUCH DAMAGE.
 */
 
-#ifndef TEXTCONF_H
-#define TEXTCONF_H
-
-
-
-
-
-
-#endif // TEXTCONF_H
+#pragma once 

@@ -22,7 +22,22 @@
   ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
   POSSIBILITY OF SUCH DAMAGE.
 */
+#include "tex.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "tex.h"
+
+tex_bibliography *bibliography_create(tex_error_t *err)
+{
+  return NULL;
+}
+tex_error_t bibliography_delete(tex_bibliography *bibliography)
+{
+  return 0;
+}
+tex_error_t bibliography_set_bib_file(tex_bibliography *bibliography,
+                                      const char       *bib_file,
+                                      int               use_external_file)
+{
+  return 0;
+}

@@ -1,25 +1,28 @@
+#include "tex.h"
 #include <stdio.h>
 #include <stdlib.h>
-#include "tex.h"
 
-int main() {
-
-  tex_error_t err = TEX_ERROR_NONE;
-  tex_document* doc = document_create(TEXDOC_REPORT, "Document Title", &err);
-  if (doc == NULL) {
+int main()
+{
+  tex_error_t   err = TEX_ERROR_NONE;
+  tex_document *doc = document_create(TEXDOC_REPORT, "Document Title", &err);
+  if (doc == NULL)
+  {
     return -1;
   }
-  const char* filename = "document_fs_write_test.tex";
+  const char *filename = "document_fs_write_test.tex";
 
   int write_err = document_fs_write(doc, filename);
-  if (write_err != TEX_ERROR_NONE) {
+  if (write_err != TEX_ERROR_NONE)
+  {
     fprintf(stderr, "document_fs_write failed with code %d\n", write_err);
     document_delete(doc);
     return 2;
   }
 
-  FILE* f = fopen(filename, "r");
-  if (f == NULL) {
+  FILE *f = fopen(filename, "r");
+  if (f == NULL)
+  {
     fprintf(stderr, "file %s not created\n", filename);
     document_delete(doc);
     return 3;

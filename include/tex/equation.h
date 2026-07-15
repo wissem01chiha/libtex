@@ -23,50 +23,24 @@
   POSSIBILITY OF SUCH DAMAGE.
 */
 
-#ifndef EQUATION_H
-#define EQUATION_H
+#pragma once
 
 #include "errno.h"
-#include "textype.h"
 
 #ifdef __cplusplus
-extern "C" {
+extern "C"
+{
 #endif
 
-typedef struct tex_equation tex_equation;
+  typedef struct tex_equation tex_equation;
 
-tex_equation* equation_create(int numbered, int err);
-int equation_delete(tex_equation* eq);
+  tex_equation *equation_create(int *err);
+  tex_error_t   equation_delete(tex_equation *eq);
 
-int equation_set_content(tex_equation* eq, const char* content);
-int equation_set_label(tex_equation* eq, const char* label);
-int equation_write(const tex_equation* eq, char* buffer, size_t buffer_size);
+  tex_error_t equation_set_content(tex_equation *eq, const char *content);
+  tex_error_t equation_set_label(tex_equation *eq, const char *label);
+  tex_error_t equation_write(const tex_equation *eq, char *buffer, size_t buffer_size);
 
 #ifdef __cplusplus
 }; /* extern "C" { */
 #endif
-
-#endif  // EQUATION_H
-
-// class Equation : public Environment
-// {
-// public:
-//     Equation(bool numbered = true)
-//         : Environment(numbered ? "equation" : "equation*") {}
-
-//     void setContent(const std::string &content)
-//     {
-//         m_content = content;
-//     }
-
-//     void setLabel(const std::string &label)
-//     {
-//         m_label = label;
-//     }
-
-//     std::string generate() const override;
-
-// private:
-//     std::string m_content;
-//     std::string m_label;
-// };

@@ -27,7 +27,8 @@
 #define VERSION_H
 
 #ifdef __cplusplus
-extern "C" {
+extern "C"
+{
 #endif
 
 #define LIBTEX_VERSION_MAJOR 0
@@ -40,4 +41,4 @@ extern "C" {
 }; /* extern "C" { */
 #endif
 
-#endif  // VERSION_H
+#endif // VERSION_H

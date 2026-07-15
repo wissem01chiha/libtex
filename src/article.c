@@ -22,15 +22,52 @@
   ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
   POSSIBILITY OF SUCH DAMAGE.
 */
+
+#include "tex.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "tex.h"
 
-tex_error_t article_enable_index(tex_article* doc) {
-  return 0;
+tex_error_t article_enable_index(tex_article *doc)
+{
+  return TEX_ERROR_NONE;
 }
 
-tex_article* article_create(tex_error_t* err) {
+tex_article *article_create(tex_error_t *err)
+{
   return NULL;
+}
+
+tex_error_t article_delete(tex_article *art)
+{
+  return TEX_ERROR_NONE;
+}
+tex_error_t article_set_title(tex_article *doc, const char *title)
+{
+  return TEX_ERROR_NONE;
+}
+
+tex_error_t article_set_author(tex_article *doc, const char *author)
+{
+  return TEX_ERROR_NONE;
+}
+
+tex_error_t article_set_date(tex_article *doc, const char *date)
+{
+  return TEX_ERROR_NONE;
+}
+
+tex_error_t article_set_language(tex_article *doc, tex_language_t language)
+{
+  return TEX_ERROR_NONE;
+}
+
+tex_error_t article_add_content(tex_article *doc, const char *content)
+{
+  return TEX_ERROR_NONE;
+}
+
+tex_error_t article_add_section(tex_article *doc, const tex_section *sec)
+{
+  return TEX_ERROR_NONE;
 }

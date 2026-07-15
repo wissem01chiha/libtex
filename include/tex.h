@@ -23,8 +23,8 @@
   POSSIBILITY OF SUCH DAMAGE.
 */
 
-#ifndef TEX_H
-#define TEX_H
+#ifndef Tex_h_
+#define Tex_h_
 
 #include "tex/algorithm.h"
 #include "tex/article.h"
@@ -44,4 +44,4 @@
 #include "tex/texutil.h"
 #include "tex/version.h"
 
-#endif  // TEX_H
+#endif // Tex_h_

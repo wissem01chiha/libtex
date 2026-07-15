@@ -23,36 +23,34 @@
   POSSIBILITY OF SUCH DAMAGE.
 */
 
-#ifndef FIGURE_H
-#define FIGURE_H
+#pragma once
 
-#include <stddef.h>
 #include "errno.h"
+#include <stddef.h>
 
 #ifdef __cplusplus
-extern "C" {
+extern "C"
+{
 #endif
 
-typedef struct {
-  char* image_path;
-  char* caption;
-  char* label;
-  char* width;
-  char* position;
-} tex_figure;
+  typedef struct
+  {
+    char *image_path;
+    char *caption;
+    char *label;
+    char *width;
+    char *position;
+  } tex_figure;
 
-tex_figure* figure_create(const char* image_path, const char* position);
+  tex_figure *figure_create(const char *image_path, const char *position);
+  tex_error_t figure_delete(tex_figure *fig);
 
-int figure_delete(tex_figure* fig);
+  tex_error_t figure_set_caption(tex_figure *fig, const char *caption);
+  tex_error_t figure_set_label(tex_figure *fig, const char *label);
+  tex_error_t figure_set_width(tex_figure *fig, const char *width);
 
-int figure_set_caption(tex_figure* fig, const char* caption);
-int figure_set_label(tex_figure* fig, const char* label);
-int figure_set_width(tex_figure* fig, const char* width);
-
-int figure_write(const tex_figure* fig, char* buffer, size_t buffer_size);
+  tex_error_t figure_write(const tex_figure *fig, char *buffer, size_t buffer_size);
 
 #ifdef __cplusplus
 }; /* extern "C" { */
 #endif
-
-#endif  // FIGURE_H
