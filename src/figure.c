@@ -14,7 +14,7 @@ tex_figure *figure_create(tex_error_t *err)
   tex_figure *fig = calloc(1, sizeof(tex_figure));
   if (fig == NULL)
   {
-    *err= TEX_ENULL_FIGURE;
+    *err = TEX_ENULL_FIGURE;
     return NULL;
   }
   fig->image_path = '\0';
@@ -40,7 +40,7 @@ tex_error_t figure_set_caption(tex_figure *fig, const char *caption)
   {
     return TEX_ENULL_FIGURE;
   }
-  fig->caption = strdup(caption);
+  fig->caption = tex_strdup(caption);
   return TEX_ENONE;
 }
 
@@ -50,7 +50,7 @@ tex_error_t figure_set_label(tex_figure *fig, const char *label)
   {
     return TEX_ENULL_FIGURE;
   }
-  fig->label = strdup(label);
+  fig->label = tex_strdup(label);
   return TEX_ENONE;
 }
 
@@ -63,7 +63,8 @@ tex_error_t figure_set_width(tex_figure *fig, const char *width)
   return TEX_ENONE;
 }
 
-tex_error_t figure_write(const tex_figure *fig, char *buffer, size_t buffer_size)
+tex_error_t
+figure_write(const tex_figure *fig, char *buffer, size_t buffer_size)
 {
   if (fig == NULL)
   {

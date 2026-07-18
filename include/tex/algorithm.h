@@ -23,21 +23,27 @@ extern "C"
   tex_algorithm *algorithm_create(tex_error_t *err);
   tex_error_t    algorithm_delete(tex_algorithm *algorithm);
 
-  void        alorithm_set_caption(tex_algorithm *algorithm, const char *caption);
-  tex_error_t algorithm_add_line(tex_algorithm *algorithm, const char *line, int indent);
+  void alorithm_set_caption(tex_algorithm *algorithm, const char *caption);
   tex_error_t
-  algorithm_add_comment(tex_algorithm *algorithm, const char *comment, int indent);
-  tex_error_t
-  algorithm_add_for_loop(tex_algorithm *algorithm, const char *condition, int indent);
-  tex_error_t
-  algorithm_add_while_loop(tex_algorithm *algorithm, const char *condition, int indent);
+  algorithm_add_line(tex_algorithm *algorithm, const char *line, int indent);
+  tex_error_t algorithm_add_comment(tex_algorithm *algorithm,
+                                    const char    *comment,
+                                    int            indent);
+  tex_error_t algorithm_add_for_loop(tex_algorithm *algorithm,
+                                     const char    *condition,
+                                     int            indent);
+  tex_error_t algorithm_add_while_loop(tex_algorithm *algorithm,
+                                       const char    *condition,
+                                       int            indent);
   tex_error_t
   algorithm_add_if(tex_algorithm *algorithm, const char *condition, int indent);
   tex_error_t algorithm_add_else(tex_algorithm *algorithm, int indent);
-  tex_error_t
-  algorithm_add_else_if(tex_algorithm *algorithm, const char *condition, int indent);
-  tex_error_t
-  algorithm_add_end(tex_algorithm *algorithm, const char *statement, int indent);
+  tex_error_t algorithm_add_else_if(tex_algorithm *algorithm,
+                                    const char    *condition,
+                                    int            indent);
+  tex_error_t algorithm_add_end(tex_algorithm *algorithm,
+                                const char    *statement,
+                                int            indent);
   tex_error_t
   algorithm_add_return(tex_algorithm *algorithm, const char *value, int indent);
   tex_error_t algorithm_add_break(tex_algorithm *algorithm, int indent);

@@ -17,11 +17,15 @@ extern "C"
   // Get the username of the user running the program.
   const char *tex_get_username(tex_error_t *err);
 
-  // Get the current system date formatted as YYYY-MM-DD (e.g., "2026-07-18").
+  // Get the current system date formatted as YYYY-MM-DD
+  // (e.g., "2026-07-18").
   const char *tex_get_date(tex_error_t *err);
 
   // Get the current local time. eg  HH:MM:SS
   const char *tex_get_time(tex_error_t *err);
+
+  // a wrapper around strdup for cross platform
+  char *tex_strdup(const char *str);
 
 #ifdef __cplusplus
 };

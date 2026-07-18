@@ -9,6 +9,8 @@ which is no longer actively maintained
 
 ## Examples
 
+### Writing your first Latex document
+
 ## API documentation
 
 ## Changelog

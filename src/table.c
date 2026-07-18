@@ -1,3 +1,9 @@
+/*
+ * SPDX-FileCopyrightText: 2026 Wissem Chiha <chihawissem08@gmail.com>
+ *
+ * SPDX-License-Identifier: BSD-2-Clause
+ */
+
 #include "tex.h"
 #include <stdlib.h>
 #include <string.h>
@@ -18,7 +24,7 @@ tex_table *table_create(const char *caption, tex_error_t *err)
   }
   if (caption != NULL)
   {
-    tab->caption = strdup(caption);
+    tab->caption = tex_strdup(caption);
   }
   *err = TEX_ENONE;
   return tab;

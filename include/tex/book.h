@@ -39,7 +39,8 @@ extern "C"
   tex_error_t book_add_content(tex_book *doc, const char *content);
   tex_error_t book_add_section(tex_book *doc, const tex_section *sec);
 
-  tex_error_t book_add_package(tex_book *doc, const char *package, const char *options);
+  tex_error_t
+  book_add_package(tex_book *doc, const char *package, const char *options);
 
 #ifdef __cplusplus
 }; /* extern "C" { */

@@ -6,6 +6,7 @@
 
 #include "tex.h"
 #include <stdio.h>
+#include <uv.h>
 #include <stdlib.h>
 #include <string.h>
 
@@ -59,7 +60,7 @@ tex_error_t document_set_title(tex_document *doc, const char *title)
   {
     return TEX_ENULL_DOCUMENT;
   }
-  doc->title = _strdup(title);
+  doc->title = tex_strdup(title);
   return TEX_ENONE;
 }
 
@@ -69,18 +70,21 @@ tex_error_t document_set_author(tex_document *doc, const char *author)
   {
     return TEX_ENULL_DOCUMENT;
   }
-  doc->author = _strdup(author);
+  doc->author = tex_strdup(author);
   return TEX_ENONE;
 }
 
 tex_error_t document_set_date(tex_document *doc, const char *date)
 {
-  if (doc == NULL || date == NULL)
+  if (doc == NULL)
   {
     return TEX_ENULL_DOCUMENT;
   }
-
-  doc->date = _strdup(date);
+  if (date == NULL)
+  {
+    return TEX_EINVAL_INPUT;
+  }
+  doc->date = tex_strdup(date);
   return TEX_ENONE;
 }
 
@@ -96,25 +100,87 @@ tex_error_t document_set_language(tex_document *doc, tex_language_t language)
 
 tex_error_t document_add_content(tex_document *doc, const char *content)
 {
-  if (doc == NULL || content == NULL)
+  if (doc == NULL)
   {
     return TEX_ENULL_DOCUMENT;
   }
-  doc->content = _strdup(content);
+  if (content == NULL)
+  {
+    return TEX_EINVAL_INPUT;
+  }
+  doc->content = tex_strdup(content);
   return TEX_ENONE;
 }
 
 tex_error_t document_add_fs_content(tex_document *doc, const char *filename)
 {
-  if (doc == NULL)
+  if (doc == NULL || filename == NULL)
   {
-    return TEX_ENULL_DOCUMENT;
+    return TEX_EINVAL_INPUT;
   }
+  uv_loop_t *loop = uv_default_loop();
+  uv_fs_t    open_req;
+  uv_fs_t    read_req;
+  uv_fs_t    close_req;
+
+  int r = uv_fs_open(loop, &open_req, filename, O_RDONLY, 0, NULL);
+  if (r < 0)
+  {
+    uv_fs_req_cleanup(&open_req);
+  }
+
+  uv_fs_t stat_req;
+  r = uv_fs_fstat(loop, &stat_req, (uv_file) open_req.result, NULL);
+  if (r < 0)
+  {
+    uv_fs_close(loop, &close_req, (uv_file) open_req.result, NULL);
+    uv_fs_req_cleanup(&open_req);
+    uv_fs_req_cleanup(&stat_req);
+  }
+
+  size_t filesize = stat_req.statbuf.st_size;
+  uv_fs_req_cleanup(&stat_req);
+
+  char *buffer = (char *) malloc(filesize + 1);
+  if (!buffer)
+  {
+    uv_fs_close(loop, &close_req, (uv_file) open_req.result, NULL);
+    uv_fs_req_cleanup(&open_req);
+    return TEX_EFAIL_MEMALLOC;
+  }
+
+  uv_buf_t iov = uv_buf_init(buffer, (unsigned int) filesize);
+
+  r = uv_fs_read(loop, &read_req, (uv_file) open_req.result, &iov, 1, 0, NULL);
+  if (r < 0)
+  {
+    free(buffer);
+    uv_fs_close(loop, &close_req, (uv_file) open_req.result, NULL);
+    uv_fs_req_cleanup(&open_req);
+    uv_fs_req_cleanup(&read_req);
+  }
+
+  buffer[r] = '\0';
+  uv_fs_req_cleanup(&read_req);
+
+  uv_fs_close(loop, &close_req, (uv_file) open_req.result, NULL);
+  uv_fs_req_cleanup(&open_req);
+
+  doc->content = buffer;
   return TEX_ENONE;
 }
 
 tex_error_t document_add_figure(tex_document *doc, tex_figure *fig)
 {
+  if (doc)
+  {
+    return TEX_ENULL_DOCUMENT;
+  }
+  if (fig)
+  {
+    return TEX_ENULL_FIGURE;
+  }
+
   return TEX_ENONE;
 }
 
@@ -131,7 +197,8 @@ tex_error_t document_add_section(tex_document *doc, const tex_section *sec)
   return TEX_ENONE;
 }
 
-tex_error_t document_write(const tex_document *doc, char *buffer, size_t buffer_size)
+tex_error_t
+document_write(const tex_document *doc, char *buffer, size_t buffer_size)
 {
   if (doc == NULL)
   {

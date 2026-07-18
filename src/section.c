@@ -1,7 +1,12 @@
+/*
+ * SPDX-FileCopyrightText: 2026 Wissem Chiha <chihawissem08@gmail.com>
+ *
+ * SPDX-License-Identifier: BSD-2-Clause
+ */
+
 #include "tex.h"
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h> // for strdup
 
 tex_section *section_create(const char *title, tex_section_t level, int err)
 {
@@ -11,7 +16,7 @@ tex_section *section_create(const char *title, tex_section_t level, int err)
     err = TEX_EFAIL_MEMALLOC;
     return NULL;
   }
-  sec->title = strdup(title);
+  sec->title = tex_strdup(title);
   sec->level = level;
   err        = TEX_ENONE;
   return sec;
@@ -35,7 +40,20 @@ int section_add_content(tex_section *sec, const char *_content)
   {
     return TEX_EINVAL_INPUT;
   }
-  sec->content = strdup(_content);
+  sec->content = tex_strdup(_content);
+  return TEX_ENONE;
+}
+
+tex_error_t section_add_fs_content(tex_section *sec, const char *filename)
+{
+  if (sec)
+  {
+    return TEX_ENULL_SECTION;
+  }
+  if (filename)
+  {
+    return TEX_EINVAL_INPUT;
+  }
   return TEX_ENONE;
 }
 

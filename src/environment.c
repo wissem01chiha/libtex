@@ -16,7 +16,7 @@ int environment_create(const char *name, tex_environment **env, int err)
     err = TEX_EFAIL_MEMALLOC;
     return err;
   }
-  environment->name = strdup(name);
+  environment->name = tex_strdup(name);
   *env              = environment;
   err               = TEX_ENONE;
   return err;
@@ -32,7 +32,9 @@ int environment_delete(tex_environment *env)
   return TEX_ENONE;
 }
 
-int environment_begin_write(const tex_environment *env, char *buffer, size_t buffer_size)
+int environment_begin_write(const tex_environment *env,
+                            char                  *buffer,
+                            size_t                 buffer_size)
 {
   if (env == NULL || buffer == NULL)
   {
@@ -52,7 +54,9 @@ int environment_begin_write(const tex_environment *env, char *buffer, size_t buf
   return TEX_ENONE;
 }
 
-int environment_end_write(const tex_environment *env, char *buffer, size_t buffer_size)
+int environment_end_write(const tex_environment *env,
+                          char                  *buffer,
+                          size_t                 buffer_size)
 {
   if (env == NULL || buffer == NULL)
   {
@@ -72,7 +76,9 @@ int environment_end_write(const tex_environment *env, char *buffer, size_t buffe
   return TEX_ENONE;
 }
 
-int environment_write(const tex_environment *env, char *buffer, size_t buffer_size)
+int environment_write(const tex_environment *env,
+                      char                  *buffer,
+                      size_t                 buffer_size)
 {
   if (env == NULL || buffer == NULL)
   {
@@ -87,7 +93,8 @@ int environment_write(const tex_environment *env, char *buffer, size_t buffer_si
     return env_bg_wrt_err;
   }
   size_t buffer_size_ = buffer_size - strlen(buffer);
-  env_end_wrt_err     = environment_end_write(env, buffer + strlen(buffer), buffer_size_);
+  env_end_wrt_err =
+      environment_end_write(env, buffer + strlen(buffer), buffer_size_);
   if (env_end_wrt_err != TEX_ENONE)
   {
     return env_end_wrt_err;

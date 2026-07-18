@@ -20,7 +20,8 @@ extern "C"
 
   tex_error_t equation_set_content(tex_equation *eq, const char *content);
   tex_error_t equation_set_label(tex_equation *eq, const char *label);
-  tex_error_t equation_write(const tex_equation *eq, char *buffer, size_t buffer_size);
+  tex_error_t
+  equation_write(const tex_equation *eq, char *buffer, size_t buffer_size);
 
 #ifdef __cplusplus
 }; /* extern "C" { */

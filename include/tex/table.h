@@ -38,7 +38,8 @@ extern "C"
 
   tex_error_t table_add_row(tex_table *tab, tex_table_row *rw);
 
-  tex_error_t table_write(const tex_table *tab, char *buffer, size_t buffer_size);
+  tex_error_t
+  table_write(const tex_table *tab, char *buffer, size_t buffer_size);
 
 #ifdef __cplusplus
 };

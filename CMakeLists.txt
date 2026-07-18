@@ -27,8 +27,9 @@ set(CMAKE_C_STANDARD_REQUIRED ON)
 set(CMAKE_C_EXTENSIONS ON)
 set(CMAKE_C_STANDARD 11)
 
-
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+set(CMAKE_SUPPRESS_DEVELOPER_WARNINGS ON)
+set(CMAKE_WARN_DEPRECATED OFF CACHE BOOL "suppress cmake deprecation message")
 
 option(LIBTEX_BUILD_SHARED "Build shared lib" OFF)
 option(LIBTEX_BUILD_TESTS "Build tests" ON)
@@ -75,10 +76,12 @@ set(tex_sources
 if(WIN32)
     list(APPEND tex_sources
         src/win/get_username.c
+        src/win/tex_strdup.c
     )
 else()
     list(APPEND tex_sources
         src/unix/get_username.c
+        src/unix/tex_strdup.c
     )
 endif() 
 
@@ -89,12 +92,12 @@ set(tex_test_sources
     test/test_document_add_fs_content.c
 )
 
-set(libtex_flags
+set(tex_flags
     -Wall
 )
 
 if(MSVC)
-    list(APPEND libtex_flags
+    list(APPEND tex_flags
         /W4
     )
 endif()
@@ -113,9 +116,8 @@ target_include_directories(${PROJECT_NAME}
         $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
         $<INSTALL_INTERFACE:include>
 )
-
-target_compile_options(${PROJECT_NAME} PRIVATE ${libtex_flags})
-target_compile_features(${PROJECT_NAME} PUBLIC c_std_99)
+target_link_libraries(${PROJECT_NAME} PUBLIC uv_a)
+target_compile_options(${PROJECT_NAME} PRIVATE ${tex_flags})
 
 if(LIBTEX_BUILD_TOOLS)
     add_executable(tex2pdf tools/tex2pdf.c)
@@ -130,7 +132,7 @@ if(LIBTEX_BUILD_TESTS)
         add_executable(${testname} ${testfile})
         add_dependencies(${testname} ${PROJECT_NAME})
         target_link_libraries(${testname} PRIVATE ${PROJECT_NAME} compat check)
-        target_compile_options(${testname} PRIVATE ${libtex_flags})
+        target_compile_options(${testname} PRIVATE ${tex_flags})
         add_test(NAME ${testname} COMMAND ${testname})
     endforeach()
 endif()

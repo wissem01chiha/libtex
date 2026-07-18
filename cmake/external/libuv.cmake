@@ -10,6 +10,6 @@ else()
         URL https://github.com/libuv/libuv/archive/refs/tags/v1.52.1.zip
     )
     FetchContent_MakeAvailable(LibUV)
-    set(LibUV_INCLUDE_DIRS ${LibUV_SOURCE_DIR}/src)
+    set(LibUV_INCLUDE_DIRS ${LibUV_SOURCE_DIR}/include)
     include_directories(SYSTEM ${LibUV_INCLUDE_DIRS})
 endif()

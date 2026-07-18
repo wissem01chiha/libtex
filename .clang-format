@@ -23,7 +23,7 @@ IndentGotoLabels: true
 IndentPPDirectives: AfterHash
 SpaceAfterCStyleCast: true
 
-ColumnLimit: 90
+ColumnLimit: 80
 
 SortIncludes: false   
 KeepEmptyLinesAtTheStartOfBlocks: false

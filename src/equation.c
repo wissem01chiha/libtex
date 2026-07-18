@@ -25,7 +25,8 @@ tex_error_t equation_set_label(tex_equation *eq, const char *label)
   return 0;
 }
 
-tex_error_t equation_write(const tex_equation *eq, char *buffer, size_t buffer_size)
+tex_error_t
+equation_write(const tex_equation *eq, char *buffer, size_t buffer_size)
 {
   return 0;
 }

@@ -34,6 +34,11 @@ extern "C"
   int          section_delete(tex_section *sec);
 
   int section_add_content(tex_section *sec, const char *content);
+
+  // Append the contents of a file to the section body same spirt of
+  // document_add_fs_content
+  tex_error_t section_add_fs_content(tex_section *sec, const char *filename);
+
   int section_write(const tex_section *sec, char *buffer, size_t buffer_size);
 
 #ifdef __cplusplus

@@ -35,7 +35,8 @@ extern "C"
   tex_error_t report_include_list_of_tables(tex_report *report, int include);
 
   tex_error_t report_set_language(tex_report *report, int language);
-  tex_error_t report_generate(tex_report *report, char **output, size_t *output_size);
+  tex_error_t
+  report_generate(tex_report *report, char **output, size_t *output_size);
 
 #ifdef __cplusplus
 }; /* extern "C" { */

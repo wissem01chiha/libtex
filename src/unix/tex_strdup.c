@@ -6,3 +6,9 @@
 
 #include "tex.h"
 #include <stdlib.h>
+#include <string.h>
+
+char *tex_strdup(const char *str)
+{
+  return strdup(str);
+}

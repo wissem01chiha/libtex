@@ -25,9 +25,13 @@ extern "C"
                               char                  *buffer,
                               size_t                 buffer_size);
 
-  int environment_end_write(const tex_environment *env, char *buffer, size_t buffer_size);
+  int environment_end_write(const tex_environment *env,
+                            char                  *buffer,
+                            size_t                 buffer_size);
 
-  int environment_write(const tex_environment *env, char *buffer, size_t buffer_size);
+  int environment_write(const tex_environment *env,
+                        char                  *buffer,
+                        size_t                 buffer_size);
 
 #ifdef __cplusplus
 };

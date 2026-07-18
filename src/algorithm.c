@@ -41,7 +41,8 @@ void alorithm_set_caption(tex_algorithm *algorithm, const char *caption)
   algorithm->caption = _strdup(caption);
 }
 
-tex_error_t algorithm_add_line(tex_algorithm *algorithm, const char *line, int indent)
+tex_error_t
+algorithm_add_line(tex_algorithm *algorithm, const char *line, int indent)
 {
   return 0;
 }
@@ -52,19 +53,22 @@ algorithm_add_comment(tex_algorithm *algorithm, const char *comment, int indent)
   return 0;
 }
 
-tex_error_t
-algorithm_add_for_loop(tex_algorithm *algorithm, const char *condition, int indent)
+tex_error_t algorithm_add_for_loop(tex_algorithm *algorithm,
+                                   const char    *condition,
+                                   int            indent)
+{
+  return 0;
+}
+
+tex_error_t algorithm_add_while_loop(tex_algorithm *algorithm,
+                                     const char    *condition,
+                                     int            indent)
 {
   return 0;
 }
 
 tex_error_t
-algorithm_add_while_loop(tex_algorithm *algorithm, const char *condition, int indent)
-{
-  return 0;
-}
-
-tex_error_t algorithm_add_if(tex_algorithm *algorithm, const char *condition, int indent)
+algorithm_add_if(tex_algorithm *algorithm, const char *condition, int indent)
 {
   return 0;
 }
@@ -74,18 +78,21 @@ tex_error_t algorithm_add_else(tex_algorithm *algorithm, int indent)
   return 0;
 }
 
+tex_error_t algorithm_add_else_if(tex_algorithm *algorithm,
+                                  const char    *condition,
+                                  int            indent)
+{
+  return 0;
+}
+
 tex_error_t
-algorithm_add_else_if(tex_algorithm *algorithm, const char *condition, int indent)
+algorithm_add_end(tex_algorithm *algorithm, const char *statement, int indent)
 {
   return 0;
 }
 
-tex_error_t algorithm_add_end(tex_algorithm *algorithm, const char *statement, int indent)
-{
-  return 0;
-}
-
-tex_error_t algorithm_add_return(tex_algorithm *algorithm, const char *value, int indent)
+tex_error_t
+algorithm_add_return(tex_algorithm *algorithm, const char *value, int indent)
 {
   return 0;
 }

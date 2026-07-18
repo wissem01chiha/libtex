@@ -46,7 +46,7 @@ extern "C"
   // Set the document author, default is user name on target machine
   tex_error_t document_set_author(tex_document *doc, const char *author);
 
-  // Set the document write date, defaul is today date
+  // Set the document write date, default is today date
   tex_error_t document_set_date(tex_document *doc, const char *date);
   tex_error_t document_set_language(tex_document *doc, tex_language_t language);
   const char *document_get_class(tex_document_t doc_t);
@@ -63,13 +63,15 @@ extern "C"
   // Add a tex_figure to the document body.
   tex_error_t document_add_figure(tex_document *doc, tex_figure *fig);
 
-  // Internal api call used by libtex to automatically append required latex packages
-  // to a document when needed. This function is not intended for direct use by end users,
-  // package declarations are managed internally and should not be handled manually.
+  // Internal api call used by libtex to automatically append required latex
+  // packages to a document when needed. This function is not intended for
+  // direct use by end users, package declarations are managed internally and
+  // should not be handled manually.
   tex_error_t document_add_package(tex_document *doc, tex_package *package);
 
   // Write the document to a buffer in memory
-  tex_error_t document_write(const tex_document *doc, char *buffer, size_t buffer_size);
+  tex_error_t
+  document_write(const tex_document *doc, char *buffer, size_t buffer_size);
 
   // Write the document to a file in the filesystem
   tex_error_t document_fs_write(const tex_document *doc, const char *file);

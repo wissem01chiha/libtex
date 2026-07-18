@@ -30,7 +30,8 @@ extern "C"
   tex_error_t figure_set_label(tex_figure *fig, const char *label);
   tex_error_t figure_set_width(tex_figure *fig, const char *width);
 
-  tex_error_t figure_write(const tex_figure *fig, char *buffer, size_t buffer_size);
+  tex_error_t
+  figure_write(const tex_figure *fig, char *buffer, size_t buffer_size);
 
 #ifdef __cplusplus
 }; /* extern "C" { */

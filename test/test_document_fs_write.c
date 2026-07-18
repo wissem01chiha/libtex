@@ -10,49 +10,49 @@
 
 START_TEST(test_document_fs_write)
 {
-    tex_error_t err = TEX_ENONE;
-    tex_document *doc = document_create(&err);
+  tex_error_t   err = TEX_ENONE;
+  tex_document *doc = document_create(&err);
 
-    ck_assert_ptr_nonnull(doc);              
-    ck_assert_int_eq(err, TEX_ENONE); 
+  ck_assert_ptr_nonnull(doc);
+  ck_assert_int_eq(err, TEX_ENONE);
 
-    document_set_title(doc, "test-document-title");
+  document_set_title(doc, "test-document-title");
 
-    const char *filename = "document_fs_write_test.tex";
-    int write_err = document_fs_write(doc, filename);
-   
+  const char *filename  = "document_fs_write_test.tex";
+  int         write_err = document_fs_write(doc, filename);
 
-    ck_assert_int_eq(write_err, TEX_ENONE);    
-  
-    FILE *f = fopen(filename, "r");
-    ck_assert_ptr_nonnull(f);                 
+  ck_assert_int_eq(write_err, TEX_ENONE);
 
-    if (f != NULL) {
-        fclose(f);
-    }
+  FILE *f = fopen(filename, "r");
+  ck_assert_ptr_nonnull(f);
 
-    document_delete(doc);
+  if (f != NULL)
+  {
+    fclose(f);
+  }
+
+  document_delete(doc);
 }
 END_TEST
 
 Suite *tex_suite(void)
 {
-    Suite *s = suite_create("test-document");
-    TCase *tc_core = tcase_create("Core");
-    tcase_add_test(tc_core, test_document_fs_write);
-    suite_add_tcase(s, tc_core);
+  Suite *s       = suite_create("test-document");
+  TCase *tc_core = tcase_create("Core");
+  tcase_add_test(tc_core, test_document_fs_write);
+  suite_add_tcase(s, tc_core);
 
-    return s;
+  return s;
 }
 
 int main(void)
 {
-    int number_failed;
-    Suite *s = tex_suite();
-    SRunner *sr = srunner_create(s);
-    srunner_run_all(sr, CK_NORMAL);
-    number_failed = srunner_ntests_failed(sr);
-    srunner_free(sr);
+  int      number_failed;
+  Suite   *s  = tex_suite();
+  SRunner *sr = srunner_create(s);
+  srunner_run_all(sr, CK_NORMAL);
+  number_failed = srunner_ntests_failed(sr);
+  srunner_free(sr);
 
-    return (number_failed == 0) ? 0 : 1;
+  return (number_failed == 0) ? 0 : 1;
 }

@@ -26,10 +26,13 @@ extern "C"
                           int                err);
   int presentation_delete(tex_presentation *presentation);
 
-  int presentation_set_institute(tex_presentation *presentation, const char *institute);
-  int presentation_set_subtitle(tex_presentation *presentation, const char *subtitle);
+  int presentation_set_institute(tex_presentation *presentation,
+                                 const char       *institute);
+  int presentation_set_subtitle(tex_presentation *presentation,
+                                const char       *subtitle);
   int presentation_set_navigation(tex_presentation *presentation, int show);
-  int presentation_set_transition(tex_presentation *presentation, int transition);
+  int presentation_set_transition(tex_presentation *presentation,
+                                  int               transition);
   int presentation_add_slide(tex_presentation *presentation,
                              const char       *title,
                              const char       *content);
