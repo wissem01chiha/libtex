@@ -38,7 +38,7 @@ void alorithm_set_caption(tex_algorithm *algorithm, const char *caption)
   {
     return;
   }
-  algorithm->caption = _strdup(caption);
+  algorithm->caption = tex_strdup(caption);
 }
 
 tex_error_t
