@@ -1,35 +1,38 @@
-/** Copyright (c) 2026, wissem chiha
-
-  Redistribution and use in source and binary forms, with or without
-  modification, are permitted provided that the following conditions are met:
-
-  1. Redistributions of source code must retain the above copyright notice,
-  this list of conditions and the following disclaimer.
-
-  2. Redistributions in binary form must reproduce the above copyright notice,
-  this list of conditions and the following disclaimer in the documentation
-  and/or other materials provided with the distribution.
-
-  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
-  AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
-  IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
-  ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE
-  LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
-  CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
-  SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
-  INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
-  CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
-  ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
-  POSSIBILITY OF SUCH DAMAGE.
-*/
+/*
+ * SPDX-FileCopyrightText: 2026 Wissem Chiha <chihawissem08@gmail.com>
+ *
+ * SPDX-License-Identifier: BSD-2-Clause
+ */
 
 #pragma once
+
+#include <stddef.h>
 
 #ifdef __cplusplus
 extern "C"
 {
 #endif
 
+  //
+  typedef struct
+  {
+    int         priority;
+    const char *name;
+    const char *options;
+  } tex_package;
+
+  static tex_package packages[] = {
+      {1, "geometry", NULL},  {1, "graphicx", NULL},   {2, "hyperref", NULL},
+      {1, "amsmath", NULL},   {1, "amssymb", NULL},    {1, "booktabs", NULL},
+      {1, "xcolor", NULL},    {1, "listings", NULL},   {1, "fancyhdr", NULL},
+      {1, "tikz", NULL},      {1, "pgfplots", NULL},   {1, "algorithm2e", NULL},
+      {1, "caption", NULL},   {1, "subcaption", NULL}, {1, "float", NULL},
+      {1, "multicol", NULL},  {1, "array", NULL},      {1, "tabularx", NULL},
+      {1, "longtable", NULL}, {1, "enumitem", NULL},   {1, "siunitx", NULL},
+      {1, "xspace", NULL},    {1, "titlesec", NULL},   {1, "fancyvrb", NULL},
+      {1, "minted", NULL},    {1, "csquotes", NULL},   {1, "biblatex", NULL},
+  };
+
 #ifdef __cplusplus
-}; /* extern "C" { */
+};
 #endif

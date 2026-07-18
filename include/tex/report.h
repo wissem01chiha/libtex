@@ -1,32 +1,13 @@
-/** Copyright (c) 2026, wissem chiha
+/*
+ * SPDX-FileCopyrightText: 2026 Wissem Chiha <chihawissem08@gmail.com>
+ *
+ * SPDX-License-Identifier: BSD-2-Clause
+ */
 
-  Redistribution and use in source and binary forms, with or without
-  modification, are permitted provided that the following conditions are met:
-
-  1. Redistributions of source code must retain the above copyright notice,
-  this list of conditions and the following disclaimer.
-
-  2. Redistributions in binary form must reproduce the above copyright notice,
-  this list of conditions and the following disclaimer in the documentation
-  and/or other materials provided with the distribution.
-
-  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
-  AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
-  IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
-  ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE
-  LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
-  CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
-  SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
-  INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
-  CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
-  ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
-  POSSIBILITY OF SUCH DAMAGE.
-*/
-
-#ifndef REPORT_H
-#define REPORT_H
+#pragma once
 
 #include "document.h"
+#include "texerrno.h"
 
 #ifdef __cplusplus
 extern "C"
@@ -35,22 +16,27 @@ extern "C"
 
   typedef struct tex_report tex_report;
 
-  int report_create(tex_report **report,
-                    const char  *title,
-                    const char  *author,
-                    const char  *date,
-                    int          language,
-                    int          err);
-  int report_delete(tex_report *report);
+  struct tex_report
+  {
+    tex_document *document;
+    char         *abstract;
+    int           include_table_of_contents;
+    int           include_list_of_figures;
+    int           include_list_of_tables;
+    int           language;
+  };
 
-  int report_set_abstract(tex_report *report, const char *abstract);
-  int report_include_table_of_contents(tex_report *report, int include);
-  int report_include_list_of_figures(tex_report *report, int include);
-  int report_include_list_of_tables(tex_report *report, int include);
-  int report_generate(tex_report *report, char **output, size_t *output_size);
+  tex_report *report_create(int err);
+  tex_error_t report_delete(tex_report *report);
+
+  tex_error_t report_set_abstract(tex_report *report, const char *abstract);
+  tex_error_t report_include_table_of_contents(tex_report *report, int include);
+  tex_error_t report_include_list_of_figures(tex_report *report, int include);
+  tex_error_t report_include_list_of_tables(tex_report *report, int include);
+
+  tex_error_t report_set_language(tex_report *report, int language);
+  tex_error_t report_generate(tex_report *report, char **output, size_t *output_size);
 
 #ifdef __cplusplus
 }; /* extern "C" { */
 #endif
-
-#endif // REPORT_H

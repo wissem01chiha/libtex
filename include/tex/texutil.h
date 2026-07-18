@@ -1,48 +1,28 @@
-/** Copyright (c) 2026, wissem chiha
+/*
+ * SPDX-FileCopyrightText: 2026 Wissem Chiha <chihawissem08@gmail.com>
+ *
+ * SPDX-License-Identifier: BSD-2-Clause
+ */
 
-  Redistribution and use in source and binary forms, with or without
-  modification, are permitted provided that the following conditions are met:
+// utility helper functions definition.
 
-  1. Redistributions of source code must retain the above copyright notice,
-  this list of conditions and the following disclaimer.
+#pragma once
 
-  2. Redistributions in binary form must reproduce the above copyright notice,
-  this list of conditions and the following disclaimer in the documentation
-  and/or other materials provided with the distribution.
-
-  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
-  AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
-  IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
-  ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE
-  LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
-  CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
-  SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
-  INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
-  CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
-  ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
-  POSSIBILITY OF SUCH DAMAGE.
-*/
-
-#ifndef TEXUTIL_H
-#define TEXUTIL_H
-
-#include "errno.h"
+#include "texerrno.h"
 
 #ifdef __cplusplus
 extern "C"
 {
 #endif
-
-#ifdef _MSC_VER
-#  define strdup _strdup
-#endif
-
+  // Get the username of the user running the program.
   const char *tex_get_username(tex_error_t *err);
 
+  // Get the current system date formatted as YYYY-MM-DD (e.g., "2026-07-18").
   const char *tex_get_date(tex_error_t *err);
 
-#ifdef __cplusplus
-}; /* extern "C" { */
-#endif
+  // Get the current local time. eg  HH:MM:SS
+  const char *tex_get_time(tex_error_t *err);
 
-#endif // TEXUTIL_H
+#ifdef __cplusplus
+};
+#endif

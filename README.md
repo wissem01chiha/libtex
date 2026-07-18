@@ -7,8 +7,7 @@
 [![pre-commit.ci status](https://results.pre-commit.ci/badge/github/wissem01chiha/libtex/master.svg)](https://results.pre-commit.ci/latest/github/wissem01chiha/libtex/master)
 
 **libtex** is a C99 version of  [LatexGenCpp](https://github.com/skhelladi/LatexGenCpp) written by [Sofiane KHELLADI](https://github.com/skhelladi). It is a library for writing [Latex](https://www.latex-project.org/) **.tex** files.
-which is no longer actively maintained
-
+which is no longer actively maintained.
 Please feel free to open an [issue](https://github.com/wissem01chiha/libtex/issues). I will try to address any concerns as best I can.
 
 ## Installation
