@@ -9,11 +9,12 @@
 #include <stdlib.h>
 #include <string.h>
 
-tex_figure *figure_create(int *err)
+tex_figure *figure_create(tex_error_t *err)
 {
   tex_figure *fig = calloc(1, sizeof(tex_figure));
   if (fig == NULL)
   {
+    *err= TEX_ENULL_FIGURE;
     return NULL;
   }
   fig->image_path = '\0';
