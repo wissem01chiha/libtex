@@ -5,11 +5,16 @@ which is no longer actively maintained
 
 ## Installation
 
+### Precomipiled binaries 
+
+### Build from source 
+
 ## Testing
 
 ## Examples
 
 ### Writing your first Latex document
+
 
 ## API documentation
 

@@ -57,7 +57,7 @@ tex_error_t section_add_fs_content(tex_section *sec, const char *filename)
   return TEX_ENONE;
 }
 
-int section_write(const tex_section *sec, char *buffer, size_t buffer_size)
+tex_error_t section_write(const tex_section *sec, char *buffer, size_t buffer_size)
 {
   if (sec == NULL || buffer == NULL)
   {

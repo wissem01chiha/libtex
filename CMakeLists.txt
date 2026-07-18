@@ -1,4 +1,8 @@
-# SPDX-FileCopyrightText: Copyright (c) 2026, Wissem Chiha
+# 
+# SPDX-FileCopyrightText: 2026 Wissem Chiha <chihawissem08@gmail.com>
+#
+# SPDX-License-Identifier: BSD-2-Clause
+# 
 cmake_minimum_required(VERSION 3.12...3.31)
 
 project(tex LANGUAGES C)
@@ -116,7 +120,7 @@ target_include_directories(${PROJECT_NAME}
         $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
         $<INSTALL_INTERFACE:include>
 )
-target_link_libraries(${PROJECT_NAME} PUBLIC uv)
+target_link_libraries(${PROJECT_NAME} PUBLIC uv_a)
 target_compile_options(${PROJECT_NAME} PRIVATE ${tex_flags})
 
 if(LIBTEX_BUILD_TOOLS)

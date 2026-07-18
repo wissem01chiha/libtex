@@ -4,3 +4,4 @@ docs/** linguist-vendored
 cmake/FindLATEX.cmake linguist-vendored
 cmake/FindLibUV.cmake linguist-vendored
 cmake/FindFreetype.cmake linguist-vendored
+cmake/FindGnuplot.cmake linguist-vendored
