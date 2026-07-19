@@ -42,7 +42,7 @@ extern "C"
    * Find a given subsection in the given section using its title.
    */
   TEX_EXTERN tex_section *section_find_subsection(tex_section *sec,
-                                                const char   *sectitle);
+                                                  const char  *sectitle);
 
   /**
    * Append content to the section body.

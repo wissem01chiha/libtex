@@ -10,8 +10,9 @@
 
 TEX_EXTERN const char *tex_strerr(int err)
 {
-  if(err >= UV__EOF){
+  if (err >= UV__EOF)
+  {
     return uv_strerror(err);
   }
-    return NULL;
+  return NULL;
 }

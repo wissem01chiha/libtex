@@ -34,12 +34,10 @@ tex_error_t section_delete(tex_section *sec)
   return TEX_ENONE;
 }
 
-tex_section *section_find_subsection(tex_section *sec,
-                                                const char  *sectitle)
+tex_section *section_find_subsection(tex_section *sec, const char *sectitle)
 {
   return NULL;
 }
-
 
 tex_error_t section_add_content(tex_section *sec, const char *_content)
 {
