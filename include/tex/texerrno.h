@@ -7,7 +7,7 @@
 #pragma once
 
 #include <errno.h>
-#include <uv.h>
+#include <uv/errno.h>
 
 #ifdef __cplusplus
 extern "C"
