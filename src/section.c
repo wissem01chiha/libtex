@@ -1,8 +1,8 @@
-/*
+/***************************************************************************
  * SPDX-FileCopyrightText: 2026 Wissem Chiha <chihawissem08@gmail.com>
  *
  * SPDX-License-Identifier: BSD-2-Clause
- */
+ ***************************************************************************/
 
 #include "tex.h"
 #include <stdio.h>
@@ -22,7 +22,7 @@ tex_section *section_create(const char *title, tex_section_t level, int err)
   return sec;
 }
 
-int section_delete(tex_section *sec)
+tex_error_t section_delete(tex_section *sec)
 {
   if (sec == NULL)
   {
@@ -34,7 +34,14 @@ int section_delete(tex_section *sec)
   return TEX_ENONE;
 }
 
-int section_add_content(tex_section *sec, const char *_content)
+tex_section *section_find_subsection(tex_section *sec,
+                                                const char  *sectitle)
+{
+  return NULL;
+}
+
+
+tex_error_t section_add_content(tex_section *sec, const char *_content)
 {
   if (sec == NULL || _content == NULL)
   {
@@ -57,25 +64,26 @@ tex_error_t section_add_fs_content(tex_section *sec, const char *filename)
   return TEX_ENONE;
 }
 
-tex_error_t section_write(const tex_section *sec, char *buffer, size_t buffer_size)
+tex_error_t
+section_write(const tex_section *sec, char *buffer, size_t buffer_size)
 {
   if (sec == NULL || buffer == NULL)
   {
     return TEX_EINVAL_INPUT;
   }
-  if (sec->level == CHAPTER)
+  if (sec->level == Chapter)
   {
     snprintf(buffer, buffer_size, "\\chapter{%s}\n", sec->title);
   }
-  else if (sec->level == SECTION)
+  else if (sec->level == Section)
   {
     snprintf(buffer, buffer_size, "\\section{%s}\n", sec->title);
   }
-  else if (sec->level == SUBSECTION)
+  else if (sec->level == Subsection)
   {
     snprintf(buffer, buffer_size, "\\subsection{%s}\n", sec->title);
   }
-  else if (sec->level == SUBSUBSECTION)
+  else if (sec->level == Subsubsection)
   {
     snprintf(buffer, buffer_size, "\\subsubsection{%s}\n", sec->title);
   }

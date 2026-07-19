@@ -5,22 +5,13 @@
  ***************************************************************************/
 
 #include "tex.h"
-#include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
-tex_book *book_create(tex_error_t *err)
+TEX_EXTERN const char *tex_strerr(int err)
 {
-  tex_book *book = malloc(sizeof(tex_book));
-  if (book == NULL)
-  {
-    *err = TEX_EFAIL_MEMALLOC;
-    return NULL;
+  if(err >= UV__EOF){
+    return uv_strerror(err);
   }
-  book->abstract = NULL;
-  book->toc      = false;
-  book->lof      = false;
-  book->lot      = false;
-  book->index    = false;
-  return book;
+    return NULL;
 }

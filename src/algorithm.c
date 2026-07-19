@@ -1,8 +1,8 @@
-/*
+/***************************************************************************
  * SPDX-FileCopyrightText: 2026 Wissem Chiha <chihawissem08@gmail.com>
  *
  * SPDX-License-Identifier: BSD-2-Clause
- */
+ ***************************************************************************/
 
 #include "tex.h"
 #include <stdio.h>
@@ -44,7 +44,10 @@ void alorithm_set_caption(tex_algorithm *algorithm, const char *caption)
 tex_error_t
 algorithm_add_line(tex_algorithm *algorithm, const char *line, int indent)
 {
-  return 0;
+  if(algorithm){
+    return TEX_ENULL_BUFFER;
+  }
+  return TEX_ENONE;
 }
 
 tex_error_t

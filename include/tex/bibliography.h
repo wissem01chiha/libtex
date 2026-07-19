@@ -1,14 +1,15 @@
-/*
+/***************************************************************************
  * SPDX-FileCopyrightText: 2026 Wissem Chiha <chihawissem08@gmail.com>
  *
  * SPDX-License-Identifier: BSD-2-Clause
- */
+ ***************************************************************************/
 
 #pragma once
 
 #include "texerrno.h"
 #include "document.h"
 #include <stddef.h>
+#include "texexport.h"
 
 #ifdef __cplusplus
 extern "C"

@@ -1,8 +1,8 @@
-/*
+/***************************************************************************
  * SPDX-FileCopyrightText: 2026 Wissem Chiha <chihawissem08@gmail.com>
  *
  * SPDX-License-Identifier: BSD-2-Clause
- */
+ ***************************************************************************/
 
 #include "tex.h"
 #include <stdio.h>
@@ -108,7 +108,27 @@ tex_error_t document_add_content(tex_document *doc, const char *content)
   {
     return TEX_EINVAL_INPUT;
   }
-  doc->content = tex_strdup(content);
+  if (doc->content == NULL)
+  {
+    doc->content = tex_strdup(content);
+  }
+  else
+  {
+    size_t len  = strlen(doc->content);
+    size_t nlen = strlen(content);
+    char  *buff = malloc(len + nlen + 1);
+    if (buff == NULL)
+    {
+      return TEX_EFAIL_MEMALLOC;
+    }
+    memcpy(buff, doc->content, len);
+    memcpy(buff + len, content, nlen);
+    buff[len + nlen] = '\0';
+
+    free(doc->content);
+    doc->content = buff;
+  }
+
   return TEX_ENONE;
 }
 
@@ -195,6 +215,19 @@ tex_error_t document_add_section(tex_document *doc, const tex_section *sec)
     return TEX_ENULL_SECTION;
   }
   return TEX_ENONE;
+}
+
+tex_section *document_find_section(tex_document *doc, const char *sectitle)
+{
+  if (doc)
+  {
+    return NULL;
+  }
+  if (sectitle)
+  {
+    return NULL;
+  }
+  return NULL;
 }
 
 tex_error_t

@@ -1,8 +1,8 @@
-/*
+/***************************************************************************
  * SPDX-FileCopyrightText: 2026 Wissem Chiha <chihawissem08@gmail.com>
  *
  * SPDX-License-Identifier: BSD-2-Clause
- */
+ ***************************************************************************/
 
 #pragma once
 
@@ -10,6 +10,7 @@
 #include "language.h"
 #include "package.h"
 #include "figure.h"
+#include "texexport.h"
 #include "section.h"
 
 #ifdef __cplusplus
@@ -17,6 +18,9 @@ extern "C"
 {
 #endif
 
+  /**
+   * Supported latex documents types
+   */
   typedef enum tex_document_t
   {
     Article = 0,
@@ -37,44 +41,97 @@ extern "C"
     char          *content;
   } tex_document;
 
-  tex_document *document_create(tex_error_t *err);
-  tex_error_t   document_delete(tex_document *doc);
+  TEX_EXTERN tex_document *document_create(tex_error_t *err);
+  TEX_EXTERN tex_error_t   document_delete(tex_document *doc);
 
-  tex_error_t document_set_class(tex_document *doc, tex_document_t doc_t);
-  tex_error_t document_set_title(tex_document *doc, const char *title);
+  /**
+   * By default the document is set to Article type, however it can be changed
+   * using this routine.
+   */
+  TEX_EXTERN tex_error_t document_set_class(tex_document  *doc,
+                                            tex_document_t doc_t);
 
-  // Set the document author, default is user name on target machine
-  tex_error_t document_set_author(tex_document *doc, const char *author);
+  /**
+   * Set the document title.
+   */
+  TEX_EXTERN tex_error_t document_set_title(tex_document *doc,
+                                            const char   *title);
 
-  // Set the document write date, default is today date
-  tex_error_t document_set_date(tex_document *doc, const char *date);
-  tex_error_t document_set_language(tex_document *doc, tex_language_t language);
-  const char *document_get_class(tex_document_t doc_t);
+  /**
+   * Set the document author, default is the user name on the target machine.
+   */
+  TEX_EXTERN tex_error_t document_set_author(tex_document *doc,
+                                             const char   *author);
 
-  tex_error_t document_add_section(tex_document *doc, const tex_section *sec);
+  /**
+   * Set the document write date, default is today's date.
+   * No special formatting is handled.
+   */
+  TEX_EXTERN tex_error_t document_set_date(tex_document *doc, const char *date);
 
-  // Adding explict content from memory, for adding content from filesystem
-  // see  document_add_fs_content
-  tex_error_t document_add_content(tex_document *doc, const char *content);
+  /**
+   * Set the document language, default is English.
+   */
+  TEX_EXTERN tex_error_t document_set_language(tex_document  *doc,
+                                               tex_language_t language);
 
-  // Append the contents of a file to the document body.
-  tex_error_t document_add_fs_content(tex_document *doc, const char *filename);
+  /**
+   * Convert document enumeration class to string representation.
+   */
+  TEX_EXTERN const char *document_get_class(tex_document_t doc_t);
 
-  // Add a tex_figure to the document body.
-  tex_error_t document_add_figure(tex_document *doc, tex_figure *fig);
+  /**
+   * Add a section to the document.
+   */
+  TEX_EXTERN tex_error_t document_add_section(tex_document      *doc,
+                                              const tex_section *sec);
 
-  // Internal api call used by libtex to automatically append required latex
-  // packages to a document when needed. This function is not intended for
-  // direct use by end users, package declarations are managed internally and
-  // should not be handled manually.
-  tex_error_t document_add_package(tex_document *doc, tex_package *package);
+  /**
+   * Find a given section in the document using its title.
+   */
+  TEX_EXTERN tex_section *document_find_section(tex_document *doc,
+                                                const char   *sectitle);
 
-  // Write the document to a buffer in memory
-  tex_error_t
-  document_write(const tex_document *doc, char *buffer, size_t buffer_size);
+  /**
+   * Add explicit content from memory. For adding content from filesystem
+   * see document_add_fs_content.
+   */
+  TEX_EXTERN tex_error_t document_add_content(tex_document *doc,
+                                              const char   *content);
 
-  // Write the document to a file in the filesystem
-  tex_error_t document_fs_write(const tex_document *doc, const char *file);
+  /**
+   * Append the contents of a file to the document body.
+   */
+  TEX_EXTERN tex_error_t document_add_fs_content(tex_document *doc,
+                                                 const char   *filename);
+
+  /**
+   * Add a tex_figure to the document body.
+   */
+  TEX_EXTERN tex_error_t document_add_figure(tex_document *doc,
+                                             tex_figure   *fig);
+
+  /**
+   * Internal API call used by libtex to automatically append required LaTeX
+   * packages to a document when needed. This function is not intended for
+   * direct use by end users. Package declarations are managed internally and
+   * should not be handled manually.
+   */
+  TEX_EXTERN tex_error_t document_add_package(tex_document *doc,
+                                              tex_package  *package);
+
+  /**
+   * Write the document to a buffer in memory.
+   */
+  TEX_EXTERN tex_error_t document_write(const tex_document *doc,
+                                        char               *buffer,
+                                        size_t              buffer_size);
+
+  /**
+   * Write the document to a file in the filesystem.
+   */
+  TEX_EXTERN tex_error_t document_fs_write(const tex_document *doc,
+                                           const char         *file);
 
 #ifdef __cplusplus
 };

@@ -4,11 +4,17 @@
  * SPDX-License-Identifier: BSD-2-Clause
  ***************************************************************************/
 
-#include "tex.h"
-#include <stdlib.h>
-#include <string.h>
+#pragma once
 
-char *tex_strdup(const char *str)
+
+typedef enum tex_color_theme_t
 {
-  return strdup(str);
-}
+    DEFAULT_COLOR = 0,
+    BEAVER        = 1,
+    CRANE         = 2,
+    DOLPHIN       = 3,
+    DOVE          = 4,
+    FLY           = 5,
+    SEAGULL       = 6,
+    WOLVERINE     = 7
+} tex_color_theme_t;

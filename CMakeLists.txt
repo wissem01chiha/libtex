@@ -75,6 +75,8 @@ set(tex_sources
     src/get_time.c
     src/theorem.c
     src/version.c
+    src/beamer.c
+    src/tex_strerr.c
 )
 
 if(WIN32)

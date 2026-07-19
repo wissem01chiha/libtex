@@ -1,8 +1,8 @@
-/*
+/***************************************************************************
  * SPDX-FileCopyrightText: 2026 Wissem Chiha <chihawissem08@gmail.com>
  *
  * SPDX-License-Identifier: BSD-2-Clause
- */
+ ***************************************************************************/
 
 #pragma once
 
@@ -17,9 +17,10 @@
 #include "tex/figure.h"
 #include "tex/language.h"
 #include "tex/list.h"
-#include "tex/presentation.h"
+#include "tex/beamer.h"
 #include "tex/report.h"
 #include "tex/section.h"
 #include "tex/table.h"
 #include "tex/texutil.h"
-#include "tex/version.h"
+#include "tex/texexport.h"
+#include "tex/texversion.h"

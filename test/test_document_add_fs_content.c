@@ -49,6 +49,8 @@ START_TEST(test_document_add_fs_content_write)
   fclose(f);
 
   tex_error_t res = document_add_fs_content(doc, filename);
+  ck_assert_int_eq(res, TEX_ENONE);
+  
   document_set_title(doc, "test-document-title");
 
   const char *write_filename = "test_document_add_fs_content_write.tex";
