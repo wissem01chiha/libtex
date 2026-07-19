@@ -29,7 +29,7 @@ jobs:
             cmake-args: -G Ninja
             pkgtgt: package
 
-          - name: macOS Clang
+          - name: MacOS Clang
             os: macos-latest
             compiler: clang
             cflags: -Wall -Wextra
