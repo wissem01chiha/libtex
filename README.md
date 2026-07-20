@@ -1,7 +1,9 @@
 <!-- omit in toc -->
 # libtex
 
-[![CMake](https://github.com/wissem01chiha/libtex/actions/workflows/cmake.yml/badge.svg)](https://github.com/wissem01chiha/libtex/actions/workflows/cmake.yml)
+[![Ubuntu](https://github.com/wissem01chiha/libtex/actions/workflows/cmake.yml/badge.svg)](https://github.com/wissem01chiha/libtex/actions/workflows/cmake.yml)
+[![MacOS](https://github.com/wissem01chiha/libtex/actions/workflows/macos.yml/badge.svg)](https://github.com/wissem01chiha/libtex/actions/workflows/macos.yml)
+[![Windows](https://github.com/wissem01chiha/libtex/actions/workflows/windows.yml/badge.svg)](https://github.com/wissem01chiha/libtex/actions/workflows/windows.yml)
 ![GitHub License](https://img.shields.io/github/license/wissem01chiha/libtex)
 [![CodeFactor](https://www.codefactor.io/repository/github/wissem01chiha/libtex/badge)](https://www.codefactor.io/repository/github/wissem01chiha/libtex)
 [![pre-commit.ci status](https://results.pre-commit.ci/badge/github/wissem01chiha/libtex/master.svg)](https://results.pre-commit.ci/latest/github/wissem01chiha/libtex/master)
