@@ -1,4 +1,4 @@
-name: Ubuntu
+name: MacOS
 on: [push, pull_request]
 jobs:
   ci-cmake:
@@ -8,11 +8,11 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - name: Ubuntu GCC
-            os: ubuntu-latest
-            compiler: gcc
+          - name: MacOS Clang
+            os: macos-latest
+            compiler: clang
             cflags: -Wall -Wextra
-            pkgtgt: package package_source
+            pkgtgt: package
             cmake-args:
 
     steps:

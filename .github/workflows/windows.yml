@@ -1,4 +1,4 @@
-name: Ubuntu
+name: Windows
 on: [push, pull_request]
 jobs:
   ci-cmake:
@@ -8,12 +8,20 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - name: Ubuntu GCC
-            os: ubuntu-latest
+
+          - name: Windows MSVC
+            os: windows-latest
+            compiler: cl
+            cflags: /W3
+            cmake-args: -A x64
+            pkgtgt: PACKAGE
+
+          - name: Windows MinGW
+            os: windows-latest
             compiler: gcc
             cflags: -Wall -Wextra
-            pkgtgt: package package_source
-            cmake-args:
+            cmake-args: -G Ninja
+            pkgtgt: package
 
     steps:
     - name: Checkout repository
