@@ -7,16 +7,25 @@
 
 const char *tex_color_to_string(tex_color_theme_t col)
 {
-    switch (col)
-    {
-    case Default_color: return "default";
-    case Beaver:        return "beaver";
-    case Crane:         return "crane";
-    case Dolphin:       return "dolphin";
-    case Dove:          return "dove";
-    case Fly:           return "fly";
-    case Seagull:       return "seagull";
-    case Wolverine:     return "wolverine";
-    default:            return "";
-    }
+  switch (col)
+  {
+    case Default_color:
+      return "default";
+    case Beaver:
+      return "beaver";
+    case Crane:
+      return "crane";
+    case Dolphin:
+      return "dolphin";
+    case Dove:
+      return "dove";
+    case Fly:
+      return "fly";
+    case Seagull:
+      return "seagull";
+    case Wolverine:
+      return "wolverine";
+    default:
+      return "";
+  }
 }

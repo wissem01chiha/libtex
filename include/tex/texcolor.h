@@ -8,19 +8,19 @@ extern "C"
 {
 #endif
 
-typedef enum tex_color_theme_t
-{
-  Default_color = 0,
-  Beaver        = 1,
-  Crane         = 2,
-  Dolphin       = 3,
-  Dove          = 4,
-  Fly           = 5,
-  Seagull       = 6,
-  Wolverine     = 7
-} tex_color_theme_t;
+  typedef enum tex_color_theme_t
+  {
+    Default_color = 0,
+    Beaver        = 1,
+    Crane         = 2,
+    Dolphin       = 3,
+    Dove          = 4,
+    Fly           = 5,
+    Seagull       = 6,
+    Wolverine     = 7
+  } tex_color_theme_t;
 
-const char *tex_color_to_string(tex_color_theme_t col);
+  const char *tex_color_to_string(tex_color_theme_t col);
 
 #ifdef __cplusplus
 };

@@ -45,9 +45,9 @@ extern "C"
    * Adjsut figure scale
    */
   TEX_EXTERN tex_error_t figure_set_scale(tex_figure *fig, float scale);
-  
+
   /**
-   * Write figure to a memeory buffer 
+   * Write figure to a memeory buffer
    */
   TEX_EXTERN tex_error_t figure_write(const tex_figure *fig,
                                       char             *buffer,
