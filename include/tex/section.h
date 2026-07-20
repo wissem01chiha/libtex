@@ -1,13 +1,13 @@
-/***************************************************************************
- * SPDX-FileCopyrightText: 2026 Wissem Chiha <chihawissem08@gmail.com>
- *
- * SPDX-License-Identifier: BSD-2-Clause
- ***************************************************************************/
+// SPDX-FileCopyrightText: 2026 Wissem Chiha <chihawissem08@gmail.com>
+// SPDX-License-Identifier: BSD-2-Clause
 
 #pragma once
 
 #include <stddef.h>
 #include "texexport.h"
+#include "figure.h"
+#include "list.h"
+#include "table.h"
 
 #ifdef __cplusplus
 extern "C"
@@ -31,12 +31,15 @@ extern "C"
     tex_section_t       level;
     struct tex_section *subsection;
     char               *content;
+    tex_figure         *figure;
+    tex_list           *list;
     struct tex_section *next;
   } tex_section;
 
   TEX_EXTERN tex_section *
   section_create(const char *title, tex_section_t level, int err);
-  TEX_EXTERN int section_delete(tex_section *sec);
+
+  TEX_EXTERN tex_error_t section_delete(tex_section *sec);
 
   /**
    * Find a given subsection in the given section using its title.

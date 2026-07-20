@@ -1,8 +1,5 @@
-/***************************************************************************
- * SPDX-FileCopyrightText: 2026 Wissem Chiha <chihawissem08@gmail.com>
- *
- * SPDX-License-Identifier: BSD-2-Clause
- ***************************************************************************/
+// SPDX-FileCopyrightText: 2026 Wissem Chiha <chihawissem08@gmail.com>
+// SPDX-License-Identifier: BSD-2-Clause
 
 #pragma once
 
@@ -10,6 +7,7 @@
 #include "language.h"
 #include "package.h"
 #include "figure.h"
+#include "list.h"
 #include "texexport.h"
 #include "section.h"
 

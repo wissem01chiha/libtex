@@ -1,8 +1,5 @@
-/***************************************************************************
- * SPDX-FileCopyrightText: 2026 Wissem Chiha <chihawissem08@gmail.com>
- *
- * SPDX-License-Identifier: BSD-2-Clause
- ***************************************************************************/
+// SPDX-FileCopyrightText: 2026 Wissem Chiha <chihawissem08@gmail.com>
+// SPDX-License-Identifier: BSD-2-Clause
 
 #include "tex.h"
 #include <stdio.h>
@@ -26,7 +23,7 @@ tex_error_t section_delete(tex_section *sec)
 {
   if (sec == NULL)
   {
-    return TEX_EINVAL_INPUT;
+    return TEX_ENULL_SECTION;
   }
   free(sec->title);
   free(sec->content);
@@ -36,6 +33,14 @@ tex_error_t section_delete(tex_section *sec)
 
 tex_section *section_find_subsection(tex_section *sec, const char *sectitle)
 {
+  if (sec == NULL)
+  {
+    return NULL;
+  }
+  if (sectitle == NULL)
+  {
+    return NULL;
+  }
   return NULL;
 }
 

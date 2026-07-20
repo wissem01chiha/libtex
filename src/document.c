@@ -1,12 +1,8 @@
-/***************************************************************************
- * SPDX-FileCopyrightText: 2026 Wissem Chiha <chihawissem08@gmail.com>
- *
- * SPDX-License-Identifier: BSD-2-Clause
- ***************************************************************************/
+// SPDX-FileCopyrightText: 2026 Wissem Chiha <chihawissem08@gmail.com>
+// SPDX-License-Identifier: BSD-2-Clause
 
 #include "tex.h"
 #include <stdio.h>
-#include <uv.h>
 #include <stdlib.h>
 #include <string.h>
 
@@ -134,59 +130,36 @@ tex_error_t document_add_content(tex_document *doc, const char *content)
 
 tex_error_t document_add_fs_content(tex_document *doc, const char *filename)
 {
-  if (doc == NULL || filename == NULL)
+  if (doc == NULL)
+  {
+    return TEX_ENULL_DOCUMENT;
+  }
+  if (filename == NULL)
   {
     return TEX_EINVAL_INPUT;
   }
-  uv_loop_t *loop = uv_default_loop();
-  uv_fs_t    open_req;
-  uv_fs_t    read_req;
-  uv_fs_t    close_req;
-
-  int r = uv_fs_open(loop, &open_req, filename, O_RDONLY, 0, NULL);
-  if (r < 0)
+  FILE *f = fopen(filename, "rb");
+  if (f == NULL)
   {
-    uv_fs_req_cleanup(&open_req);
+    return TEX_EFAIL_FOPEN;
   }
-
-  uv_fs_t stat_req;
-  r = uv_fs_fstat(loop, &stat_req, (uv_file) open_req.result, NULL);
-  if (r < 0)
+  fseek(f, 0, SEEK_END);
+  long fsize = ftell(f);
+  fseek(f, 0, SEEK_SET);
+  char *buffer = malloc(fsize + 1);
+  if (buffer == NULL)
   {
-    uv_fs_close(loop, &close_req, (uv_file) open_req.result, NULL);
-    uv_fs_req_cleanup(&open_req);
-    uv_fs_req_cleanup(&stat_req);
-  }
-
-  size_t filesize = stat_req.statbuf.st_size;
-  uv_fs_req_cleanup(&stat_req);
-
-  char *buffer = (char *) malloc(filesize + 1);
-  if (!buffer)
-  {
-    uv_fs_close(loop, &close_req, (uv_file) open_req.result, NULL);
-    uv_fs_req_cleanup(&open_req);
     return TEX_EFAIL_MEMALLOC;
   }
-
-  uv_buf_t iov = uv_buf_init(buffer, (unsigned int) filesize);
-
-  r = uv_fs_read(loop, &read_req, (uv_file) open_req.result, &iov, 1, 0, NULL);
-  if (r < 0)
+  size_t read  = fread(buffer, 1, fsize, f);
+  buffer[read] = '\0';
+  fclose(f);
+  tex_error_t err = document_add_content(doc, buffer);
+  if (err != TEX_ENONE)
   {
-    free(buffer);
-    uv_fs_close(loop, &close_req, (uv_file) open_req.result, NULL);
-    uv_fs_req_cleanup(&open_req);
-    uv_fs_req_cleanup(&read_req);
+    return err;
   }
-
-  buffer[r] = '\0';
-  uv_fs_req_cleanup(&read_req);
-
-  uv_fs_close(loop, &close_req, (uv_file) open_req.result, NULL);
-  uv_fs_req_cleanup(&open_req);
-
-  doc->content = buffer;
+  free(buffer);
   return TEX_ENONE;
 }
 
