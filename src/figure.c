@@ -30,33 +30,18 @@ tex_error_t figure_delete(tex_figure *fig)
   free(fig);
   return TEX_ENONE;
 }
-
-tex_error_t figure_set_caption(tex_figure *fig, const char *caption)
+tex_figure *figure_fs_create(const char *path, tex_error_t *err)
 {
-  if (fig == NULL || caption == NULL)
-  {
-    return TEX_ENULL_FIGURE;
-  }
-  fig->caption = tex_strdup(caption);
+  return NULL;
+}
+
+tex_error_t figure_set_size(tex_figure *fig, int width, int height)
+{
   return TEX_ENONE;
 }
 
-tex_error_t figure_set_label(tex_figure *fig, const char *label)
+tex_error_t figure_set_scale(tex_figure *fig, float scale)
 {
-  if (fig == NULL)
-  {
-    return TEX_ENULL_FIGURE;
-  }
-  fig->label = tex_strdup(label);
-  return TEX_ENONE;
-}
-
-tex_error_t figure_set_width(tex_figure *fig, const char *width)
-{
-  if (fig == NULL)
-  {
-    return TEX_ENULL_FIGURE;
-  }
   return TEX_ENONE;
 }
 

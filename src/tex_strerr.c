@@ -7,5 +7,6 @@
 
 const char *tex_strerr(int err)
 {
+  err= TEX_ENONE;
   return NULL;
 }

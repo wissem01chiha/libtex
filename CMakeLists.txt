@@ -76,6 +76,7 @@ set(tex_sources
     src/version.c
     src/beamer.c
     src/tex_strerr.c
+    src/color_to_string.c
 )
 
 if(WIN32)

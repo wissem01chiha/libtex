@@ -7,6 +7,7 @@
 #include "language.h"
 #include "package.h"
 #include "figure.h"
+#include "table.h"
 #include "list.h"
 #include "texexport.h"
 #include "section.h"
@@ -33,6 +34,7 @@ extern "C"
     tex_language_t language;
     tex_section   *section;
     tex_figure    *figure;
+    tex_table     *table;
     char          *title;
     char          *author;
     char          *date;

@@ -17,19 +17,41 @@ extern "C"
     char *image_path;
     char *caption;
     char *label;
-    char *width;
-    char *position;
+    int   width;
+    int   height;
+    float scale;
+    int   rotation;
+    int   position;
+    int   alignment;
   } tex_figure;
 
-  tex_figure *figure_create(tex_error_t *err);
-  tex_error_t figure_delete(tex_figure *fig);
+  TEX_EXTERN tex_figure *figure_create(tex_error_t *err);
+  TEX_EXTERN tex_error_t figure_delete(tex_figure *fig);
 
-  tex_error_t figure_set_caption(tex_figure *fig, const char *caption);
-  tex_error_t figure_set_label(tex_figure *fig, const char *label);
-  tex_error_t figure_set_width(tex_figure *fig, const char *width);
+  /**
+   * Create the figure from a given file path
+   * the figure label is automaticly genarted from filename
+   * eg  fig:diagram_png
+   */
+  TEX_EXTERN tex_figure *figure_fs_create(const char *path, tex_error_t *err);
 
-  tex_error_t
-  figure_write(const tex_figure *fig, char *buffer, size_t buffer_size);
+  /**
+   * Adjust figure size
+   */
+  TEX_EXTERN tex_error_t figure_set_size(tex_figure *fig,
+                                         int         width,
+                                         int         height);
+  /**
+   * Adjsut figure scale
+   */
+  TEX_EXTERN tex_error_t figure_set_scale(tex_figure *fig, float scale);
+  
+  /**
+   * Write figure to a memeory buffer 
+   */
+  TEX_EXTERN tex_error_t figure_write(const tex_figure *fig,
+                                      char             *buffer,
+                                      size_t            buffer_size);
 
 #ifdef __cplusplus
 };

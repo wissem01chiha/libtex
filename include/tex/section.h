@@ -14,6 +14,8 @@ extern "C"
 {
 #endif
 
+  typedef struct tex_section tex_section;
+
   /**
    * Document section types.
    */
@@ -25,16 +27,16 @@ extern "C"
     Subsubsection = 3
   } tex_section_t;
 
-  typedef struct tex_section
+  struct tex_section
   {
-    char               *title;
-    tex_section_t       level;
-    struct tex_section *subsection;
-    char               *content;
-    tex_figure         *figure;
-    tex_list           *list;
-    struct tex_section *next;
-  } tex_section;
+    char         *title;
+    tex_section_t level;
+    tex_section  *subsection;
+    char         *content;
+    tex_figure   *figure;
+    tex_list     *list;
+    tex_section  *next;
+  };
 
   TEX_EXTERN tex_section *
   section_create(const char *title, tex_section_t level, int err);

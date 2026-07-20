@@ -3,14 +3,25 @@
 
 #pragma once
 
+#ifdef __cplusplus
+extern "C"
+{
+#endif
+
 typedef enum tex_color_theme_t
 {
-  DEFAULT_COLOR = 0,
-  BEAVER        = 1,
-  CRANE         = 2,
-  DOLPHIN       = 3,
-  DOVE          = 4,
-  FLY           = 5,
-  SEAGULL       = 6,
-  WOLVERINE     = 7
+  Default_color = 0,
+  Beaver        = 1,
+  Crane         = 2,
+  Dolphin       = 3,
+  Dove          = 4,
+  Fly           = 5,
+  Seagull       = 6,
+  Wolverine     = 7
 } tex_color_theme_t;
+
+const char *tex_color_to_string(tex_color_theme_t col);
+
+#ifdef __cplusplus
+};
+#endif
