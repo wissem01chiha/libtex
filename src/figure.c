@@ -26,7 +26,6 @@ tex_error_t figure_delete(tex_figure *fig)
     return 0;
   }
   free(fig->image_path);
-  free(fig->position);
   free(fig);
   return TEX_ENONE;
 }
