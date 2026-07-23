@@ -33,7 +33,7 @@ tex_error_t list_add_item(tex_list *lst, const char *item, const char *label)
   {
     return TEX_ENULL_LIST;
   }
-  if (item == NULL || label == NULL )
+  if (item == NULL || label == NULL)
   {
     return TEX_EINVAL_INPUT;
   }

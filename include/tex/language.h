@@ -26,7 +26,7 @@ extern "C"
     Arabic     = 10
   } tex_language_t;
 
-  const char *tex_language_to_string(tex_language_t lang);
+  TEX_EXTERN const char *tex_language_to_string(tex_language_t lang);
 
 #ifdef __cplusplus
 }; /* extern "C" { */

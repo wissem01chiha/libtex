@@ -3,6 +3,8 @@
 
 #pragma once
 
+#include "texerrno.h"
+
 #ifdef __cplusplus
 extern "C"
 {
@@ -20,7 +22,7 @@ extern "C"
     Wolverine     = 7
   } tex_color_theme_t;
 
-  const char *tex_color_to_string(tex_color_theme_t col);
+  TEX_EXTERN const char *tex_color_to_string(tex_color_theme_t col);
 
 #ifdef __cplusplus
 };

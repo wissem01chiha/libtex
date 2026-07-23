@@ -14,6 +14,31 @@ extern "C"
 
   typedef struct tex_presentation tex_presentation;
 
+  typedef enum tex_theme_t
+  {
+    Default_theme = 0,
+    Berkeley      = 1,
+    Madrid        = 2,
+    Antibes       = 3,
+    Copenhagen    = 4,
+    Berlin        = 5,
+    Manhattan     = 6,
+    Warsaw        = 7,
+    Singapore     = 8
+  } tex_theme_t;
+
+  typedef enum tex_transition_t
+  {
+    None    = 0,
+    Fade    = 1,
+    Push    = 2,
+    Cover   = 3,
+    Uncover = 4,
+    Split   = 5,
+    Blinds  = 6,
+    Wipe    = 7
+  } tex_transition_t;
+
   TEX_EXTERN int presentation_create(tex_presentation **presentation,
                                      const char        *title,
                                      const char        *author,
