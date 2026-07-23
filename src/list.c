@@ -7,7 +7,7 @@
 
 tex_list *list_create(tex_error_t *err)
 {
-  *err           = 0;
+  *err           = TEX_ENONE;
   tex_list *list = malloc(sizeof(tex_list));
   if (list == NULL)
   {
@@ -33,15 +33,12 @@ tex_error_t list_add_item(tex_list *lst, const char *item, const char *label)
   {
     return TEX_ENULL_LIST;
   }
-  if (item == NULL)
+  if (item == NULL || label == NULL )
   {
     return TEX_EINVAL_INPUT;
   }
-  if (label == NULL)
-  {
-    return TEX_EINVAL_INPUT;
-  }
-  return 0;
+
+  return TEX_ENONE;
 }
 
 tex_error_t list_write(const tex_list *lst, char *buffer, size_t buffer_size)
@@ -54,5 +51,5 @@ tex_error_t list_write(const tex_list *lst, char *buffer, size_t buffer_size)
   {
     return TEX_ENULL_BUFFER;
   }
-  return 0;
+  return TEX_ENONE;
 }

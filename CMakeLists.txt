@@ -1,8 +1,6 @@
-# 
 # SPDX-FileCopyrightText: 2026 Wissem Chiha <chihawissem08@gmail.com>
-#
 # SPDX-License-Identifier: BSD-2-Clause
-# 
+
 cmake_minimum_required(VERSION 3.12...3.31)
 
 project(tex LANGUAGES C)

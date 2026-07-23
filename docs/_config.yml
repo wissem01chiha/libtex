@@ -1,4 +1,6 @@
 title: libtex
 description: A C library for writing Latex Tex files.
-show_downloads: true
-theme: jekyll-theme-cayman
+remote_theme: just-the-docs/just-the-docs
+plugins:
+  - jekyll-default-layout
+favicon: "/favicon.ico"

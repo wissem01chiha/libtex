@@ -1,3 +1,5 @@
+# SPDX-FileCopyrightText: 2026 Wissem Chiha <chihawissem08@gmail.com>
+# SPDX-License-Identifier: BSD-2-Clause
 find_package(Check QUIET)
 if(CHECK_FOUND)
     message(STATUS "Check found: ${CHECK_INCLUDE_DIR}")
