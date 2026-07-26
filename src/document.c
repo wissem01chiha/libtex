@@ -22,6 +22,7 @@ tex_document *document_create(tex_error_t *err)
   doc->author   = NULL;
   doc->date     = NULL;
   doc->content  = NULL;
+  doc->section  = NULL;
   if (err)
     *err = TEX_ENONE;
   return doc;
@@ -177,7 +178,7 @@ tex_error_t document_add_figure(tex_document *doc, tex_figure *fig)
   return TEX_ENONE;
 }
 
-tex_error_t document_add_section(tex_document *doc, const tex_section *sec)
+tex_error_t document_add_section(tex_document *doc, tex_section *sec)
 {
   if (doc == NULL)
   {
@@ -187,6 +188,21 @@ tex_error_t document_add_section(tex_document *doc, const tex_section *sec)
   {
     return TEX_ENULL_SECTION;
   }
+  if (doc->section == NULL)
+  {
+    doc->section = sec;
+  }
+  else
+  {
+    tex_section *p = doc->section;
+    while (p->next != NULL)
+    {
+      p = p->next;
+    }
+    p->next = sec;
+  }
+  sec->next = NULL;
+
   return TEX_ENONE;
 }
 
@@ -235,15 +251,29 @@ document_write(const tex_document *doc, char *buffer, size_t buffer_size)
                          "\\author{%s}\n"
                          "\\date{%s}\n"
                          "\\maketitle\n"
-                         "%s\n"
-                         "\\end{document}\n",
+                         "%s\n",
                          document_get_class(doc->type),
                          title,
                          author,
                          date,
                          content);
 
-  if (written < 0 || (size_t) written >= buffer_size)
+  if (doc->section != NULL)
+  {
+    tex_error_t *err =TEX_ENONE;
+    int n =
+        section_write(doc->section, buffer + written, buffer_size - written, err);
+    if (err != TEX_ENONE)
+    {
+      return *err;
+    }
+    written+=n;
+  }
+
+  int endwritten =
+      snprintf(buffer + written, buffer_size - written, "\\end{document}\n");
+
+  if (endwritten < 0 || (size_t) endwritten >= buffer_size - written)
   {
     return TEX_EOVERFLOW_BUFFER;
   }

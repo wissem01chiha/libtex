@@ -27,8 +27,18 @@ tex_error_t section_delete(tex_section *sec)
   {
     return TEX_ENULL_SECTION;
   }
-  free(sec->title);
-  free(sec->content);
+  if (sec->title != NULL)
+  {
+    free(sec->title);
+  }
+  if (sec->content != NULL)
+  {
+    free(sec->content);
+  }
+  if (sec->figure != NULL)
+  {
+    free(sec->figure);
+  }
   free(sec);
   return TEX_ENONE;
 }
@@ -48,7 +58,7 @@ tex_section *section_find_subsection(tex_section *sec, const char *sectitle)
 
 tex_error_t section_add_content(tex_section *sec, const char *_content)
 {
-  if (sec==NULL)
+  if (sec == NULL)
   {
     return TEX_ENULL_SECTION;
   }
@@ -56,7 +66,7 @@ tex_error_t section_add_content(tex_section *sec, const char *_content)
   {
     return TEX_EINVAL_INPUT;
   }
-  if (sec->content==NULL)
+  if (sec->content == NULL)
   {
     sec->content = tex_strdup(_content);
   }
@@ -82,39 +92,86 @@ tex_error_t section_add_content(tex_section *sec, const char *_content)
 
 tex_error_t section_add_fs_content(tex_section *sec, const char *filename)
 {
-  if (sec==NULL)
+  if (sec == NULL)
   {
     return TEX_ENULL_SECTION;
   }
-  if (filename==NULL)
+  if (filename == NULL)
   {
     return TEX_EINVAL_INPUT;
   }
   return TEX_ENONE;
 }
 
-tex_error_t
-section_write(const tex_section *sec, char *buffer, size_t buffer_size)
+int section_write(const tex_section *sec,
+                  char              *buffer,
+                  size_t             buffer_size,
+                  tex_error_t       *err)
 {
-  if (sec == NULL || buffer == NULL)
+  if (buffer == NULL)
   {
-    return TEX_EINVAL_INPUT;
+    *err = TEX_EINVAL_INPUT;
   }
-  if (sec->level == Chapter)
+  if (sec == NULL)
   {
-    snprintf(buffer, buffer_size, "\\chapter{%s}\n", sec->title);
+    *err = TEX_ENULL_SECTION;
   }
-  else if (sec->level == Section)
+
+  size_t written = 0;
+  int    n       = 0;
+
+  // write section header
+  const char *fmt = NULL;
+  switch (sec->level)
   {
-    snprintf(buffer, buffer_size, "\\section{%s}\n", sec->title);
+    case Chapter:
+      fmt = "\\chapter{%s}\n";
+      break;
+    case Section:
+      fmt = "\\section{%s}\n";
+      break;
+    case Subsection:
+      fmt = "\\subsection{%s}\n";
+      break;
+    case Subsubsection:
+      fmt = "\\subsubsection{%s}\n";
+      break;
+    default:
+      fmt = "\\section*{%s}\n";
+      break;
   }
-  else if (sec->level == Subsection)
+
+  n = snprintf(buffer + written, buffer_size - written, fmt, sec->title);
+
+  if (n < 0 || (size_t) n >= buffer_size - written)
   {
-    snprintf(buffer, buffer_size, "\\subsection{%s}\n", sec->title);
+    *err = TEX_EOVERFLOW_BUFFER;
   }
-  else if (sec->level == Subsubsection)
+  written += n;
+
+  // write content if available
+  if (sec->content != NULL)
   {
-    snprintf(buffer, buffer_size, "\\subsubsection{%s}\n", sec->title);
+    n = snprintf(buffer + written, buffer_size - written, "%s\n", sec->content);
+    if (n < 0 || (size_t) n >= buffer_size - written)
+      *err = TEX_EOVERFLOW_BUFFER;
+    written += n;
   }
-  return TEX_ENONE;
+
+  // handle substections
+  if (sec->subsection != NULL)
+  {
+    int written_subs = section_write(
+        sec->subsection, buffer + written, buffer_size - written, err);
+    written += written_subs;
+  }
+
+  // sibling sections
+  if (sec->next != NULL)
+  {
+    int written_next =
+        section_write(sec->next, buffer + written, buffer_size - written, err);
+    written += written_next;
+  }
+  return written;
 }

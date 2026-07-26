@@ -93,8 +93,13 @@ set(tex_test_sources
     test/test_document_fs_write.c
     test/test_document_set_title.c
     test/test_get_username.c
+    test/test_get_time.c
+    test/test_get_date.c
     test/test_document_add_fs_content.c
     test/test_section_add_content.c
+    test/test_document_add_section.c
+    test/test_section_write.c
+    test/test_document_section_write.c
 )
 
 set(tex_flags

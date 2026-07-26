@@ -40,7 +40,7 @@ END_TEST
 Suite *tex_suite(void)
 {
   Suite *s       = suite_create("test-section");
-  TCase *tc_core = tcase_create("Core");
+  TCase *tc_core = tcase_create("core");
   tcase_add_test(tc_core, test_section_create);
   tcase_add_test(tc_core, test_section_add_content);
   suite_add_tcase(s, tc_core);

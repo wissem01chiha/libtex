@@ -81,10 +81,13 @@ extern "C"
   TEX_EXTERN const char *document_get_class(tex_document_t doc_t);
 
   /**
-   * Add a section to the document.
+   * Add a section to the document. Updates the *next pointer in the section
+   * attribute member of tex_document. Sections in a tex_document form a kind of
+   * linear linked list. To add a subsection to a given document section, use
+   * document_find_section and refer to the tex_section API for more details.
    */
-  TEX_EXTERN tex_error_t document_add_section(tex_document      *doc,
-                                              const tex_section *sec);
+  TEX_EXTERN tex_error_t document_add_section(tex_document *doc,
+                                              tex_section  *sec);
 
   /**
    * Find a given section in the document using its title.
