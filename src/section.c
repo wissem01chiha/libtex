@@ -56,7 +56,7 @@ tex_error_t section_add_content(tex_section *sec, const char *_content)
   {
     return TEX_EINVAL_INPUT;
   }
-  if (sec->content)
+  if (sec->content==NULL)
   {
     sec->content = tex_strdup(_content);
   }
