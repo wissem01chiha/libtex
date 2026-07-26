@@ -34,7 +34,7 @@ extern "C"
   /**
    * Returns the error message for the given error code.
    */
-  TEX_EXTERN const char *tex_strerr(int err);
+  TEX_EXTERN const char *tex_strerr(tex_error_t err);
 
 #ifdef __cplusplus
 };

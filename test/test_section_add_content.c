@@ -7,7 +7,7 @@
 
 START_TEST(test_section_create)
 {
-  tex_error_t   err = TEX_ENONE;
+  tex_error_t  err = TEX_ENONE;
   tex_section *sec = section_create(&err);
 
   ck_assert_ptr_nonnull(sec);
@@ -19,21 +19,23 @@ END_TEST
 
 START_TEST(test_section_add_content)
 {
-  tex_error_t   err = TEX_ENONE;
+  tex_error_t  err = TEX_ENONE;
   tex_section *sec = section_create(&err);
+  ck_assert_ptr_nonnull(sec);
 
-    tex_error_t errac = section_add_content(sec, "Lorem ipsum dolor sit amet");
-    ck_assert_int_eq(errac, TEX_ENONE);
+  tex_error_t errac = section_add_content(sec, "Lorem ipsum dolor sit amet");
+  ck_assert_int_eq(errac, TEX_ENONE);
 
-    tex_error_t erracs = section_add_content(sec, ", consectetur adipiscing elit.");
-    ck_assert_int_eq(erracs, TEX_ENONE);
+  tex_error_t erracs =
+      section_add_content(sec, ", consectetur adipiscing elit.");
+  ck_assert_int_eq(erracs, TEX_ENONE);
 
-    ck_assert_str_eq(sec->content, "Lorem ipsum dolor sit amet, consectetur adipiscing elit.");
+  ck_assert_str_eq(sec->content,
+                   "Lorem ipsum dolor sit amet, consectetur adipiscing elit.");
 
   section_delete(sec);
 }
 END_TEST
-
 
 Suite *tex_suite(void)
 {

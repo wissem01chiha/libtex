@@ -4,13 +4,14 @@
 #include "tex.h"
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 tex_section *section_create(tex_error_t *err)
 {
   tex_section *sec = calloc(1, sizeof(tex_section));
   if (sec == NULL)
   {
-    err = TEX_EFAIL_MEMALLOC;
+    *err = TEX_EFAIL_MEMALLOC;
     return NULL;
   }
   sec->title   = NULL;
@@ -47,7 +48,7 @@ tex_section *section_find_subsection(tex_section *sec, const char *sectitle)
 
 tex_error_t section_add_content(tex_section *sec, const char *_content)
 {
-  if (sec)
+  if (sec==NULL)
   {
     return TEX_ENULL_SECTION;
   }
@@ -81,11 +82,11 @@ tex_error_t section_add_content(tex_section *sec, const char *_content)
 
 tex_error_t section_add_fs_content(tex_section *sec, const char *filename)
 {
-  if (sec)
+  if (sec==NULL)
   {
     return TEX_ENULL_SECTION;
   }
-  if (filename)
+  if (filename==NULL)
   {
     return TEX_EINVAL_INPUT;
   }

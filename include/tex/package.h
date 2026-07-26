@@ -4,6 +4,10 @@
 #pragma once
 
 #include <stddef.h>
+
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wunused-variable"
+
 #include "texexport.h"
 
 #ifdef __cplusplus
@@ -30,6 +34,8 @@ extern "C"
       {1, "xspace", NULL},    {1, "titlesec", NULL},   {1, "fancyvrb", NULL},
       {1, "minted", NULL},    {1, "csquotes", NULL},   {1, "biblatex", NULL},
   };
+
+#pragma GCC diagnostic pop
 
 #ifdef __cplusplus
 };
