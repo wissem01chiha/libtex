@@ -5,7 +5,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-tex_section *section_create(const char *title, tex_section_t level, int err)
+tex_section *section_create(tex_error_t *err)
 {
   tex_section *sec = calloc(1, sizeof(tex_section));
   if (sec == NULL)
@@ -13,9 +13,10 @@ tex_section *section_create(const char *title, tex_section_t level, int err)
     err = TEX_EFAIL_MEMALLOC;
     return NULL;
   }
-  sec->title = tex_strdup(title);
-  sec->level = level;
-  err        = TEX_ENONE;
+  sec->title   = NULL;
+  sec->level   = Section;
+  sec->content = NULL;
+  err          = TEX_ENONE;
   return sec;
 }
 
@@ -46,11 +47,35 @@ tex_section *section_find_subsection(tex_section *sec, const char *sectitle)
 
 tex_error_t section_add_content(tex_section *sec, const char *_content)
 {
-  if (sec == NULL || _content == NULL)
+  if (sec)
+  {
+    return TEX_ENULL_SECTION;
+  }
+  if (_content == NULL)
   {
     return TEX_EINVAL_INPUT;
   }
-  sec->content = tex_strdup(_content);
+  if (sec->content)
+  {
+    sec->content = tex_strdup(_content);
+  }
+  else
+  {
+    size_t len  = strlen(sec->content);
+    size_t nlen = strlen(_content);
+    char  *buff = malloc(len + nlen + 1);
+    if (buff == NULL)
+    {
+      return TEX_EFAIL_MEMALLOC;
+    }
+    memcpy(buff, sec->content, len);
+    memcpy(buff + len, _content, nlen);
+    buff[len + nlen] = '\0';
+
+    free(sec->content);
+    sec->content = buff;
+  }
+
   return TEX_ENONE;
 }
 

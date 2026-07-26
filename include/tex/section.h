@@ -38,8 +38,7 @@ extern "C"
     tex_section  *next;
   };
 
-  TEX_EXTERN tex_section *
-  section_create(const char *title, tex_section_t level, int err);
+  TEX_EXTERN tex_section *section_create(tex_error_t *err);
 
   TEX_EXTERN tex_error_t section_delete(tex_section *sec);
 
