@@ -260,14 +260,14 @@ document_write(const tex_document *doc, char *buffer, size_t buffer_size)
 
   if (doc->section != NULL)
   {
-    tex_error_t *err =TEX_ENONE;
-    int n =
-        section_write(doc->section, buffer + written, buffer_size - written, err);
+    tex_error_t *err = TEX_ENONE;
+    int          n   = section_write(
+        doc->section, buffer + written, buffer_size - written, err);
     if (err != TEX_ENONE)
     {
       return *err;
     }
-    written+=n;
+    written += n;
   }
 
   int endwritten =

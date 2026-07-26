@@ -12,20 +12,20 @@ START_TEST(test_section_write)
   ck_assert_ptr_nonnull(sec);
   ck_assert_int_eq(err, TEX_ENONE);
 
-  sec->title = tex_strdup("section1");
+  sec->title   = tex_strdup("section1");
   sec->content = tex_strdup("Zorim eptrum falix nodera, quistal venor daplum.");
 
   tex_section *subsec = section_create(&err);
-  subsec->level = Subsection;
-  subsec->title = tex_strdup("subsection1.1");
-  subsec->content = tex_strdup("Fexor mitralo sunep, dravix coltur anem.");
+  subsec->level       = Subsection;
+  subsec->title       = tex_strdup("subsection1.1");
+  subsec->content     = tex_strdup("Fexor mitralo sunep, dravix coltur anem.");
 
   sec->subsection = subsec;
 
   const size_t buffer_size = 1400;
-  char buffer[1400];
+  char         buffer[1400];
 
-  int n =  section_write(sec,buffer,buffer_size, &err);
+  int n = section_write(sec, buffer, buffer_size, &err);
   ck_assert_int_gt(n, 0);
   ck_assert_int_eq(err, TEX_ENONE);
   printf("%s\n", buffer);
@@ -33,7 +33,6 @@ START_TEST(test_section_write)
   section_delete(sec);
 }
 END_TEST
-
 
 Suite *tex_suite(void)
 {

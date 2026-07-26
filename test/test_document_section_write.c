@@ -11,29 +11,27 @@ START_TEST(test_document_section_write)
   tex_document *doc = document_create(&err);
   document_set_title(doc, "test-document-with-section");
 
-  //create some sections with subsections 
+  // create some sections with subsections
   tex_section *sec = section_create(&err);
-  sec->title = tex_strdup("section1");
+  sec->title       = tex_strdup("section1");
   sec->content = tex_strdup("Zorim eptrum falix nodera, quistal venor daplum.");
 
   tex_section *subsec = section_create(&err);
-  subsec->level = Subsection;
-  subsec->title = tex_strdup("subsection1.1");
-  subsec->content = tex_strdup("Fexor mitralo sunep, dravix coltur anem.");
+  subsec->level       = Subsection;
+  subsec->title       = tex_strdup("subsection1.1");
+  subsec->content     = tex_strdup("Fexor mitralo sunep, dravix coltur anem.");
 
   sec->subsection = subsec;
 
   // add the section to the doc
   doc->section = sec;
 
-  const char *filename  = "document_with_section_write.tex";
+  const char *filename = "document_with_section_write.tex";
   ck_assert_int_eq(document_fs_write(doc, filename), TEX_ENONE);
-
 
   document_delete(doc);
 }
 END_TEST
-
 
 Suite *tex_suite(void)
 {

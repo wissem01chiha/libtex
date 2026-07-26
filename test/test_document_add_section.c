@@ -19,27 +19,24 @@ START_TEST(test_document_add_section)
   ck_assert_ptr_null(doc->section);
   ck_assert_int_eq(err, TEX_ENONE);
 
-
-  tex_error_t erra = document_add_section(doc,sec);
+  tex_error_t erra = document_add_section(doc, sec);
   ck_assert_ptr_nonnull(doc->section);
   ck_assert_int_eq(erra, TEX_ENONE);
 
   tex_section *sec_2 = section_create(&err);
-  sec_2->title = "section2";
+  sec_2->title       = "section2";
 
-  tex_error_t err2 = document_add_section(doc,sec_2);
- ck_assert_ptr_nonnull(doc->section->next);
- ck_assert_int_eq(err2, TEX_ENONE);
- ck_assert_str_eq(doc->section->next->title,"section2");
-
+  tex_error_t err2 = document_add_section(doc, sec_2);
+  ck_assert_ptr_nonnull(doc->section->next);
+  ck_assert_int_eq(err2, TEX_ENONE);
+  ck_assert_str_eq(doc->section->next->title, "section2");
 
   // document owns now the section , no need to free it using
   // section_delet(sec), it will cause heap corruption for double freeing
-  // with errc  0xC0000374 on windows 
+  // with errc  0xC0000374 on windows
   document_delete(doc);
 }
 END_TEST
-
 
 Suite *tex_suite(void)
 {
