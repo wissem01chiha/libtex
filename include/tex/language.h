@@ -29,5 +29,5 @@ extern "C"
   TEX_EXTERN const char *tex_language_to_string(tex_language_t lang);
 
 #ifdef __cplusplus
-}; /* extern "C" { */
+}; 
 #endif
