@@ -7,6 +7,6 @@
 
 START_TEST(test_document_add_figure)
 {
-  tex_error_t  err = TEX_ENONE;
+  tex_error_t err = TEX_ENONE;
 }
 END_TEST

@@ -4,7 +4,8 @@
 #include "tex.h"
 #include <string.h>
 
-const char* get_filename(const char* path) {
-    const char *slash = strrchr(path, '/'); 
-    return slash ? slash + 1 : path;
+const char *get_filename(const char *path)
+{
+  const char *slash = strrchr(path, '/');
+  return slash ? slash + 1 : path;
 }

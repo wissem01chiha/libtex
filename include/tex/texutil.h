@@ -42,9 +42,9 @@ extern "C"
   TEX_EXTERN const char *get_filename(const char *path);
 
   /**
-   * Get the current working directory 
+   * Get the current working directory
    */
-  TEX_EXTERN int tex_cwd(char* buffer, size_t* size);
+  TEX_EXTERN int tex_cwd(char *buffer, size_t *size);
 
 #ifdef __cplusplus
 };
