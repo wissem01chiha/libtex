@@ -36,6 +36,16 @@ extern "C"
    */
   TEX_EXTERN const char *tex_strerr(tex_error_t err);
 
+  /**
+   * Get filename from a full file path string
+   */
+  TEX_EXTERN const char *get_filename(const char *path);
+
+  /**
+   * Get the current working directory 
+   */
+  TEX_EXTERN int tex_cwd(char* buffer, size_t* size);
+
 #ifdef __cplusplus
 };
 #endif

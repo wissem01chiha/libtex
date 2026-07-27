@@ -11,16 +11,28 @@ START_TEST(test_figure_create)
   tex_figure *fig = figure_create(&err);
   ck_assert_ptr_nonnull(fig);
   ck_assert_int_eq(err, TEX_ENONE);
-
-  figure_delete(fig);
+  ck_assert_int_eq(figure_delete(fig), TEX_ENONE);
 }
 END_TEST
 
 START_TEST(test_figure_fs_create)
 {
   tex_error_t err = TEX_ENONE;
-  tex_figure *fig = figure_create(&err);
-
+#ifdef _WIN32
+  tex_figure *fig = figure_fs_create(".\\test\\fixture\\map_01.png", &err);
+#else
+  tex_figure *fig = figure_fs_create("./test/fixture/map_01.png", &err);
+#endif
+  ck_assert_ptr_nonnull(fig);
+  ck_assert_int_eq(err, TEX_ENONE);
+#ifdef _WIN32
+  ck_assert_str_eq(fig->image_path, ".\\test\\fixture\\map_01.png");
+#else
+  ck_assert_str_eq(fig->image_path, "./test/fixture/map_01.png");
+#endif
+  ck_assert_int_eq(fig->width, 1024);
+  ck_assert_int_eq(fig->height, 1024);
+  ck_assert_str_eq(fig->label, "map_01.png");
   figure_delete(fig);
 }
 END_TEST

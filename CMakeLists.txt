@@ -75,17 +75,22 @@ set(tex_sources
     src/beamer.c
     src/tex_strerr.c
     src/color_to_string.c
+    src/plot.c
 )
 
 if(WIN32)
     list(APPEND tex_sources
         src/win/get_username.c
         src/win/tex_strdup.c
+        src/win/get_filename.c
+        src/win/tex_cwd.c
     )
 else()
     list(APPEND tex_sources
         src/unix/get_username.c
         src/unix/tex_strdup.c
+        src/unix/get_filename.c
+        src/unix/tex_cwd.c
     )
 endif() 
 
@@ -101,6 +106,13 @@ set(tex_test_sources
     test/test_section_write.c
     test/test_document_section_write.c
     test/test_figure_fs_create.c
+    test/test_figure_write.c
+)
+
+set(tex_test_assets
+    test/fixture/map_01.png
+    test/fixture/map_02.png
+    test/fixture/map_03.png
 )
 
 set(tex_flags
@@ -126,6 +138,10 @@ target_include_directories(${PROJECT_NAME}
     PUBLIC
         $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
         $<INSTALL_INTERFACE:include>
+)
+target_include_directories(${PROJECT_NAME} 
+    PRIVATE
+        ${CMAKE_CURRENT_SOURCE_DIR}/third_party
 )
 target_link_libraries(${PROJECT_NAME} PUBLIC)
 target_compile_options(${PROJECT_NAME} PRIVATE ${tex_flags})
@@ -165,6 +181,14 @@ if(LIBTEX_BUILD_TESTS)
         add_test(NAME ${testname} COMMAND ${testname})
     endforeach()
 endif()
+
+foreach(asset ${tex_test_assets})
+    configure_file(
+        ${CMAKE_CURRENT_SOURCE_DIR}/${asset}
+        ${CMAKE_CURRENT_BINARY_DIR}/${asset}
+        COPYONLY
+    )
+endforeach()
 
 set(tex_pc "${CMAKE_CURRENT_BINARY_DIR}/tex.pc")
 configure_file(
