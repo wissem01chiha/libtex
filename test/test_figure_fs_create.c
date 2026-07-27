@@ -7,7 +7,7 @@
 
 START_TEST(test_figure_create)
 {
-  tex_error_t   err = TEX_ENONE;
+  tex_error_t err = TEX_ENONE;
   tex_figure *fig = figure_create(&err);
   ck_assert_ptr_nonnull(fig);
   ck_assert_int_eq(err, TEX_ENONE);
@@ -18,13 +18,12 @@ END_TEST
 
 START_TEST(test_figure_fs_create)
 {
-  tex_error_t   err = TEX_ENONE;
+  tex_error_t err = TEX_ENONE;
   tex_figure *fig = figure_create(&err);
 
   figure_delete(fig);
 }
 END_TEST
-
 
 Suite *tex_suite(void)
 {
