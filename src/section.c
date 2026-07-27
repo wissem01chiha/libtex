@@ -17,6 +17,7 @@ tex_section *section_create(tex_error_t *err)
   sec->title   = NULL;
   sec->level   = Section;
   sec->content = NULL;
+  sec->next    = NULL;
   err          = TEX_ENONE;
   return sec;
 }

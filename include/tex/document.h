@@ -35,6 +35,7 @@ extern "C"
     tex_section   *section;
     tex_figure    *figure;
     tex_table     *table;
+    tex_list      *list;
     char          *title;
     char          *author;
     char          *date;
@@ -109,10 +110,16 @@ extern "C"
                                                  const char   *filename);
 
   /**
-   * Add a tex_figure to the document body.
+   * Add a tex_figure to the document body, the figure will be appended at the
+   * document end figure list is a flat linkedlist in the document
    */
   TEX_EXTERN tex_error_t document_add_figure(tex_document *doc,
                                              tex_figure   *fig);
+  /**
+   * Add a tex_list to the document body, the list will be appended at the
+   * document end
+   */
+  TEX_EXTERN tex_error_t document_add_list(tex_document *doc, tex_list *list);
 
   /**
    * Internal API call used by libtex to automatically append required LaTeX

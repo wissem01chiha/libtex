@@ -100,6 +100,7 @@ set(tex_test_sources
     test/test_document_add_section.c
     test/test_section_write.c
     test/test_document_section_write.c
+    test/test_figure_fs_create.c
 )
 
 set(tex_flags
