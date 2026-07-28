@@ -35,14 +35,22 @@ extern "C"
     tex_section   *section;
     tex_figure    *figure;
     tex_table     *table;
+    tex_list      *list;
     char          *title;
     char          *author;
     char          *date;
     char          *content;
   } tex_document;
 
+  /**
+   * Create a tex_document based object
+   */
   TEX_EXTERN tex_document *document_create(tex_error_t *err);
-  TEX_EXTERN tex_error_t   document_delete(tex_document *doc);
+
+  /**
+   * Delete a tex_document based object
+   */
+  TEX_EXTERN tex_error_t document_delete(tex_document *doc);
 
   /**
    * By default the document is set to Article type, however it can be changed
@@ -81,10 +89,13 @@ extern "C"
   TEX_EXTERN const char *document_get_class(tex_document_t doc_t);
 
   /**
-   * Add a section to the document.
+   * Add a section to the document. Updates the *next pointer in the section
+   * attribute member of tex_document. Sections in a tex_document form a kind of
+   * linear linked list. To add a subsection to a given document section, use
+   * document_find_section and refer to the tex_section API for more details.
    */
-  TEX_EXTERN tex_error_t document_add_section(tex_document      *doc,
-                                              const tex_section *sec);
+  TEX_EXTERN tex_error_t document_add_section(tex_document *doc,
+                                              tex_section  *sec);
 
   /**
    * Find a given section in the document using its title.
@@ -106,10 +117,16 @@ extern "C"
                                                  const char   *filename);
 
   /**
-   * Add a tex_figure to the document body.
+   * Add a tex_figure to the document body, the figure will be appended at the
+   * document end figure list is a flat linkedlist in the document
    */
   TEX_EXTERN tex_error_t document_add_figure(tex_document *doc,
                                              tex_figure   *fig);
+  /**
+   * Add a tex_list to the document body, the list will be appended at the
+   * document end
+   */
+  TEX_EXTERN tex_error_t document_add_list(tex_document *doc, tex_list *list);
 
   /**
    * Internal API call used by libtex to automatically append required LaTeX
@@ -132,6 +149,12 @@ extern "C"
    */
   TEX_EXTERN tex_error_t document_fs_write(const tex_document *doc,
                                            const char         *file);
+
+  /**
+   * A subset of document_fs_write that uses the current working directory
+   * and the default file name "main.tex" to write the document
+   */
+  TEX_EXTERN tex_error_t document_fs_write_default(const tex_document *doc);
 
 #ifdef __cplusplus
 };

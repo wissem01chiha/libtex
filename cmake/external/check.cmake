@@ -9,7 +9,8 @@ else()
     include(FetchContent)
     FetchContent_Declare(
         Check
-        URL https://github.com/libcheck/check/archive/refs/tags/0.15.2.zip
+        GIT_REPOSITORY https://github.com/libcheck/check.git
+        GIT_TAG 35d9cc011faa0545bf56d5062ae90bbc2688eba7
     )
     FetchContent_MakeAvailable(Check)
     set(CHECK_INCLUDE_DIR ${Check_SOURCE_DIR}/src ${Check_BINARY_DIR}/src ${Check_BINARY_DIR})

@@ -15,6 +15,7 @@
 #include "tex/language.h"
 #include "tex/list.h"
 #include "tex/beamer.h"
+#include "tex/plot.h"
 #include "tex/report.h"
 #include "tex/section.h"
 #include "tex/table.h"

@@ -70,7 +70,7 @@ END_TEST
 Suite *tex_suite(void)
 {
   Suite *s       = suite_create("test-document");
-  TCase *tc_core = tcase_create("Core");
+  TCase *tc_core = tcase_create("core");
   tcase_add_test(tc_core, test_document_add_fs_content);
   tcase_add_test(tc_core, test_document_add_fs_content_write);
   suite_add_tcase(s, tc_core);

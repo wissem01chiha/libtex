@@ -12,6 +12,8 @@ extern "C"
 {
 #endif
 
+  typedef struct tex_list tex_list;
+
   /**
    * Latex list levels
    */
@@ -22,10 +24,11 @@ extern "C"
     Description = 2
   } tex_list_t;
 
-  typedef struct tex_list
+  struct tex_list
   {
     tex_list_t type;
-  } tex_list;
+    tex_list  *next;
+  };
 
   TEX_EXTERN tex_list   *list_create(tex_error_t *err);
   TEX_EXTERN tex_error_t list_delete(tex_list *lst);
@@ -34,9 +37,10 @@ extern "C"
                                        const char *item,
                                        const char *label);
 
-  TEX_EXTERN tex_error_t list_write(const tex_list *lst,
-                                    char           *buffer,
-                                    size_t          buffer_size);
+  TEX_EXTERN int list_write(const tex_list *lst,
+                            char           *buffer,
+                            size_t          buffer_size,
+                            tex_error_t    *err);
 
 #ifdef __cplusplus
 };

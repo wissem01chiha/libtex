@@ -3,12 +3,14 @@
 
 #pragma once
 
+#include "texconf.h"
+
 #ifndef TEX_EXTERN
 #  ifdef _WIN32
-#    if defined(BUILDING_UV_SHARED)
+#    if defined(TEX_BUILD_SHARED)
 /* Building shared library. */
 #      define TEX_EXTERN __declspec(dllexport)
-#    elif defined(USING_UV_SHARED)
+#    elif defined(USING_TEX_SHARED)
 /* Using shared library. */
 #      define TEX_EXTERN __declspec(dllimport)
 #    else

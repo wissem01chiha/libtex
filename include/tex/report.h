@@ -36,5 +36,5 @@ extern "C"
   report_generate(tex_report *report, char **output, size_t *output_size);
 
 #ifdef __cplusplus
-}; /* extern "C" { */
+};
 #endif

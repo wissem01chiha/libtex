@@ -34,13 +34,13 @@ set(CMAKE_SUPPRESS_DEVELOPER_WARNINGS ON)
 set(CMAKE_WARN_DEPRECATED OFF CACHE BOOL "suppress cmake deprecation message")
 
 option(LIBTEX_BUILD_SHARED "Build shared lib" OFF)
+option(LIBTEX_BUILD_TOOLS "Build tools in the script directory" ON)
 option(LIBTEX_BUILD_TESTS "Build tests" ON)
 option(LIBTEX_BUILD_REGRESS "Build regression tests" ON)
 option(LIBTEX_BUILD_DOC "Build documentation" ON)
 option(LIBTEX_INSTALL "Install libtex files" OFF)
-option(LIBTEX_ENABLE_COVERAGE "Enable coverage reporting" OFF)
-option(LIBTEX_BUILD_TOOLS "Build tools in the script directory" ON)
-option(LIBTEX_ASAN "Enable AddressSanitizer (ASan)" OFF)
+option(LIBTEX_COVER "Enable coverage reporting" OFF)
+option(LIBTEX_ASAN "Enable AddressSanitizer (ASan)" ON)
 
 if (CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT)
     set(CMAKE_INSTALL_PREFIX "${CMAKE_CURRENT_BINARY_DIR}/install"
@@ -75,25 +75,45 @@ set(tex_sources
     src/beamer.c
     src/tex_strerr.c
     src/color_to_string.c
+    src/plot.c
 )
 
 if(WIN32)
     list(APPEND tex_sources
         src/win/get_username.c
         src/win/tex_strdup.c
+        src/win/get_filename.c
+        src/win/tex_cwd.c
     )
 else()
     list(APPEND tex_sources
         src/unix/get_username.c
         src/unix/tex_strdup.c
+        src/unix/get_filename.c
+        src/unix/tex_cwd.c
     )
 endif() 
 
 set(tex_test_sources
     test/test_document_fs_write.c
-    test/test_document_api.c
+    test/test_document_set_title.c
     test/test_get_username.c
+    test/test_get_time.c
+    test/test_get_date.c
     test/test_document_add_fs_content.c
+    test/test_section_add_content.c
+    test/test_document_add_section.c
+    test/test_section_write.c
+    test/test_document_section_write.c
+    test/test_figure_fs_create.c
+    test/test_figure_write.c
+    test/test_document_fs_write_default.c
+)
+
+set(tex_test_assets
+    test/fixture/map_01.png
+    test/fixture/map_02.png
+    test/fixture/map_03.png
 )
 
 set(tex_flags
@@ -120,12 +140,32 @@ target_include_directories(${PROJECT_NAME}
         $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
         $<INSTALL_INTERFACE:include>
 )
+target_include_directories(${PROJECT_NAME}
+    PUBLIC
+        ${CMAKE_BINARY_DIR}
+    PRIVATE
+        ${CMAKE_CURRENT_SOURCE_DIR}/third_party
+)
 target_link_libraries(${PROJECT_NAME} PUBLIC)
 target_compile_options(${PROJECT_NAME} PRIVATE ${tex_flags})
+
+if(LIBTEX_COVER AND NOT WIN32)
+  set(LIBTEX_COVERAGE_COMPILE_FLAGS -g -O0 -fprofile-arcs -ftest-coverage)
+  set(LIBTEX_COVERAGE_LINK_FLAGS --coverage)
+  target_compile_options(${PROJECT_NAME} PUBLIC ${LIBTEX_COVERAGE_COMPILE_FLAGS})
+  if(TARGET ${PROJECT_NAME})
+    target_compile_options(${PROJECT_NAME} PUBLIC ${LIBTEX_COVERAGE_COMPILE_FLAGS})
+    target_link_options(${PROJECT_NAME} PUBLIC ${LIBTEX_COVERAGE_LINK_FLAGS})
+  endif()
+endif()
 
 if(LIBTEX_BUILD_TOOLS)
     add_executable(tex2pdf tools/tex2pdf.c)
     target_link_libraries(tex2pdf PUBLIC ${PROJECT_NAME})
+    if(LIBTEX_COVER AND NOT(WIN32))
+      target_compile_options(tex2pdf PRIVATE ${LIBTEX_COVERAGE_COMPILE_FLAGS})
+      target_link_options(tex2pdf PRIVATE ${LIBTEX_COVERAGE_LINK_FLAGS})
+    endif()
     add_dependencies(tex2pdf ${PROJECT_NAME})
 endif()
 
@@ -134,6 +174,10 @@ if(LIBTEX_BUILD_TESTS)
     foreach(testfile ${tex_test_sources})
         get_filename_component(testname ${testfile} NAME_WE)
         add_executable(${testname} ${testfile})
+        if(LIBTEX_COVER AND NOT(WIN32))
+            target_compile_options(${testname} PRIVATE ${LIBTEX_COVERAGE_COMPILE_FLAGS})
+            target_link_options(${testname} PRIVATE ${LIBTEX_COVERAGE_LINK_FLAGS})
+        endif()
         add_dependencies(${testname} ${PROJECT_NAME})
         target_link_libraries(${testname} PRIVATE ${PROJECT_NAME} compat check)
         target_compile_options(${testname} PRIVATE ${tex_flags})
@@ -141,10 +185,13 @@ if(LIBTEX_BUILD_TESTS)
     endforeach()
 endif()
 
-if(LIBTEX_ENABLE_COVERAGE)
-  find_program(LCOV lcov REQUIRED)
-  find_program(GENHTML genhtml REQUIRED)
-endif()
+foreach(asset ${tex_test_assets})
+    configure_file(
+        ${CMAKE_CURRENT_SOURCE_DIR}/${asset}
+        ${CMAKE_CURRENT_BINARY_DIR}/${asset}
+        COPYONLY
+    )
+endforeach()
 
 set(tex_pc "${CMAKE_CURRENT_BINARY_DIR}/tex.pc")
 configure_file(

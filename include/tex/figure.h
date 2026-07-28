@@ -12,18 +12,21 @@ extern "C"
 {
 #endif
 
-  typedef struct
+  typedef struct tex_figure tex_figure;
+
+  struct tex_figure
   {
-    char *image_path;
-    char *caption;
-    char *label;
-    int   width;
-    int   height;
-    float scale;
-    int   rotation;
-    int   position;
-    int   alignment;
-  } tex_figure;
+    char       *image_path;
+    char       *caption;
+    char       *label;
+    int         width;
+    int         height;
+    float       scale;
+    int         rotation;
+    int         position;
+    int         alignment;
+    tex_figure *next;
+  };
 
   TEX_EXTERN tex_figure *figure_create(tex_error_t *err);
   TEX_EXTERN tex_error_t figure_delete(tex_figure *fig);
@@ -42,16 +45,23 @@ extern "C"
                                          int         width,
                                          int         height);
   /**
-   * Adjsut figure scale
+   * Adjust figure scale.
+   * The scale factor is provided directly as a float 1.0 = original
+   * size, 0.5 = half size, 2.0 = double size, this routine adjusts the
+   * figure width and hight automatically
    */
   TEX_EXTERN tex_error_t figure_set_scale(tex_figure *fig, float scale);
 
   /**
    * Write figure to a memeory buffer
+   * upon sucess it returns th number of bytes writtin to the buffer same as
+   * snprintf function, on failure returns -1 and set err to specifice error
+   * code
    */
-  TEX_EXTERN tex_error_t figure_write(const tex_figure *fig,
-                                      char             *buffer,
-                                      size_t            buffer_size);
+  TEX_EXTERN int figure_write(const tex_figure *fig,
+                              char             *buffer,
+                              size_t            buffer_size,
+                              tex_error_t      *err);
 
 #ifdef __cplusplus
 };

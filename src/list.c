@@ -14,6 +14,7 @@ tex_list *list_create(tex_error_t *err)
     *err = TEX_EFAIL_MEMALLOC;
     return NULL;
   }
+  list->next = NULL;
   return list;
 }
 
@@ -41,15 +42,18 @@ tex_error_t list_add_item(tex_list *lst, const char *item, const char *label)
   return TEX_ENONE;
 }
 
-tex_error_t list_write(const tex_list *lst, char *buffer, size_t buffer_size)
+int list_write(const tex_list *lst,
+               char           *buffer,
+               size_t          buffer_size,
+               tex_error_t    *err)
 {
   if (lst == NULL)
   {
-    return TEX_ENULL_LIST;
+    *err = TEX_ENULL_LIST;
   }
   if (buffer == NULL)
   {
-    return TEX_ENULL_BUFFER;
+    *err = TEX_ENULL_BUFFER;
   }
-  return TEX_ENONE;
+  return 0;
 }

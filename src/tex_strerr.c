@@ -5,7 +5,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-const char *tex_strerr(int err)
+const char *tex_strerr(tex_error_t err)
 {
   err = TEX_ENONE;
   return NULL;

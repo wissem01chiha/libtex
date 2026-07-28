@@ -38,8 +38,7 @@ extern "C"
     tex_section  *next;
   };
 
-  TEX_EXTERN tex_section *
-  section_create(const char *title, tex_section_t level, int err);
+  TEX_EXTERN tex_section *section_create(tex_error_t *err);
 
   TEX_EXTERN tex_error_t section_delete(tex_section *sec);
 
@@ -64,10 +63,13 @@ extern "C"
 
   /**
    * Write the section to a memory buffer.
+   * upon sucess it returns th number of bytes writtin to the buffer same as
+   * snprintf function
    */
-  TEX_EXTERN tex_error_t section_write(const tex_section *sec,
-                                       char              *buffer,
-                                       size_t             buffer_size);
+  TEX_EXTERN int section_write(const tex_section *sec,
+                               char              *buffer,
+                               size_t             buffer_size,
+                               tex_error_t       *err);
 
 #ifdef __cplusplus
 };
