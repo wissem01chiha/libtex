@@ -3,6 +3,7 @@
 
 #include "tex.h"
 #include <string.h>
+#include <unistd.h>
 
 tex_error_t tex_cwd(char *buffer, size_t *size)
 {
