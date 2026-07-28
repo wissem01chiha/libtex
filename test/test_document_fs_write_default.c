@@ -14,7 +14,7 @@ START_TEST(test_document_fs_write_default)
   ck_assert_int_eq(err, TEX_ENONE);
 
   document_set_title(doc, "test-document-title");
-  tex_error_t        write_err = document_fs_write_default(doc);
+  tex_error_t write_err = document_fs_write_default(doc);
 
   ck_assert_int_eq(write_err, TEX_ENONE);
   document_delete(doc);
