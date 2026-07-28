@@ -2,6 +2,7 @@
 // SPDX-License-Identifier: BSD-2-Clause
 
 #include "tex.h"
+#include <string.h>
 
 tex_error_t tex_cwd(char *buffer, size_t *size)
 {

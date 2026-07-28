@@ -5,7 +5,7 @@ nav_order: 5
 
 # Code Samples
 
-## Basic Example: Writing Your First LaTeX Document
+## Writing your first Latex document
 
 ```c
 #include <tex/tex.h>
@@ -13,9 +13,6 @@ nav_order: 5
 
 tex_error_t   err = TEX_ENONE;
 tex_document *doc = document_create(&err);
-
-document_set_title(doc, "my-title");
-document_set_author(doc, "me!");
 
 tex_error_t write_err = document_fs_write_default(doc);
 if (write_err != TEX_ENONE) {
@@ -33,7 +30,6 @@ if (write_err != TEX_ENONE) {
 
 ### Adding Comments
 
-[NOT SUPPOrted YET]
 
 ## Lists
 
@@ -41,7 +37,6 @@ if (write_err != TEX_ENONE) {
 
 ### Adding Lists
 
-[NOT SUPPOrted YET]
 
 ## Tables 
 

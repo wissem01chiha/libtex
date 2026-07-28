@@ -3,6 +3,8 @@
 
 #pragma once
 
+#include <errno.h>
+
 #ifdef __cplusplus
 extern "C"
 {

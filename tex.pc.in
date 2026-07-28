@@ -32,7 +32,7 @@ libdir=@libdir@
 includedir=@includedir@
 
 Name: ${PROJECT_NAME}
-Description: A C library for writing Latex Tex files.
+Description: A lightweight C library for writing LaTeX TeX files.
 Version: @PROJECT_VERSION@
 Libs: @PKG_CONFIG_RPATH@ -L${libdir} -llibtex
 Libs.private: @LIBS@
