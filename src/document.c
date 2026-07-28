@@ -327,6 +327,34 @@ tex_error_t document_fs_write(const tex_document *doc, const char *filename)
   return TEX_ENONE;
 }
 
+tex_error_t document_fs_write_default(const tex_document *doc)
+{
+  char        buffer[1024];
+  size_t      size   = 1024;
+  tex_error_t cwderr = tex_cwd(buffer, &size);
+  if (cwderr != TEX_ENONE)
+  {
+    return cwderr;
+  }
+  size_t pos = strlen(buffer);
+#ifdef _WIN32
+  buffer[pos++] = '\\';
+#else
+  buffer[pos++] = '/';
+#endif
+  buffer[pos++] = 'm';
+  buffer[pos++] = 'a';
+  buffer[pos++] = 'i';
+  buffer[pos++] = 'n';
+  buffer[pos++] = '.';
+  buffer[pos++] = 't';
+  buffer[pos++] = 'e';
+  buffer[pos++] = 'x';
+  buffer[pos++] = '\0';
+
+  return document_fs_write(doc, buffer);
+}
+
 tex_error_t document_add_package(tex_document *doc, tex_package *package)
 {
   if (doc)

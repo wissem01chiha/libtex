@@ -3,7 +3,20 @@
 
 #include "tex.h"
 
-int tex_cwd(char *buffer, size_t *size)
+tex_error_t tex_cwd(char *buffer, size_t *size)
 {
-  return -1;
+  if (buffer == NULL || size == NULL)
+  {
+    return TEX_EINVAL_INPUT;
+  }
+  if (getcwd(buffer, *size) == NULL)
+  {
+    if (errno == ERANGE)
+    {
+      return TEX_EOVERFLOW_BUFFER;
+    }
+    return TEX_EFAIL_GETCWD;
+  }
+  *size = strlen(buffer);
+  return TEX_ENONE;
 }

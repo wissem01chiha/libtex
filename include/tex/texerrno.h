@@ -3,23 +3,23 @@
 
 #pragma once
 
-#include <errno.h>
-
 #ifdef __cplusplus
 extern "C"
 {
 #endif
 
-  // standard error codes used in libtex.
+  // Standard error codes used in libtex.
   typedef enum tex_error_t
   {
     TEX_ENONE = 0,
     TEX_EFAIL_MEMALLOC,
     TEX_EFAIL_FOPEN,
     TEX_EFAIL_GETPWUID,
+    TEX_EFAIL_GETCWD,
     TEX_EFAIL_GETUSERNAME,
     TEX_EFAIL_TIME,
     TEX_EFAIL_LOCALTIME,
+    TEX_EFAIL_GETCURRENTDIRECTORY,
     TEX_ENULL_DOCUMENT,
     TEX_ENULL_SECTION,
     TEX_ENULL_REPORT,

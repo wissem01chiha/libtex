@@ -16,7 +16,7 @@ START_TEST(test_document_fs_write)
   document_set_title(doc, "test-document-title");
 
   const char *filename  = "document_fs_write_test.tex";
-  int         write_err = document_fs_write(doc, filename);
+  tex_error_t write_err = document_fs_write(doc, filename);
 
   ck_assert_int_eq(write_err, TEX_ENONE);
 

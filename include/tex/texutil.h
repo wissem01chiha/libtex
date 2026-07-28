@@ -44,7 +44,7 @@ extern "C"
   /**
    * Get the current working directory
    */
-  TEX_EXTERN int tex_cwd(char *buffer, size_t *size);
+  TEX_EXTERN tex_error_t tex_cwd(char *buffer, size_t *size);
 
 #ifdef __cplusplus
 };

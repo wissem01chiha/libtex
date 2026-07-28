@@ -42,8 +42,15 @@ extern "C"
     char          *content;
   } tex_document;
 
+  /**
+   * Create a tex_document based object
+   */
   TEX_EXTERN tex_document *document_create(tex_error_t *err);
-  TEX_EXTERN tex_error_t   document_delete(tex_document *doc);
+
+  /**
+   * Delete a tex_document based object
+   */
+  TEX_EXTERN tex_error_t document_delete(tex_document *doc);
 
   /**
    * By default the document is set to Article type, however it can be changed
@@ -142,6 +149,12 @@ extern "C"
    */
   TEX_EXTERN tex_error_t document_fs_write(const tex_document *doc,
                                            const char         *file);
+
+  /**
+   * A subset of document_fs_write that uses the current working directory
+   * and the default file name "main.tex" to write the document
+   */
+  TEX_EXTERN tex_error_t document_fs_write_default(const tex_document *doc);
 
 #ifdef __cplusplus
 };

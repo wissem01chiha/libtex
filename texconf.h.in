@@ -2,3 +2,7 @@
 // SPDX-License-Identifier: BSD-2-Clause
 
 #pragma once 
+
+#cmakedefine01 TEX_BUILD_SHARED ${LIBTEX_BUILD_SHARED}
+
+#cmakedefine01 TEX_ASAN ${LIBTEX_ASAN}

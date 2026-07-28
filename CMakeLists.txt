@@ -40,7 +40,7 @@ option(LIBTEX_BUILD_REGRESS "Build regression tests" ON)
 option(LIBTEX_BUILD_DOC "Build documentation" ON)
 option(LIBTEX_INSTALL "Install libtex files" OFF)
 option(LIBTEX_COVER "Enable coverage reporting" OFF)
-option(LIBTEX_ASAN "Enable AddressSanitizer (ASan)" OFF)
+option(LIBTEX_ASAN "Enable AddressSanitizer (ASan)" ON)
 
 if (CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT)
     set(CMAKE_INSTALL_PREFIX "${CMAKE_CURRENT_BINARY_DIR}/install"
@@ -107,6 +107,7 @@ set(tex_test_sources
     test/test_document_section_write.c
     test/test_figure_fs_create.c
     test/test_figure_write.c
+    test/test_document_fs_write_default.c
 )
 
 set(tex_test_assets
@@ -139,7 +140,9 @@ target_include_directories(${PROJECT_NAME}
         $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
         $<INSTALL_INTERFACE:include>
 )
-target_include_directories(${PROJECT_NAME} 
+target_include_directories(${PROJECT_NAME}
+    PUBLIC
+        ${CMAKE_BINARY_DIR}
     PRIVATE
         ${CMAKE_CURRENT_SOURCE_DIR}/third_party
 )
