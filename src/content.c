@@ -1,0 +1,136 @@
+// SPDX-FileCopyrightText: 2026 Wissem Chiha <chihawissem08@gmail.com>
+// SPDX-License-Identifier: BSD-2-Clause
+
+#include "tex.h"
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+
+tex_content *content_create(tex_error_t *err) {
+    tex_content *cont = (tex_content *)malloc(sizeof(tex_content));
+    if (!cont) {
+        if (err) *err = TEX_EFAIL_MEMALLOC;
+        return NULL;
+    }
+    cont->data = NULL;
+    cont->next = NULL;
+
+    if (err) *err = TEX_ENONE;
+    return cont;
+}
+
+tex_error_t content_delete(tex_content *cont) {
+    if (!cont) {
+        return TEX_ENULL_CONTENT;
+    }
+
+    if (cont->data) {
+        free(cont->data);
+        cont->data = NULL;
+    }
+
+    free(cont);
+    return TEX_ENONE;
+}
+
+tex_error_t content_add(tex_content *cont, const char *_data)
+{
+    if (!cont) {
+        return TEX_ENULL_CONTENT; 
+    }
+    if (!_data) {
+        return TEX_EINVAL_INPUT;
+    }
+
+    size_t len  = cont->data ? strlen(cont->data) : 0;
+    size_t nlen = strlen(_data);
+
+    char *buff = malloc(len + nlen + 1);
+    if (!buff) {
+        return TEX_EFAIL_MEMALLOC;
+    }
+
+    if (cont->data) {
+        memcpy(buff, cont->data, len);
+        free(cont->data);
+    }
+
+    memcpy(buff + len, _data, nlen);
+    buff[len + nlen] = '\0';
+
+    cont->data = buff;
+    return TEX_ENONE;
+}
+
+
+TEX_EXTERN tex_error_t content_fs_add(tex_content *cont, const char *filename)
+{
+  return TEX_ENONE;
+}
+
+char *content_to_string(const tex_content *cont, tex_error_t *err)
+{
+    if (!cont) {
+        if (err) *err = TEX_ENULL_CONTENT;
+        return NULL;
+    }
+
+    size_t total_len = 0;
+    const tex_content *cur = cont;
+    while (cur) {
+        if (cur->data) {
+            total_len += strlen(cur->data);
+        }
+        cur = cur->next;
+    }
+
+    char *result = malloc(total_len + 1);
+    if (!result) {
+        if (err) *err = TEX_EFAIL_MEMALLOC;
+        return NULL;
+    }
+    result[0] = '\0';
+
+    cur = cont;
+    while (cur) {
+        if (cur->data) {
+            strcat(result, cur->data);
+        }
+        cur = cur->next;
+    }
+
+    if (err) *err = TEX_ENONE;
+    return result;
+}
+
+int content_write(const tex_content *cont,
+                  char *buffer,
+                  size_t buffer_size,
+                  tex_error_t *err) {
+    if (!cont) {
+        if (err) *err = TEX_ENULL_CONTENT;
+        return -1;
+    }
+    if (!buffer) {
+        if (err) *err = TEX_ENULL_BUFFER;
+        return -1;
+    }
+    if (!cont->data) {
+        if (err) *err = TEX_EINVAL_INPUT;
+        return -1;
+    }
+
+    int written = snprintf(buffer, buffer_size, "%s\n", cont->data);
+
+    if (written < 0) {
+        if (err) *err = TEX_EWRITE_FAIL;
+        return -1;
+    }
+    if ((size_t)written >= buffer_size) {
+        if (err) *err = TEX_EOVERFLOW_BUFFER;
+        return -1;
+    }
+
+    if (err) *err = TEX_ENONE;
+    return written;
+}

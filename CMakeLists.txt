@@ -76,6 +76,8 @@ set(tex_sources
     src/tex_strerr.c
     src/color_to_string.c
     src/plot.c
+    src/element.c
+    src/content.c
 )
 
 if(WIN32)
@@ -108,6 +110,7 @@ set(tex_test_sources
     test/test_figure_fs_create.c
     test/test_figure_write.c
     test/test_document_fs_write_default.c
+    test/test_content.c
 )
 
 set(tex_test_assets

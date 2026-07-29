@@ -14,12 +14,24 @@ START_TEST(test_document_section_write)
   // create some sections with subsections
   tex_section *sec = section_create(&err);
   sec->title       = tex_strdup("section1");
-  sec->content = tex_strdup("Zorim eptrum falix nodera, quistal venor daplum.");
+
+  tex_content *cnt = content_create(&err);
+  ck_assert_int_eq(err, TEX_ENONE);
+  ck_assert_int_eq(
+      content_add(cnt, "Zorim eptrum falix nodera, quistal venor daplum."),
+      TEX_ENONE);
+
+  ck_assert_int_eq(section_add_content(sec, cnt), TEX_ENONE);
 
   tex_section *subsec = section_create(&err);
   subsec->level       = Subsection;
   subsec->title       = tex_strdup("subsection1.1");
-  subsec->content     = tex_strdup("Fexor mitralo sunep, dravix coltur anem.");
+
+  tex_content *scnt = content_create(&err);
+  ck_assert_int_eq(
+      content_add(scnt, "Fexor mitralo sunep, dravix coltur anem."), TEX_ENONE);
+
+  ck_assert_int_eq(section_add_content(subsec, scnt), TEX_ENONE);
 
   sec->subsection = subsec;
 

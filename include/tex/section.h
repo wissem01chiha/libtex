@@ -6,6 +6,8 @@
 #include <stddef.h>
 #include "texexport.h"
 #include "figure.h"
+#include "content.h"
+#include "element.h"
 #include "list.h"
 #include "table.h"
 
@@ -27,19 +29,26 @@ extern "C"
     Subsubsection = 3
   } tex_section_t;
 
+  /**
+   * Document section structure
+   */
   struct tex_section
   {
     char         *title;
     tex_section_t level;
     tex_section  *subsection;
-    char         *content;
-    tex_figure   *figure;
-    tex_list     *list;
+    tex_element  *elements;
     tex_section  *next;
   };
 
+  /**
+   * Create a tex_section based object
+   */
   TEX_EXTERN tex_section *section_create(tex_error_t *err);
 
+  /**
+   * Delete a tex_section based object
+   */
   TEX_EXTERN tex_error_t section_delete(tex_section *sec);
 
   /**
@@ -52,7 +61,15 @@ extern "C"
    * Append content to the section body.
    */
   TEX_EXTERN tex_error_t section_add_content(tex_section *sec,
-                                             const char  *content);
+                                             tex_content *content);
+
+  /**
+   * Return a root element of a linked list, of section contenat of
+   * tex_contant based object, this function mainly added for inspection
+   * and testing but can be usful for other goals, implement of same pattern
+   * for getting the list of figures, tables , .. of a section is underwork
+   */
+  TEX_EXTERN tex_content *section_get_content(tex_section *sec);
 
   /**
    * Append the contents of a file to the section body,
@@ -60,6 +77,18 @@ extern "C"
    */
   TEX_EXTERN tex_error_t section_add_fs_content(tex_section *sec,
                                                 const char  *filename);
+
+  /**
+   * Add a tex_figure to the section body, the figure will be appended at the
+   * section end
+   */
+  TEX_EXTERN tex_error_t section_add_figure(tex_section *sec, tex_figure *fig);
+
+  /**
+   * Add a tex_list to the section body, the figure will be appended at the
+   * section end
+   */
+  TEX_EXTERN tex_error_t section_add_list(tex_section *sec, tex_list *lst);
 
   /**
    * Write the section to a memory buffer.

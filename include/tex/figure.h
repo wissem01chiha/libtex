@@ -28,7 +28,14 @@ extern "C"
     tex_figure *next;
   };
 
+  /**
+   * Create a tex_figure based object
+   */
   TEX_EXTERN tex_figure *figure_create(tex_error_t *err);
+
+  /**
+   * Delete a tex_figure based object
+   */
   TEX_EXTERN tex_error_t figure_delete(tex_figure *fig);
 
   /**

@@ -4,6 +4,7 @@
 #pragma once
 
 #include "texerrno.h"
+#include "texexport.h"
 #include <stddef.h>
 
 #ifdef __cplusplus
@@ -25,18 +26,21 @@ extern "C"
     tex_table_row *row;
   } tex_table;
 
-  tex_table_row *tex_table_row_create(size_t size, tex_error_t *err);
+  TEX_EXTERN tex_table_row *tex_table_row_create(size_t size, tex_error_t *err);
 
-  tex_table  *table_create(const char *title, tex_error_t *err);
-  tex_error_t table_delete(tex_table *tab);
+  TEX_EXTERN tex_table *table_create(const char *title, tex_error_t *err);
 
-  tex_error_t table_set_caption(tex_table *tab, const char *caption);
-  tex_error_t table_set_label(tex_table *tab, const char *label);
+  TEX_EXTERN tex_error_t table_delete(tex_table *tab);
 
-  tex_error_t table_add_row(tex_table *tab, tex_table_row *rw);
+  TEX_EXTERN tex_error_t table_set_caption(tex_table *tab, const char *caption);
+  TEX_EXTERN tex_error_t table_set_label(tex_table *tab, const char *label);
 
-  tex_error_t
-  table_write(const tex_table *tab, char *buffer, size_t buffer_size);
+  TEX_EXTERN tex_error_t table_add_row(tex_table *tab, tex_table_row *rw);
+
+  TEX_EXTERN int table_write(const tex_table *tab,
+                             char            *buffer,
+                             size_t           buffer_size,
+                             tex_error_t     *err);
 
 #ifdef __cplusplus
 };
