@@ -48,6 +48,20 @@ START_TEST(test_content_to_string)
 }
 END_TEST
 
+START_TEST(test_content_fs_add)
+{
+  tex_error_t  err = TEX_ENONE;
+  tex_content *c   = content_create(&err);
+  ck_assert_int_eq(err, TEX_ENONE);
+
+  tex_error_t aerr = content_add(c, "Hello World");
+  ck_assert_int_eq(aerr, TEX_ENONE);
+  ck_assert_str_eq(c->data, "Hello World");
+
+  content_delete(c);
+}
+END_TEST
+
 START_TEST(test_content_write)
 {
   tex_error_t  err = TEX_ENONE;
