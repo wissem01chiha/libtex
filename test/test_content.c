@@ -8,85 +8,85 @@
 
 START_TEST(test_content_create_delete)
 {
-    tex_error_t err = TEX_ENONE;
-    tex_content *c = content_create(&err);
-    ck_assert_ptr_nonnull(c);
-    ck_assert_int_eq(err, TEX_ENONE);
+  tex_error_t  err = TEX_ENONE;
+  tex_content *c   = content_create(&err);
+  ck_assert_ptr_nonnull(c);
+  ck_assert_int_eq(err, TEX_ENONE);
 
-    tex_error_t derr = content_delete(c);
-    ck_assert_int_eq(derr, TEX_ENONE);
+  tex_error_t derr = content_delete(c);
+  ck_assert_int_eq(derr, TEX_ENONE);
 }
 END_TEST
 
 START_TEST(test_content_add)
 {
-    tex_error_t err = TEX_ENONE;
-    tex_content *c = content_create(&err);
-    ck_assert_int_eq(err, TEX_ENONE);
+  tex_error_t  err = TEX_ENONE;
+  tex_content *c   = content_create(&err);
+  ck_assert_int_eq(err, TEX_ENONE);
 
-    tex_error_t aerr = content_add(c, "Hello World");
-    ck_assert_int_eq(aerr, TEX_ENONE);
-    ck_assert_str_eq(c->data, "Hello World");
+  tex_error_t aerr = content_add(c, "Hello World");
+  ck_assert_int_eq(aerr, TEX_ENONE);
+  ck_assert_str_eq(c->data, "Hello World");
 
-    content_delete(c);
+  content_delete(c);
 }
 END_TEST
 
 START_TEST(test_content_to_string)
 {
-    tex_error_t err = TEX_ENONE;
-    tex_content *c = content_create(&err);
-    content_add(c, "Lorem ipsum");
+  tex_error_t  err = TEX_ENONE;
+  tex_content *c   = content_create(&err);
+  content_add(c, "Lorem ipsum");
 
-    char *s = content_to_string(c, &err);
-    ck_assert_ptr_nonnull(s);
-    ck_assert_str_eq(s, "Lorem ipsum");
-    ck_assert_int_eq(err, TEX_ENONE);
+  char *s = content_to_string(c, &err);
+  ck_assert_ptr_nonnull(s);
+  ck_assert_str_eq(s, "Lorem ipsum");
+  ck_assert_int_eq(err, TEX_ENONE);
 
-    free(s);
-    content_delete(c);
+  free(s);
+  content_delete(c);
 }
 END_TEST
 
 START_TEST(test_content_write)
 {
-    tex_error_t err = TEX_ENONE;
-    tex_content *c = content_create(&err);
-    content_add(c, "UnitTest");
+  tex_error_t  err = TEX_ENONE;
+  tex_content *c   = content_create(&err);
+  content_add(c, "UnitTest");
 
-    char buffer[128];
-    int written = content_write(c, buffer, sizeof(buffer), &err);
-    ck_assert_int_gt(written, 0);
-    ck_assert_str_eq(buffer, "UnitTest\n");
-    ck_assert_int_eq(err, TEX_ENONE);
+  char buffer[128];
+  int  written = content_write(c, buffer, sizeof(buffer), &err);
+  ck_assert_int_gt(written, 0);
+  ck_assert_str_eq(buffer, "UnitTest\n");
+  ck_assert_int_eq(err, TEX_ENONE);
 
-    content_delete(c);
+  content_delete(c);
 }
 END_TEST
 
 Suite *content_suite(void)
 {
-    Suite *s = suite_create("tex_content");
-    TCase *tc_core = tcase_create("Core");
+  Suite *s       = suite_create("tex_content");
+  TCase *tc_core = tcase_create("Core");
 
-    tcase_add_test(tc_core, test_content_create_delete);
-    tcase_add_test(tc_core, test_content_add);
-    tcase_add_test(tc_core, test_content_to_string);
-    tcase_add_test(tc_core, test_content_write);
+  tcase_add_test(tc_core, test_content_create_delete);
+  tcase_add_test(tc_core, test_content_add);
+  tcase_add_test(tc_core, test_content_to_string);
+  tcase_add_test(tc_core, test_content_write);
 
-    suite_add_tcase(s, tc_core);
-    return s;
+  suite_add_tcase(s, tc_core);
+  return s;
 }
 
 int main(void)
 {
-    int number_failed;
-    Suite *s = content_suite();
-    SRunner *sr = srunner_create(s);
+  int      number_failed;
+  Suite   *s  = content_suite();
+  SRunner *sr = srunner_create(s);
 
-    srunner_run_all(sr, CK_NORMAL);
-    number_failed = srunner_ntests_failed(sr);
-    srunner_free(sr);
+  srunner_run_all(sr, CK_NORMAL);
+  number_failed = srunner_ntests_failed(sr);
+  srunner_free(sr);
 
-    return (number_failed == 0) ? 0 : 1;
+  return (number_failed == 0) ? 0 : 1;
 }
