@@ -2,6 +2,7 @@
 
 ### Features
 
+* added special characters formatting in latex support ([1969574](https://github.com/wissem01chiha/libtex/commit/1969574aee5c05f12175918546e16787666281d3))
 * **figure:** implement figure_set_scale feature ([c332619](https://github.com/wissem01chiha/libtex/commit/c332619232cfb07710ce2ae605fc1851d0d35b03))
 
 ### Bug Fixes
