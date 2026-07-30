@@ -21,8 +21,7 @@ tex_document *document_create(tex_error_t *err)
   doc->title    = NULL;
   doc->author   = NULL;
   doc->date     = NULL;
-  doc->content  = NULL;
-  doc->section  = NULL;
+  doc->elements = NULL;
   if (err)
     *err = TEX_ENONE;
   return doc;
@@ -95,7 +94,7 @@ tex_error_t document_set_language(tex_document *doc, tex_language_t language)
   return TEX_ENONE;
 }
 
-tex_error_t document_add_content(tex_document *doc, const char *content)
+tex_error_t document_add_content(tex_document *doc, tex_content *content)
 {
   if (doc == NULL)
   {
@@ -103,27 +102,32 @@ tex_error_t document_add_content(tex_document *doc, const char *content)
   }
   if (content == NULL)
   {
-    return TEX_EINVAL_INPUT;
+    return TEX_ENULL_CONTENT;
   }
-  if (doc->content == NULL)
+
+  tex_error_t  err = TEX_ENONE;
+  tex_element *ele = element_create(&err);
+  if (err != TEX_ENONE || ele == NULL)
   {
-    doc->content = tex_strdup(content);
+    return err;
+  }
+
+  ele->type = TEX_ELE_CONTENT;
+  ele->data = content;
+  ele->next = NULL;
+
+  if (!doc->elements)
+  {
+    doc->elements = ele;
   }
   else
   {
-    size_t len  = strlen(doc->content);
-    size_t nlen = strlen(content);
-    char  *buff = malloc(len + nlen + 1);
-    if (buff == NULL)
+    tex_element *cur = doc->elements;
+    while (cur->next)
     {
-      return TEX_EFAIL_MEMALLOC;
+      cur = cur->next;
     }
-    memcpy(buff, doc->content, len);
-    memcpy(buff + len, content, nlen);
-    buff[len + nlen] = '\0';
-
-    free(doc->content);
-    doc->content = buff;
+    cur->next = ele;
   }
 
   return TEX_ENONE;
@@ -135,32 +139,22 @@ tex_error_t document_add_fs_content(tex_document *doc, const char *filename)
   {
     return TEX_ENULL_DOCUMENT;
   }
-  if (filename == NULL)
-  {
-    return TEX_EINVAL_INPUT;
-  }
-  FILE *f = fopen(filename, "rb");
-  if (f == NULL)
-  {
-    return TEX_EFAIL_FOPEN;
-  }
-  fseek(f, 0, SEEK_END);
-  long fsize = ftell(f);
-  fseek(f, 0, SEEK_SET);
-  char *buffer = malloc(fsize + 1);
-  if (buffer == NULL)
-  {
-    return TEX_EFAIL_MEMALLOC;
-  }
-  size_t read  = fread(buffer, 1, fsize, f);
-  buffer[read] = '\0';
-  fclose(f);
-  tex_error_t err = document_add_content(doc, buffer);
+  tex_error_t  err = TEX_ENONE;
+  tex_content *cnt = content_create(&err);
   if (err != TEX_ENONE)
   {
     return err;
   }
-  free(buffer);
+  err = content_fs_add(cnt, filename);
+  if (err != TEX_ENONE)
+  {
+    return err;
+  };
+  tex_error_t errcnt = document_add_content(doc, cnt);
+  if (errcnt != TEX_ENONE)
+  {
+    return errcnt;
+  }
   return TEX_ENONE;
 }
 
@@ -174,12 +168,31 @@ tex_error_t document_add_figure(tex_document *doc, tex_figure *fig)
   {
     return TEX_ENULL_FIGURE;
   }
-  tex_figure *p = doc->figure;
-  while (p->next != NULL)
+  tex_error_t  err = TEX_ENONE;
+  tex_element *ele = element_create(&err);
+  if (err == TEX_ENONE)
   {
-    p = p->next;
+    // nothing happened
+    ele->type = TEX_ELE_FIGURE;
+    ele->data = fig;
+    // append to elements list
+    if (!doc->elements)
+    {
+      doc->elements = ele;
+    }
+    else
+    {
+      tex_element *cur = doc->elements;
+      while (cur->next)
+        cur = cur->next;
+      cur->next = ele;
+    }
   }
-  p->next = fig;
+  else
+  {
+    return err;
+  }
+
   return TEX_ENONE;
 }
 
@@ -202,20 +215,31 @@ tex_error_t document_add_section(tex_document *doc, tex_section *sec)
   {
     return TEX_ENULL_SECTION;
   }
-  if (doc->section == NULL)
+
+  tex_error_t  err = TEX_ENONE;
+  tex_element *ele = element_create(&err);
+  if (err == TEX_ENONE)
   {
-    doc->section = sec;
+    // nothing happened
+    ele->type = TEX_ELE_SECTION;
+    ele->data = sec;
+    // append to elements list
+    if (!doc->elements)
+    {
+      doc->elements = ele;
+    }
+    else
+    {
+      tex_element *cur = doc->elements;
+      while (cur->next)
+        cur = cur->next;
+      cur->next = ele;
+    }
   }
   else
   {
-    tex_section *p = doc->section;
-    while (p->next != NULL)
-    {
-      p = p->next;
-    }
-    p->next = sec;
+    return err;
   }
-  sec->next = NULL;
 
   return TEX_ENONE;
 }
@@ -244,13 +268,12 @@ document_write(const tex_document *doc, char *buffer, size_t buffer_size)
   {
     return TEX_ENULL_BUFFER;
   }
-
+  int         n   = 0;
   tex_error_t err = TEX_ENONE;
 
-  const char *title   = doc->title ? doc->title : "";
-  const char *author  = doc->author ? doc->author : tex_get_username(&err);
-  const char *date    = doc->date ? doc->date : tex_get_date(&err);
-  const char *content = doc->content ? doc->content : "";
+  const char *title  = doc->title ? doc->title : "";
+  const char *author = doc->author ? doc->author : tex_get_username(&err);
+  const char *date   = doc->date ? doc->date : tex_get_date(&err);
 
   if (err != TEX_ENONE)
   {
@@ -262,30 +285,29 @@ document_write(const tex_document *doc, char *buffer, size_t buffer_size)
                          "%% LIBTEX generated file: DO NOT EDIT!\n"
                          "%% Generated by LibTEX Version %s \n"
                          "\\documentclass{%s}\n"
+                         "%s\n"
                          "\\begin{document}\n"
                          "\\title{%s}\n"
                          "\\author{%s}\n"
                          "\\date{%s}\n"
-                         "\\maketitle\n"
-                         "%s\n",
+                         "\\maketitle\n",
                          LIBTEX_VERSION_STRING,
                          document_get_class(doc->type),
+                         "\\usepackage[utf8]{inputenc}",
                          title,
                          author,
-                         date,
-                         content);
+                         date);
 
-  if (doc->section != NULL)
+  // iterate over elements list
+  tex_element *cur = doc->elements;
+  while (cur)
   {
-    tex_error_t *err = TEX_ENONE;
-    int          n   = section_write(
-        doc->section, buffer + written, buffer_size - written, err);
-    if (err != TEX_ENONE)
-    {
-      return *err;
-    }
+    n = element_write(cur, buffer + written, buffer_size - written, &err);
+    if (n < 0)
+      return -1;
     written += n;
-  }
+    cur = cur->next;
+  };
 
   int endwritten =
       snprintf(buffer + written, buffer_size - written, "\\end{document}\n");

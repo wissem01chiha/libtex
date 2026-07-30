@@ -12,13 +12,19 @@ START_TEST(test_section_write)
   ck_assert_ptr_nonnull(sec);
   ck_assert_int_eq(err, TEX_ENONE);
 
-  sec->title   = tex_strdup("section1");
-  sec->content = tex_strdup("Zorim eptrum falix nodera, quistal venor daplum.");
+  sec->title = tex_strdup("section1");
+
+  tex_content *cnt = content_create(&err);
+  content_add(cnt, "Zorim eptrum falix nodera, quistal venor daplum.");
+  section_add_content(sec, cnt);
 
   tex_section *subsec = section_create(&err);
   subsec->level       = Subsection;
   subsec->title       = tex_strdup("subsection1.1");
-  subsec->content     = tex_strdup("Fexor mitralo sunep, dravix coltur anem.");
+
+  tex_content *subcnt = content_create(&err);
+  content_add(subcnt, "Fexor mitralo sunep, dravix coltur anem.");
+  section_add_content(subsec, subcnt);
 
   sec->subsection = subsec;
 

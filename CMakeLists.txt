@@ -47,6 +47,7 @@ if (CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT)
     CACHE PATH "default install path" FORCE)
 endif()
 
+add_subdirectory(third_party/libcsv)
 if(LIBTEX_BUILD_TESTS)
     include(external/check)
 endif()
@@ -76,6 +77,8 @@ set(tex_sources
     src/tex_strerr.c
     src/color_to_string.c
     src/plot.c
+    src/element.c
+    src/content.c
 )
 
 if(WIN32)
@@ -108,6 +111,8 @@ set(tex_test_sources
     test/test_figure_fs_create.c
     test/test_figure_write.c
     test/test_document_fs_write_default.c
+    test/test_content.c
+    test/test_document_regress.c
 )
 
 set(tex_test_assets

@@ -23,14 +23,26 @@ START_TEST(test_section_add_content)
   tex_section *sec = section_create(&err);
   ck_assert_ptr_nonnull(sec);
 
-  tex_error_t errac = section_add_content(sec, "Lorem ipsum dolor sit amet");
+  tex_content *cnt = content_create(&err);
+  ck_assert_int_eq(err, TEX_ENONE);
+  ck_assert_int_eq(content_add(cnt, "Lorem ipsum dolor sit amet"), TEX_ENONE);
+
+  tex_error_t errac = section_add_content(sec, cnt);
   ck_assert_int_eq(errac, TEX_ENONE);
 
-  tex_error_t erracs =
-      section_add_content(sec, ", consectetur adipiscing elit.");
+  tex_content *scnt = content_create(&err);
+  ck_assert_int_eq(err, TEX_ENONE);
+  ck_assert_int_eq(content_add(scnt, ", consectetur adipiscing elit."),
+                   TEX_ENONE);
+
+  tex_error_t erracs = section_add_content(sec, scnt);
   ck_assert_int_eq(erracs, TEX_ENONE);
 
-  ck_assert_str_eq(sec->content,
+  tex_content *allcnt = section_get_content(sec);
+  char        *str    = content_to_string(allcnt, &err);
+  ck_assert_int_eq(err, TEX_ENONE);
+
+  ck_assert_str_eq(str,
                    "Lorem ipsum dolor sit amet, consectetur adipiscing elit.");
 
   section_delete(sec);

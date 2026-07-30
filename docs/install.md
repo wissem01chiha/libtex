@@ -9,4 +9,9 @@ For quick integration, the easiest way is to download the precompiled installati
 
 # Build from Source
 
-libtex uses CMake as its main build system.
+libtex uses [cmake]() as its main build system, support for other build systems or workflows may be subject to discusssion 
+
+
+# Platform Support 
+
+libtex support mainly last of windows , Ubuntu , OSX, 

@@ -83,6 +83,11 @@ tex_error_t figure_set_scale(tex_figure *fig, float scale)
   {
     return TEX_ENULL_FIGURE;
   }
+  if (scale <= 0.0f)
+  {
+    return TEX_EINVAL_FIGURE_SCALE;
+  }
+  fig->scale = scale;
   return TEX_ENONE;
 }
 

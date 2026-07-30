@@ -7,7 +7,9 @@
 #include "language.h"
 #include "package.h"
 #include "figure.h"
+#include "element.h"
 #include "table.h"
+#include "content.h"
 #include "list.h"
 #include "texexport.h"
 #include "section.h"
@@ -32,14 +34,10 @@ extern "C"
   {
     tex_document_t type;
     tex_language_t language;
-    tex_section   *section;
-    tex_figure    *figure;
-    tex_table     *table;
-    tex_list      *list;
+    tex_element   *elements;
     char          *title;
     char          *author;
     char          *date;
-    char          *content;
   } tex_document;
 
   /**
@@ -108,7 +106,7 @@ extern "C"
    * see document_add_fs_content.
    */
   TEX_EXTERN tex_error_t document_add_content(tex_document *doc,
-                                              const char   *content);
+                                              tex_content  *content);
 
   /**
    * Append the contents of a file to the document body.

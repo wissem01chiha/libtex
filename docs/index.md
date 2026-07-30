@@ -1,6 +1,5 @@
 ---
 title: User's Guide
-nav_order: 1
 ---
 
 # Libtex User's Guide
@@ -15,5 +14,5 @@ This user's guide has the following contents:
 *   [Install](install.md) - Step by step guide to build and install libtex
 *   [Samples](samples.md) - Describes some project usage samples.
 *   [Contributing](contributing.md) - Contributing guide for developpers 
-*   [Changelog](changelog.md) - Project API Changes reference 
+*   [Changelog](../CHANGELOG.md) - Project API Changes reference 
 *   [FAQ](faq.md) - Have a question? Want some tips? Check here first.

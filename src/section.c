@@ -14,11 +14,11 @@ tex_section *section_create(tex_error_t *err)
     *err = TEX_EFAIL_MEMALLOC;
     return NULL;
   }
-  sec->title   = NULL;
-  sec->level   = Section;
-  sec->content = NULL;
-  sec->next    = NULL;
-  err          = TEX_ENONE;
+  sec->title    = NULL;
+  sec->level    = Section;
+  sec->next     = NULL;
+  sec->elements = NULL;
+  err           = TEX_ENONE;
   return sec;
 }
 
@@ -32,13 +32,9 @@ tex_error_t section_delete(tex_section *sec)
   {
     free(sec->title);
   }
-  if (sec->content != NULL)
+  if (element_delete(sec->elements) != TEX_ENONE)
   {
-    free(sec->content);
-  }
-  if (sec->figure != NULL)
-  {
-    free(sec->figure);
+    return element_delete(sec->elements);
   }
   free(sec);
   return TEX_ENONE;
@@ -57,38 +53,84 @@ tex_section *section_find_subsection(tex_section *sec, const char *sectitle)
   return NULL;
 }
 
-tex_error_t section_add_content(tex_section *sec, const char *_content)
+tex_error_t section_add_content(tex_section *sec, tex_content *content)
 {
   if (sec == NULL)
   {
     return TEX_ENULL_SECTION;
   }
-  if (_content == NULL)
+  if (content == NULL)
   {
-    return TEX_EINVAL_INPUT;
+    return TEX_ENULL_ELEMENT;
   }
-  if (sec->content == NULL)
+
+  tex_error_t  err = TEX_ENONE;
+  tex_element *ele = element_create(&err);
+  if (err != TEX_ENONE || ele == NULL)
   {
-    sec->content = tex_strdup(_content);
+    return err;
+  }
+
+  ele->type = TEX_ELE_CONTENT;
+  ele->data = content;
+  ele->next = NULL;
+
+  if (!sec->elements)
+  {
+    sec->elements = ele;
   }
   else
   {
-    size_t len  = strlen(sec->content);
-    size_t nlen = strlen(_content);
-    char  *buff = malloc(len + nlen + 1);
-    if (buff == NULL)
+    tex_element *cur = sec->elements;
+    while (cur->next)
     {
-      return TEX_EFAIL_MEMALLOC;
+      cur = cur->next;
     }
-    memcpy(buff, sec->content, len);
-    memcpy(buff + len, _content, nlen);
-    buff[len + nlen] = '\0';
-
-    free(sec->content);
-    sec->content = buff;
+    cur->next = ele;
   }
 
   return TEX_ENONE;
+}
+
+tex_content *section_get_content(tex_section *sec)
+{
+  if (!sec)
+  {
+    return NULL;
+  }
+
+  tex_content *head = NULL;
+  tex_content *tail = NULL;
+
+  tex_element *cur = sec->elements;
+  while (cur)
+  {
+    if (cur->type == TEX_ELE_CONTENT && cur->data)
+    {
+      tex_content *cont = (tex_content *) cur->data;
+      tex_content *node = (tex_content *) malloc(sizeof(tex_content));
+      if (!node)
+      {
+        return head;
+      }
+      node->data = cont->data;
+      node->next = NULL;
+
+      if (!head)
+      {
+        head = node;
+        tail = node;
+      }
+      else
+      {
+        tail->next = node;
+        tail       = node;
+      }
+    }
+    cur = cur->next;
+  }
+
+  return head;
 }
 
 tex_error_t section_add_fs_content(tex_section *sec, const char *filename)
@@ -101,6 +143,44 @@ tex_error_t section_add_fs_content(tex_section *sec, const char *filename)
   {
     return TEX_EINVAL_INPUT;
   }
+  return TEX_ENONE;
+}
+
+tex_error_t section_add_figure(tex_section *sec, tex_figure *fig)
+{
+  if (fig == NULL)
+  {
+    return TEX_ENULL_FIGURE;
+  }
+  if (sec == NULL)
+  {
+    return TEX_ENULL_SECTION;
+  }
+  tex_error_t  err = TEX_ENONE;
+  tex_element *ele = element_create(&err);
+  if (err == TEX_ENONE)
+  {
+    // nothing happened
+    ele->type = TEX_ELE_FIGURE;
+    ele->data = fig;
+    // append to elements list
+    if (!sec->elements)
+    {
+      sec->elements = ele;
+    }
+    else
+    {
+      tex_element *cur = sec->elements;
+      while (cur->next)
+        cur = cur->next;
+      cur->next = ele;
+    }
+  }
+  else
+  {
+    return err;
+  }
+
   return TEX_ENONE;
 }
 
@@ -150,14 +230,16 @@ int section_write(const tex_section *sec,
   }
   written += n;
 
-  // write content if available
-  if (sec->content != NULL)
+  // iterate over elements list
+  tex_element *cur = sec->elements;
+  while (cur)
   {
-    n = snprintf(buffer + written, buffer_size - written, "%s\n", sec->content);
-    if (n < 0 || (size_t) n >= buffer_size - written)
-      *err = TEX_EOVERFLOW_BUFFER;
+    n = element_write(cur, buffer + written, buffer_size - written, err);
+    if (n < 0)
+      return -1;
     written += n;
-  }
+    cur = cur->next;
+  };
 
   // handle substections
   if (sec->subsection != NULL)

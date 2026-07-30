@@ -47,3 +47,11 @@ tex_error_t table_set_caption(tex_table *tab, const char *caption)
 
   return TEX_ENONE;
 }
+
+int table_write(const tex_table *tab,
+                char            *buffer,
+                size_t           buffer_size,
+                tex_error_t     *err)
+{
+  return -1;
+}
