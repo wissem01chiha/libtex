@@ -1,6 +1,6 @@
 # libtex
 
-[![Ubuntu](https://github.com/wissem01chiha/libtex/actions/workflows/cmake.yml/badge.svg)](https://github.com/wissem01chiha/libtex/actions/workflows/cmake.yml)
+[![Ubuntu](https://github.com/wissem01chiha/libtex/actions/workflows/ubuntu.yml/badge.svg)](https://github.com/wissem01chiha/libtex/actions/workflows/ubuntu.yml)
 [![MacOS](https://github.com/wissem01chiha/libtex/actions/workflows/macos.yml/badge.svg)](https://github.com/wissem01chiha/libtex/actions/workflows/macos.yml)
 [![Windows](https://github.com/wissem01chiha/libtex/actions/workflows/windows.yml/badge.svg)](https://github.com/wissem01chiha/libtex/actions/workflows/windows.yml)
 [![codecov](https://codecov.io/gh/wissem01chiha/libtex/branch/develop/graph/badge.svg?token=DAKZZFFS9N)](https://codecov.io/gh/wissem01chiha/libtex)
