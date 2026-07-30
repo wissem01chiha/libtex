@@ -43,6 +43,13 @@ extern "C"
    */
   TEX_EXTERN tex_error_t content_fs_add(tex_content *cont,
                                         const char  *filename);
+  /**
+   * This utility is for formatting special characters in latex, such as
+   * _ or %, which are reserved latex commands. To prevent compilation
+   * errors, it converts them into textual strings by prefixing them with
+   * a backslash placeholder.
+   */
+  TEX_EXTERN const char *content_format_string(const char *_data);
 
   /**
    * Returns a string concatenation of the content objects, combining
@@ -51,7 +58,7 @@ extern "C"
    * for testing but can also be used to flatten a series of content objects
    * successfully added by the user into one consolidated content object.
    */
-  char *content_to_string(const tex_content *cont, tex_error_t *err);
+  TEX_EXTERN char *content_to_string(const tex_content *cont, tex_error_t *err);
 
   /**
    * Write content to a memeory buffer

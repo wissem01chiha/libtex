@@ -51,8 +51,10 @@ tex_error_t content_add(tex_content *cont, const char *_data)
     return TEX_EINVAL_INPUT;
   }
 
+  const char *_fmtdata = content_format_string(_data);
+
   size_t len  = cont->data ? strlen(cont->data) : 0;
-  size_t nlen = strlen(_data);
+  size_t nlen = strlen(_fmtdata);
 
   char *buff = malloc(len + nlen + 1);
   if (!buff)
@@ -66,7 +68,7 @@ tex_error_t content_add(tex_content *cont, const char *_data)
     free(cont->data);
   }
 
-  memcpy(buff + len, _data, nlen);
+  memcpy(buff + len, _fmtdata, nlen);
   buff[len + nlen] = '\0';
 
   cont->data = buff;
@@ -108,6 +110,66 @@ tex_error_t content_fs_add(tex_content *cont, const char *filename)
   };
   free(buffer);
   return TEX_ENONE;
+}
+
+const char *content_format_string(const char *_data)
+{
+  if (_data == NULL)
+  {
+    return NULL;
+  }
+  size_t len = strlen(_data);
+  // every char replaced by max 12 chars , increase if needed
+  char *buffer = (char *) malloc(len * 12 + 1);
+  if (!buffer)
+  {
+    return NULL;
+  }
+  const char *src = _data;
+  char       *dst = buffer;
+  while (*src)
+  {
+    switch (*src)
+    {
+      case '_':
+        dst += sprintf(dst, "\\_");
+        break;
+      case '%':
+        dst += sprintf(dst, "\\%%");
+        break;
+      case '&':
+        dst += sprintf(dst, "\\&");
+        break;
+      case '$':
+        dst += sprintf(dst, "\\$");
+        break;
+      case '#':
+        dst += sprintf(dst, "\\#");
+        break;
+      case '{':
+        dst += sprintf(dst, "\\{");
+        break;
+      case '}':
+        dst += sprintf(dst, "\\}");
+        break;
+      case '~':
+        dst += sprintf(dst, "\\textasciitilde");
+        break;
+      case '^':
+        dst += sprintf(dst, "\\textasciicircum");
+        break;
+      case '\\':
+        dst += sprintf(dst, "\\textbackslash");
+        break;
+      default:
+        *dst++ = *src;
+        break;
+    }
+    src++;
+  }
+
+  *dst = '\0';
+  return buffer;
 }
 
 char *content_to_string(const tex_content *cont, tex_error_t *err)

@@ -69,6 +69,20 @@ START_TEST(test_content_fs_add)
 }
 END_TEST
 
+START_TEST(test_content_format_string)
+{
+  const char *input  = "100%_value & cost$ #item {data} ~ ^ \\";
+  const char *expect = "100\\%\\_value \\& cost\\$ \\#item \\{data\\} "
+                       "\\textasciitilde \\textasciicircum \\textbackslash";
+
+  const char *output = content_format_string(input);
+  ck_assert_ptr_nonnull(output);
+  ck_assert_str_eq(output, expect);
+  printf("%s\n", output);
+  free((void *) output);
+}
+END_TEST
+
 START_TEST(test_content_write)
 {
   tex_error_t  err = TEX_ENONE;
@@ -94,6 +108,7 @@ Suite *content_suite(void)
   tcase_add_test(tc_core, test_content_add);
   tcase_add_test(tc_core, test_content_fs_add);
   tcase_add_test(tc_core, test_content_to_string);
+  tcase_add_test(tc_core, test_content_format_string);
   tcase_add_test(tc_core, test_content_write);
 
   suite_add_tcase(s, tc_core);

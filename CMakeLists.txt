@@ -112,6 +112,7 @@ set(tex_test_sources
     test/test_figure_write.c
     test/test_document_fs_write_default.c
     test/test_content.c
+    test/test_document_regress.c
 )
 
 set(tex_test_assets
