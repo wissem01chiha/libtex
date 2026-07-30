@@ -74,9 +74,16 @@ START_TEST(test_document_regress)
   ck_assert(strstr(buffer, "Welcome to Libtex !") != NULL);
   ck_assert(strstr(buffer, "\\begin{figure}[h]") != NULL);
   ck_assert(strstr(buffer, "\\centering") != NULL);
+#ifdef _WIN32
   ck_assert(strstr(buffer,
                    "\\includegraphics[width=1024cm,height=1024cm,scale=0.00,"
                    "angle=0]{.\\test\\fixture\\map_01.png}") != NULL);
+#else
+  ck_assert(strstr(buffer,
+                   "\\includegraphics[width=1024cm,height=1024cm,scale=0.00,"
+                   "angle=0]{./test/fixture/map_01.png}") != NULL);
+
+#endif
   ck_assert(strstr(buffer, "\\caption{}") != NULL);
   ck_assert(strstr(buffer, "\\label{map_01.png}") != NULL);
   ck_assert(strstr(buffer, "\\end{figure}") != NULL);
