@@ -73,8 +73,40 @@ tex_error_t content_add(tex_content *cont, const char *_data)
   return TEX_ENONE;
 }
 
-TEX_EXTERN tex_error_t content_fs_add(tex_content *cont, const char *filename)
+tex_error_t content_fs_add(tex_content *cont, const char *filename)
 {
+  if (cont == NULL)
+  {
+    return TEX_ENULL_CONTENT;
+  }
+  if (filename == NULL)
+  {
+    return TEX_ENULL_FILEPATH;
+  }
+
+  FILE *f = fopen(filename, "rb");
+  if (f == NULL)
+  {
+    return TEX_EFAIL_FOPEN;
+  }
+  fseek(f, 0, SEEK_END);
+  long fsize = ftell(f);
+  fseek(f, 0, SEEK_SET);
+  char *buffer = malloc(fsize + 1);
+  if (buffer == NULL)
+  {
+    return TEX_EFAIL_MEMALLOC;
+  }
+  size_t read  = fread(buffer, 1, fsize, f);
+  buffer[read] = '\0';
+  fclose(f);
+  tex_error_t err = TEX_ENONE;
+  err             = content_add(cont, buffer);
+  if (err != TEX_ENONE)
+  {
+    return err;
+  };
+  free(buffer);
   return TEX_ENONE;
 }
 

@@ -24,7 +24,13 @@ START_TEST(test_document_add_fs_content)
   tex_error_t res = document_add_fs_content(doc, filename);
 
   ck_assert_int_eq(res, TEX_ENONE);
-  ck_assert_str_eq(doc->content, expected);
+
+  tex_element *eles = doc->elements;
+  ck_assert_ptr_nonnull(eles);
+  ck_assert_int_eq(eles->type, TEX_ELE_CONTENT);
+  ck_assert_ptr_nonnull(eles->data);
+  tex_content *cnt = eles->data;
+  ck_assert_str_eq(cnt->data, "hello, libtex world");
 
   remove(filename);
   ck_assert_int_eq(document_delete(doc), TEX_ENONE);

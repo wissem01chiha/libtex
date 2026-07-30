@@ -45,7 +45,11 @@ extern "C"
                                         const char  *filename);
 
   /**
-   * Return a string concatetaion of the contenat object
+   * Returns a string concatenation of the content objects, combining
+   * all internal buffers from the linked-list of tex_content objects
+   * into a single character buffer. This routine was originally introduced
+   * for testing but can also be used to flatten a series of content objects
+   * successfully added by the user into one consolidated content object.
    */
   char *content_to_string(const tex_content *cont, tex_error_t *err);
 

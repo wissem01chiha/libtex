@@ -30,8 +30,23 @@ TEX_EXTERN tex_error_t element_delete(tex_element *ele)
   return TEX_ENONE;
 }
 
-element_writer element_write[] = {
-    [TEX_ELE_FIGURE]  = (element_writer) figure_write,
-    [TEX_ELE_LIST]    = (element_writer) list_write,
-    [TEX_ELE_TABLE]   = (element_writer) table_write,
-    [TEX_ELE_CONTENT] = (element_writer) content_write};
+int element_write(const tex_element *element,
+                  char              *buffer,
+                  size_t             buffer_size,
+                  tex_error_t       *err)
+{
+  switch (element->type)
+  {
+    case TEX_ELE_CONTENT:
+      return content_write(element->data, buffer, buffer_size, err);
+    case TEX_ELE_FIGURE:
+      return figure_write(element->data, buffer, buffer_size, err);
+    case TEX_ELE_LIST:
+      return list_write(element->data, buffer, buffer_size, err);
+    case TEX_ELE_TABLE:
+      return table_write(element->data, buffer, buffer_size, err);
+    case TEX_ELE_SECTION:
+      return section_write(element->data, buffer, buffer_size, err);
+  }
+  return -1;
+}

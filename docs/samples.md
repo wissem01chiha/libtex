@@ -1,6 +1,5 @@
 ---
 title: Code Samples
-nav_order: 5
 ---
 
 # Code Samples

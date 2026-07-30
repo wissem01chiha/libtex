@@ -64,10 +64,11 @@ extern "C"
                                              tex_content *content);
 
   /**
-   * Return a root element of a linked list, of section contenat of
-   * tex_contant based object, this function mainly added for inspection
-   * and testing but can be usful for other goals, implement of same pattern
-   * for getting the list of figures, tables , .. of a section is underwork
+   * Returns the root element of a linked list containing the section content
+   * of a tex_content-based object. This function was mainly added for
+   * inspection and testing but can also be useful for other purposes.
+   * Implementations of similar patterns for retrieving lists of figures,
+   * tables, etc., within a section are currently in progress.
    */
   TEX_EXTERN tex_content *section_get_content(tex_section *sec);
 

@@ -234,19 +234,10 @@ int section_write(const tex_section *sec,
   tex_element *cur = sec->elements;
   while (cur)
   {
-    element_writer writer = element_write[cur->type];
-    if (!writer)
-    {
-      if (err)
-        *err = TEX_EUNKNOWN;
-      return -1;
-    }
-
-    n = writer(cur->data, buffer + written, buffer_size - written, err);
+    n = element_write(cur, buffer + written, buffer_size - written, err);
     if (n < 0)
       return -1;
     written += n;
-
     cur = cur->next;
   };
 

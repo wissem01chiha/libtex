@@ -1,6 +1,5 @@
 ---
 title: User's Guide
-nav_order: 1
 ---
 
 # Libtex User's Guide

@@ -1,7 +1,10 @@
 ---
 title: Changelog
-nav_order: 4
 ---
 
 Changelog
 =========
+
+Fri Oct 13
+
+- libtex  - initial public release

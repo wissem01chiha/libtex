@@ -11,22 +11,23 @@ extern "C"
 {
 #endif
 
+  typedef struct tex_element    tex_element;
+  typedef enum tex_element_type tex_element_type;
+
   /**
    * Enumeration of all element types supported in a TeX/LaTeX document.
    * This enumeration defines the different kinds of elements that can appear
    * inside a document section. The set of supported elements will be
    * progressively increased according to the release roadmap.
    */
-  typedef enum tex_element_type
+  enum tex_element_type
   {
     TEX_ELE_CONTENT,
     TEX_ELE_SECTION,
     TEX_ELE_FIGURE,
     TEX_ELE_TABLE,
     TEX_ELE_LIST
-  } tex_element_type;
-
-  typedef struct tex_element tex_element;
+  };
 
   struct tex_element
   {
@@ -47,17 +48,14 @@ extern "C"
 
   /**
    * A generic function pointer for writing an element into a memory buffer.
-   * All elements must implement the same signature. Each element callback
-   * is registered into a static compile-time structure (see element_write)
-   * for dispatching. For more information, refer to the element serialization
-   * API.
+   * All elements must implement the same signature. the function dispatch the
+   * call to specific elment write callback based on the tex_element_type
+   * registred
    */
-  typedef int (*element_writer)(const void  *element,
-                                char        *buffer,
-                                size_t       buffer_size,
-                                tex_error_t *err);
-
-  extern element_writer element_write[];
+  TEX_EXTERN int element_write(const tex_element *element,
+                               char              *buffer,
+                               size_t             buffer_size,
+                               tex_error_t       *err);
 
 #ifdef __cplusplus
 };

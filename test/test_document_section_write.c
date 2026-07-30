@@ -36,7 +36,7 @@ START_TEST(test_document_section_write)
   sec->subsection = subsec;
 
   // add the section to the doc
-  doc->section = sec;
+  document_add_section(doc, sec);
 
   const char *filename = "document_with_section_write.tex";
   ck_assert_int_eq(document_fs_write(doc, filename), TEX_ENONE);

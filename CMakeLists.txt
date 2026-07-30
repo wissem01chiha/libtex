@@ -47,6 +47,7 @@ if (CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT)
     CACHE PATH "default install path" FORCE)
 endif()
 
+add_subdirectory(third_party/libcsv)
 if(LIBTEX_BUILD_TESTS)
     include(external/check)
 endif()
