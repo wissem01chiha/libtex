@@ -8,8 +8,8 @@
 
 START_TEST(test_list_create_delete)
 {
-  tex_error_t  err = TEX_ENONE;
-  tex_list *lst   = list_create(&err);
+  tex_error_t err = TEX_ENONE;
+  tex_list   *lst = list_create(&err);
   ck_assert_ptr_nonnull(lst);
   ck_assert_int_eq(err, TEX_ENONE);
 
