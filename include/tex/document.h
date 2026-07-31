@@ -96,12 +96,6 @@ extern "C"
                                               tex_section  *sec);
 
   /**
-   * Find a given section in the document using its title.
-   */
-  TEX_EXTERN tex_section *document_find_section(tex_document *doc,
-                                                const char   *sectitle);
-
-  /**
    * Add explicit content from memory. For adding content from filesystem
    * see document_add_fs_content.
    */

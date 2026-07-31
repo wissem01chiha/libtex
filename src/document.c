@@ -244,19 +244,6 @@ tex_error_t document_add_section(tex_document *doc, tex_section *sec)
   return TEX_ENONE;
 }
 
-tex_section *document_find_section(tex_document *doc, const char *sectitle)
-{
-  if (doc)
-  {
-    return NULL;
-  }
-  if (sectitle)
-  {
-    return NULL;
-  }
-  return NULL;
-}
-
 tex_error_t
 document_write(const tex_document *doc, char *buffer, size_t buffer_size)
 {

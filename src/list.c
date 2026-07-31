@@ -4,6 +4,7 @@
 #include "tex.h"
 #include <stdio.h>
 #include <stdlib.h>
+#include <cJSON/cJSON.h>
 
 tex_list *list_create(tex_error_t *err)
 {
@@ -14,8 +15,15 @@ tex_list *list_create(tex_error_t *err)
     *err = TEX_EFAIL_MEMALLOC;
     return NULL;
   }
-  list->next = NULL;
+  list->next  = NULL;
+  list->type  = Itemize;
+  list->items = NULL;
   return list;
+}
+
+tex_list_item *list_item_create(tex_error_t *err)
+{
+  return NULL;
 }
 
 tex_error_t list_delete(tex_list *lst)
@@ -28,17 +36,97 @@ tex_error_t list_delete(tex_list *lst)
   return TEX_ENONE;
 }
 
-tex_error_t list_add_item(tex_list *lst, const char *item, const char *label)
+tex_list *list_fs_json_create(const char *filename, tex_error_t *err)
 {
-  if (lst == NULL)
+  if (filename == NULL)
   {
-    return TEX_ENULL_LIST;
+    *err = TEX_ENULL_FILEPATH;
+    return NULL;
   }
-  if (item == NULL || label == NULL)
+  tex_error_t lerr = TEX_ENONE;
+  // create the list
+  tex_list *list = list_create(&lerr);
+  if (lerr != TEX_ENONE)
   {
-    return TEX_EINVAL_INPUT;
+    *err = lerr;
+    return NULL;
+  }
+  FILE *f = fopen(filename, "rb");
+  if (f == NULL)
+  {
+    *err = TEX_EFAIL_FOPEN;
+    return NULL;
+  }
+  fseek(f, 0, SEEK_END);
+  long fsize = ftell(f);
+  fseek(f, 0, SEEK_SET);
+  char *buffer = malloc(fsize + 1);
+  if (buffer == NULL)
+  {
+    *err = TEX_EFAIL_MEMALLOC;
+    return NULL;
+  }
+  size_t read  = fread(buffer, 1, fsize, f);
+  buffer[read] = '\0';
+  fclose(f);
+  // parse the json file
+  cJSON *json = cJSON_ParseWithLength(buffer, fsize + 1);
+  if (json == NULL)
+  {
+    *err = TEX_EFAIL_CJSON_PARSEWITHLENGTH;
+    return NULL;
   }
 
+  if (json->valuestring != NULL)
+  {
+    // create a list item
+    tex_list_item *item = list_item_create(err);
+    if (*err != TEX_ENONE)
+    {
+      return NULL;
+    }
+    // create a tex_content
+  }
+  // handle child elements
+
+  // handle next elements
+  cJSON_Delete(json);
+  free(buffer);
+  return list;
+}
+
+tex_error_t list_item_add_content(tex_list_item *itm, tex_content *content)
+{
+  return TEX_ENONE;
+}
+
+tex_error_t list_item_add_fs_content(tex_list_item *itm, const char *filename)
+{
+  return TEX_ENONE;
+}
+
+tex_error_t list_item_add_figure(tex_list_item *itm, tex_figure *fig)
+{
+  return TEX_ENONE;
+}
+
+tex_error_t list_item_add_fs_figure(tex_list_item *itm, const char *filename)
+{
+  return TEX_ENONE;
+}
+
+tex_error_t list_item_add_fs_table(tex_list_item *itm, tex_table *tab)
+{
+  return TEX_ENONE;
+}
+
+tex_error_t list_item_add_table(tex_list_item *itm, tex_table *tab)
+{
+  return TEX_ENONE;
+}
+
+tex_error_t list_add_item(tex_list *lst, const tex_list_item *itm)
+{
   return TEX_ENONE;
 }
 

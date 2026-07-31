@@ -48,6 +48,7 @@ if (CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT)
 endif()
 
 add_subdirectory(third_party/libcsv)
+add_subdirectory(third_party/cJSON)
 if(LIBTEX_BUILD_TESTS)
     include(external/check)
 endif()
@@ -113,6 +114,7 @@ set(tex_test_sources
     test/test_document_fs_write_default.c
     test/test_content.c
     test/test_document_regress.c
+    test/test_list.c
 )
 
 set(tex_test_assets
@@ -151,7 +153,7 @@ target_include_directories(${PROJECT_NAME}
     PRIVATE
         ${CMAKE_CURRENT_SOURCE_DIR}/third_party
 )
-target_link_libraries(${PROJECT_NAME} PUBLIC)
+target_link_libraries(${PROJECT_NAME} PUBLIC cjson)
 target_compile_options(${PROJECT_NAME} PRIVATE ${tex_flags})
 
 if(LIBTEX_COVER AND NOT WIN32)
@@ -184,7 +186,7 @@ if(LIBTEX_BUILD_TESTS)
             target_link_options(${testname} PRIVATE ${LIBTEX_COVERAGE_LINK_FLAGS})
         endif()
         add_dependencies(${testname} ${PROJECT_NAME})
-        target_link_libraries(${testname} PRIVATE ${PROJECT_NAME} compat check)
+        target_link_libraries(${testname} PRIVATE ${PROJECT_NAME} compat check cjson)
         target_compile_options(${testname} PRIVATE ${tex_flags})
         add_test(NAME ${testname} COMMAND ${testname})
     endforeach()

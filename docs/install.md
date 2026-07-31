@@ -1,6 +1,5 @@
 ---
 title:  Installation Guide
-nav_order: 5
 ---
 
 # Precompiled Binaries
@@ -9,9 +8,9 @@ For quick integration, the easiest way is to download the precompiled installati
 
 # Build from Source
 
-libtex uses [cmake]() as its main build system, support for other build systems or workflows may be subject to discusssion 
-
+libtex uses [cmake](https://cmake.org/) as its main build system, support for other build systems or workflows may be subject to discusssion 
+to build libtex from source a version of cmake (version range form 3.12 to 3.31 ) and git 
 
 # Platform Support 
 
-libtex support mainly last of windows , Ubuntu , OSX, 
+libtex support mainly last versions of windows , Ubuntu , MacOS, 
