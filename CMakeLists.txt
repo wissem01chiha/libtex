@@ -150,7 +150,7 @@ target_include_directories(${PROJECT_NAME}
 )
 target_include_directories(${PROJECT_NAME}
     PUBLIC
-        ${CMAKE_BINARY_DIR}
+        ${CMAKE_CURRENT_BINARY_DIR}
     PRIVATE
         ${CMAKE_CURRENT_SOURCE_DIR}/third_party
 )
