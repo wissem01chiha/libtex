@@ -1,0 +1,5 @@
+{
+  "cmake.configureArgs": [
+    "-DLIBTEX_BUILD_TESTS=ON"
+  ]
+}

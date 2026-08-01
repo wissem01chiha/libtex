@@ -28,7 +28,7 @@ jobs:
       uses: actions/checkout@v6
 
     - name: Generate project files
-      run: cmake -S . -B ../build ${{ matrix.cmake-args }} -D CMAKE_BUILD_TYPE=${{ matrix.build-config || 'Release' }}
+      run: cmake -S . -B ../build ${{ matrix.cmake-args }} -DCMAKE_BUILD_TYPE=${{ matrix.build-config || 'Release' }} -D LIBTEX_BUILD_TESTS=ON
       env:
         CC: ${{ matrix.compiler }}
         CFLAGS: ${{ matrix.cflags }}

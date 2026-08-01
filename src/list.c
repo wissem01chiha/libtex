@@ -23,7 +23,27 @@ tex_list *list_create(tex_error_t *err)
 
 tex_list_item *list_item_create(tex_error_t *err)
 {
-  return NULL;
+  tex_list_item *item = malloc(sizeof(tex_list_item));
+  if (item == NULL)
+  {
+    *err = TEX_EFAIL_MEMALLOC;
+    return NULL;
+  }
+  item->elements = NULL;
+  item->label    = NULL;
+  item->next     = NULL;
+  *err           = TEX_ENONE;
+  return item;
+}
+
+tex_error_t list_item_delete(tex_list_item *itm)
+{
+  if (itm == NULL)
+  {
+    return TEX_ENULL_LIST_ITEM;
+  }
+  free(itm);
+  return TEX_ENONE;
 }
 
 tex_error_t list_delete(tex_list *lst)
@@ -86,6 +106,18 @@ tex_list *list_fs_json_create(const char *filename, tex_error_t *err)
       return NULL;
     }
     // create a tex_content
+    tex_content *content = content_create(err);
+    if (*err != TEX_ENONE)
+    {
+      return NULL;
+    }
+    content->data = json->valuestring;
+    // add the content to the list item
+    *err = list_item_add_content(item, content);
+    if (*err != TEX_ENONE)
+    {
+      return NULL;
+    }
   }
   // handle child elements
 
@@ -97,16 +129,78 @@ tex_list *list_fs_json_create(const char *filename, tex_error_t *err)
 
 tex_error_t list_item_add_content(tex_list_item *itm, tex_content *content)
 {
+  if (itm == NULL)
+  {
+    return TEX_ENULL_LIST_ITEM;
+  }
+  if (content == NULL)
+  {
+    return TEX_ENULL_CONTENT;
+  }
+  // create a new tex_element
+  tex_error_t  err = TEX_ENONE;
+  tex_element *ele = element_create(&err);
+  if (err != TEX_ENONE)
+  {
+    return err;
+  }
+  ele->type     = TEX_ELE_CONTENT;
+  ele->data     = content;
+  itm->elements = ele;
   return TEX_ENONE;
 }
 
 tex_error_t list_item_add_fs_content(tex_list_item *itm, const char *filename)
 {
+  if (itm == NULL)
+  {
+    return TEX_ENULL_LIST_ITEM;
+  }
+  // create a new tex_element
+  tex_error_t  err = TEX_ENONE;
+  tex_element *ele = element_create(&err);
+  if (err != TEX_ENONE)
+  {
+    return err;
+  }
+  // create a new tex_content
+  tex_content *content = content_create(&err);
+  if (err != TEX_ENONE)
+  {
+    return err;
+  }
+  // add the content from the file
+  err = content_fs_add(content, filename);
+  if (err != TEX_ENONE)
+  {
+    return err;
+  }
+  ele->type     = TEX_ELE_CONTENT;
+  ele->data     = content;
+  itm->elements = ele;
   return TEX_ENONE;
 }
 
 tex_error_t list_item_add_figure(tex_list_item *itm, tex_figure *fig)
 {
+  if (itm == NULL)
+  {
+    return TEX_ENULL_LIST_ITEM;
+  }
+  if (fig == NULL)
+  {
+    return TEX_ENULL_FIGURE;
+  }
+  // create a new tex_element
+  tex_error_t  err = TEX_ENONE;
+  tex_element *ele = element_create(&err);
+  if (err != TEX_ENONE)
+  {
+    return err;
+  }
+  ele->type     = TEX_ELE_FIGURE;
+  ele->data     = fig;
+  itm->elements = ele;
   return TEX_ENONE;
 }
 
@@ -122,11 +216,38 @@ tex_error_t list_item_add_fs_table(tex_list_item *itm, tex_table *tab)
 
 tex_error_t list_item_add_table(tex_list_item *itm, tex_table *tab)
 {
+  if (itm == NULL)
+  {
+    return TEX_ENULL_LIST_ITEM;
+  }
+  if (tab == NULL)
+  {
+    return TEX_ENULL_TABLE;
+  }
+  // create a new tex_element
+  tex_error_t  err = TEX_ENONE;
+  tex_element *ele = element_create(&err);
+  if (err != TEX_ENONE)
+  {
+    return err;
+  }
+  ele->type     = TEX_ELE_TABLE;
+  ele->data     = tab;
+  itm->elements = ele;
   return TEX_ENONE;
 }
 
-tex_error_t list_add_item(tex_list *lst, const tex_list_item *itm)
+tex_error_t list_add_item(tex_list *lst, tex_list_item *itm)
 {
+  if (lst == NULL)
+  {
+    return TEX_ENULL_LIST;
+  }
+  if (itm == NULL)
+  {
+    return TEX_ENULL_LIST_ITEM;
+  }
+  lst->items = itm;
   return TEX_ENONE;
 }
 

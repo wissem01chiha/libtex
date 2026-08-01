@@ -23,6 +23,16 @@ tex_table *table_create(tex_error_t *err)
   return tab;
 }
 
+tex_table *create_fs_table(const char *filename, tex_error_t *err)
+{
+  if (filename == NULL)
+  {
+    *err = TEX_ENULL_FILEPATH;
+    return NULL;
+  }
+  return NULL;
+}
+
 tex_error_t table_delete(tex_table *tab)
 {
   if (tab == NULL)

@@ -22,12 +22,27 @@ START_TEST(test_list_create_delete)
 }
 END_TEST
 
+START_TEST(test_list_item_create_delete)
+{
+  tex_error_t    err = TEX_ENONE;
+  tex_list_item *itm = list_item_create(&err);
+  ck_assert_ptr_nonnull(itm);
+  ck_assert_int_eq(err, TEX_ENONE);
+  ck_assert_ptr_null(itm->elements);
+  ck_assert_ptr_null(itm->label);
+  ck_assert_ptr_null(itm->next);
+  tex_error_t lerr = list_item_delete(itm);
+  ck_assert_int_eq(lerr, TEX_ENONE);
+}
+END_TEST
+
 Suite *list_suite(void)
 {
   Suite *s       = suite_create("tex_content");
   TCase *tc_core = tcase_create("Core");
 
   tcase_add_test(tc_core, test_list_create_delete);
+  tcase_add_test(tc_core, test_list_item_create_delete);
 
   suite_add_tcase(s, tc_core);
   return s;

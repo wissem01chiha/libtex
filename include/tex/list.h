@@ -46,6 +46,11 @@ extern "C"
   TEX_EXTERN tex_list_item *list_item_create(tex_error_t *err);
 
   /**
+   * Delete a tex_list_item based object
+   */
+  TEX_EXTERN tex_error_t list_item_delete(tex_list_item *itm);
+
+  /**
    * Create a tex_list based object
    * list default type is set to Itemize, to change use *list->type
    */
@@ -107,7 +112,7 @@ extern "C"
   /**
    * Add a list_item to the given list
    */
-  TEX_EXTERN tex_error_t list_add_item(tex_list *lst, const tex_list_item *itm);
+  TEX_EXTERN tex_error_t list_add_item(tex_list *lst, tex_list_item *itm);
 
   /**
    *  Write list to a memeory buffer
