@@ -49,7 +49,6 @@ endif()
 
 add_subdirectory(third_party/libcsv)
 add_subdirectory(third_party/cJSON)
-add_subdirectory(third_party/TOONc)
 if(LIBTEX_BUILD_TESTS)
     include(external/check)
 endif()
