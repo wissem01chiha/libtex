@@ -206,11 +206,21 @@ tex_error_t list_item_add_figure(tex_list_item *itm, tex_figure *fig)
 
 tex_error_t list_item_add_fs_figure(tex_list_item *itm, const char *filename)
 {
+  if(itm==NULL){
+    return TEX_ENULL_LIST_ITEM;
+  }
+
   return TEX_ENONE;
 }
 
 tex_error_t list_item_add_fs_table(tex_list_item *itm, tex_table *tab)
 {
+  if(itm==NULL){
+    return TEX_ENULL_LIST_ITEM;
+  }
+  if(tab==NULL){
+    return TEX_ENULL_TABLE;
+  }
   return TEX_ENONE;
 }
 
@@ -264,5 +274,8 @@ int list_write(const tex_list *lst,
   {
     *err = TEX_ENULL_BUFFER;
   }
-  return 0;
+
+  int written = snprintf(buffer,
+                         buffer_size,"");
+  return written;
 }
