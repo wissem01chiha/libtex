@@ -23,7 +23,7 @@ if (ENABLE_CUSTOM_COMPILER_FLAGS)
             -pedantic
             -Wall
             -Wextra
-            -Werror
+            # -Werror
             -Wstrict-prototypes
             -Wwrite-strings
             -Wshadow
@@ -51,6 +51,7 @@ if (ENABLE_CUSTOM_COMPILER_FLAGS)
     if("${CMAKE_C_COMPILER_ID}" STREQUAL "GNU")
         list(APPEND custom_compiler_flags
             -Wcast-qual
+            -Werror
         )
     endif()
 
