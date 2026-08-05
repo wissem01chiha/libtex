@@ -8,7 +8,7 @@
 tex_table_row *tex_table_row_create(tex_error_t *err)
 {
   tex_table_row *row = calloc(1, sizeof(tex_table_row));
-  *err                = TEX_ENONE;
+  *err               = TEX_ENONE;
   return row;
 }
 

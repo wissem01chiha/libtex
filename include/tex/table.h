@@ -55,18 +55,18 @@ extern "C"
   TEX_EXTERN tex_error_t table_delete(tex_table *tab);
 
   /**
-   * Set table caption string 
+   * Set table caption string
    */
   TEX_EXTERN tex_error_t table_set_caption(tex_table *tab, const char *caption);
 
   /**
-   * Set the table label string 
+   * Set the table label string
    */
   TEX_EXTERN tex_error_t table_set_label(tex_table *tab, const char *label);
 
   /**
-   * Add a row to the table, note that adding colums in tex_table is not supported
-   * until this version
+   * Add a row to the table, note that adding colums in tex_table is not
+   * supported until this version
    */
   TEX_EXTERN tex_error_t table_add_row(tex_table *tab, tex_table_row *rw);
 

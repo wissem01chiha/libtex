@@ -13,7 +13,7 @@ extern "C"
 #endif
 
   typedef enum tex_language_t tex_language_t;
-  
+
   enum tex_language_t
   {
     English    = 0,
@@ -35,12 +35,13 @@ extern "C"
   TEX_EXTERN const char *tex_language_to_string(tex_language_t lang);
 
   /**
-   * This function compute the required tex_package based object 
-   * given the langauge type selected and the latex engine for supported 
-   * langauges, note that this is an internal API routine not intended to 
-   * use by end users 
+   * This function compute the required tex_package based object
+   * given the langauge type selected and the latex engine for supported
+   * langauges, note that this is an internal API routine not intended to
+   * use by end users
    */
-  TEX_EXTERN tex_package* language_package(tex_language_t lang, tex_error_t* err);
+  TEX_EXTERN tex_package *language_package(tex_language_t lang,
+                                           tex_error_t   *err);
 
 #ifdef __cplusplus
 };

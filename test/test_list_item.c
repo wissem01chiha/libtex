@@ -20,16 +20,16 @@ START_TEST(test_list_item_create_delete)
 }
 END_TEST
 
-
 START_TEST(test_tex_list_item_write)
 {
   tex_error_t    err = TEX_ENONE;
   tex_list_item *itm = list_item_create(&err);
-  
-  // adding some text to the item 
-  tex_content* cont = content_create(&err);
-  ck_assert_int_eq(content_add(cont, "hey this is the first list item !"), TEX_ENONE);
-  ck_assert_int_eq(list_item_add_content(itm,cont), TEX_ENONE);
+
+  // adding some text to the item
+  tex_content *cont = content_create(&err);
+  ck_assert_int_eq(content_add(cont, "hey this is the first list item !"),
+                   TEX_ENONE);
+  ck_assert_int_eq(list_item_add_content(itm, cont), TEX_ENONE);
 
   const size_t buffer_size = 1400;
   char         buffer[1400];
@@ -39,7 +39,7 @@ START_TEST(test_tex_list_item_write)
   ck_assert_int_eq(err, TEX_ENONE);
 
   printf("%s\n", buffer);
-  ck_assert_str_eq(buffer,"\\item hey this is the first list item !\n");
+  ck_assert_str_eq(buffer, "\\item hey this is the first list item !\n");
 
   list_item_delete(itm);
 }
@@ -51,35 +51,36 @@ START_TEST(test_list_item_add_content)
   tex_list_item *itm = list_item_create(&err);
   ck_assert_int_eq(err, TEX_ENONE);
 
-  tex_content* cnt = content_create(&err);
+  tex_content *cnt = content_create(&err);
   ck_assert_int_eq(err, TEX_ENONE);
 
   // add some text to the cnt object
-  ck_assert_int_eq(content_add(cnt, "this is our first list item fill text "), TEX_ENONE);
+  ck_assert_int_eq(content_add(cnt, "this is our first list item fill text "),
+                   TEX_ENONE);
 
-  ck_assert_int_eq(list_item_add_content(itm,cnt), TEX_ENONE);
+  ck_assert_int_eq(list_item_add_content(itm, cnt), TEX_ENONE);
 
-  // elemets should be not null now 
+  // elemets should be not null now
   ck_assert_ptr_nonnull(itm->elements);
-  tex_element* ele = itm->elements;
+  tex_element *ele = itm->elements;
   ck_assert_int_eq(ele->type, TEX_ELE_CONTENT);
 
-  tex_content* ct = ele->data;
+  tex_content *ct = ele->data;
   ck_assert_str_eq(ct->data, "this is our first list item fill text ");
 
-
   // try appending an other content
-    tex_content* cnt2 = content_create(&err);
-    ck_assert_int_eq(content_add(cnt2, "this is our second list item fill text "), TEX_ENONE);
+  tex_content *cnt2 = content_create(&err);
+  ck_assert_int_eq(content_add(cnt2, "this is our second list item fill text "),
+                   TEX_ENONE);
 
-    ck_assert_int_eq(list_item_add_content(itm,cnt2), TEX_ENONE);
+  ck_assert_int_eq(list_item_add_content(itm, cnt2), TEX_ENONE);
 
-    tex_element* ele2 = itm->elements;
-    tex_element* ele2c = ele2->next;
-    ck_assert_ptr_nonnull(ele2c);
-    ck_assert_int_eq(ele2c->type, TEX_ELE_CONTENT);
+  tex_element *ele2  = itm->elements;
+  tex_element *ele2c = ele2->next;
+  ck_assert_ptr_nonnull(ele2c);
+  ck_assert_int_eq(ele2c->type, TEX_ELE_CONTENT);
 
-  tex_content* ct2 = ele2c->data;
+  tex_content *ct2 = ele2c->data;
   ck_assert_str_eq(ct2->data, "this is our second list item fill text ");
 
   ck_assert_int_eq(list_item_delete(itm), TEX_ENONE);
@@ -93,7 +94,7 @@ Suite *list_suite(void)
 
   tcase_add_test(tc_core, test_list_item_create_delete);
   tcase_add_test(tc_core, test_list_item_add_content);
-  tcase_add_test(tc_core,test_tex_list_item_write);
+  tcase_add_test(tc_core, test_tex_list_item_write);
 
   suite_add_tcase(s, tc_core);
   return s;
