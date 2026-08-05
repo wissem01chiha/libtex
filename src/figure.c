@@ -36,15 +36,15 @@ tex_error_t figure_delete(tex_figure *fig)
   return TEX_ENONE;
 }
 
-tex_figure *figure_fs_create(const char *path, tex_error_t *err)
+tex_figure *figure_fs_create(const char *filename, tex_error_t *err)
 {
-  if (path == NULL)
+  if (filename == NULL)
   {
     *err = TEX_EINVAL_FILE_PATH;
     return NULL;
   }
   int            width, height, channels;
-  unsigned char *data = stbi_load(path, &width, &height, &channels, 0);
+  unsigned char *data = stbi_load(filename, &width, &height, &channels, 0);
   if (data == NULL)
   {
     *err = TEX_EFAIL_LOAD_IMAGE;
@@ -53,8 +53,8 @@ tex_figure *figure_fs_create(const char *path, tex_error_t *err)
   tex_figure *fig = figure_create(err);
   fig->height     = height;
   fig->width      = width;
-  fig->image_path = tex_strdup(path);
-  fig->label      = tex_strdup(get_filename(path));
+  fig->image_path = tex_strdup(filename);
+  fig->label      = tex_strdup(get_filename(filename));
   return fig;
 }
 

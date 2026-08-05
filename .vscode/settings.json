@@ -1,0 +1,7 @@
+{
+  "cmake.configureArgs": [
+    "-DLIBTEX_BUILD_TESTS=ON",
+    "-DBUILD_SHARED_LIBS=OFF",
+    "-DCHECK_ENABLE_TESTS=OFF"
+  ]
+}

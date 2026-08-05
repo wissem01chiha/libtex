@@ -5,6 +5,7 @@ cmake_minimum_required(VERSION 3.12...3.31)
 
 project(tex LANGUAGES C)
 
+
 list(APPEND CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/cmake")
 
 include(CMakePackageConfigHelpers)
@@ -13,7 +14,7 @@ include(CheckCCompilerFlag)
 include(GNUInstallDirs)
 include(CTest)
 
-set(PROJECT_VERSION "0.1.0")
+set(PROJECT_VERSION "0.1.1")
 set(PROJECT_HOMEPAGE_URL "https://github.com/wissem01chiha/libtex")
 set(PROJECT_DESCRIPTION "A C library for writing Latex Tex files.")
 
@@ -35,10 +36,10 @@ set(CMAKE_WARN_DEPRECATED OFF CACHE BOOL "suppress cmake deprecation message")
 
 option(LIBTEX_BUILD_SHARED "Build shared lib" OFF)
 option(LIBTEX_BUILD_TOOLS "Build tools in the script directory" ON)
-option(LIBTEX_BUILD_TESTS "Build tests" ON)
+option(LIBTEX_BUILD_TESTS "Build tests" OFF)
 option(LIBTEX_BUILD_REGRESS "Build regression tests" ON)
 option(LIBTEX_BUILD_DOC "Build documentation" ON)
-option(LIBTEX_INSTALL "Install libtex files" OFF)
+option(LIBTEX_INSTALL "Install libtex files" ON)
 option(LIBTEX_COVER "Enable coverage reporting" OFF)
 option(LIBTEX_ASAN "Enable AddressSanitizer (ASan)" ON)
 
@@ -48,6 +49,7 @@ if (CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT)
 endif()
 
 add_subdirectory(third_party/libcsv)
+add_subdirectory(third_party/cJSON)
 if(LIBTEX_BUILD_TESTS)
     include(external/check)
 endif()
@@ -67,6 +69,7 @@ set(tex_sources
     src/figure.c
     src/language.c
     src/list.c
+    src/package.c
     src/section.c
     src/table.c
     src/get_date.c
@@ -113,6 +116,8 @@ set(tex_test_sources
     test/test_document_fs_write_default.c
     test/test_content.c
     test/test_document_regress.c
+    test/test_list.c
+    test/test_list_item.c
 )
 
 set(tex_test_assets
@@ -147,11 +152,11 @@ target_include_directories(${PROJECT_NAME}
 )
 target_include_directories(${PROJECT_NAME}
     PUBLIC
-        ${CMAKE_BINARY_DIR}
+        ${CMAKE_CURRENT_BINARY_DIR}
     PRIVATE
         ${CMAKE_CURRENT_SOURCE_DIR}/third_party
 )
-target_link_libraries(${PROJECT_NAME} PUBLIC)
+target_link_libraries(${PROJECT_NAME} PUBLIC cjson)
 target_compile_options(${PROJECT_NAME} PRIVATE ${tex_flags})
 
 if(LIBTEX_COVER AND NOT WIN32)
@@ -184,7 +189,7 @@ if(LIBTEX_BUILD_TESTS)
             target_link_options(${testname} PRIVATE ${LIBTEX_COVERAGE_LINK_FLAGS})
         endif()
         add_dependencies(${testname} ${PROJECT_NAME})
-        target_link_libraries(${testname} PRIVATE ${PROJECT_NAME} compat check)
+        target_link_libraries(${testname} PRIVATE ${PROJECT_NAME} compat check cjson)
         target_compile_options(${testname} PRIVATE ${tex_flags})
         add_test(NAME ${testname} COMMAND ${testname})
     endforeach()
@@ -233,8 +238,8 @@ if(LIBTEX_INSTALL)
     )
 
     configure_package_config_file(
-        "${PROJECT_SOURCE_DIR}/cmake/tex-config.cmake.in"
-        "${PROJECT_BINARY_DIR}/opc-config.cmake"
+        "${PROJECT_SOURCE_DIR}/cmake/LibTEXConfig.cmake.in"
+        "${PROJECT_BINARY_DIR}/LibTEXConfig.cmake"
         INSTALL_DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/libtex
     )
 
@@ -260,6 +265,8 @@ if(LIBTEX_INSTALL)
     )
 endif()
 
+set(CPACK_PACKAGE_NAME "libtex-${PROJECT_VERSION}")
+set(CPACK_GENERATOR "ZIP")
 set(CPACK_PACKAGE_VENDOR "Wissem Chiha")
 set(CPACK_PACKAGE_DESCRIPTION_SUMMARY "A C library for writing Latex Tex files.")
 set(CMAKE_PROJECT_HOMEPAGE_URL "https://github.com/wissem01chiha/libtex")

@@ -43,7 +43,8 @@ extern "C"
    * the figure label is automaticly genarted from filename
    * eg  fig:diagram_png
    */
-  TEX_EXTERN tex_figure *figure_fs_create(const char *path, tex_error_t *err);
+  TEX_EXTERN tex_figure *figure_fs_create(const char  *filename,
+                                          tex_error_t *err);
 
   /**
    * Adjust figure size

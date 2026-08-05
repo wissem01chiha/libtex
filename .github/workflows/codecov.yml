@@ -28,6 +28,7 @@ jobs:
         export CXX=g++
         cmake -B ${{ github.workspace }}/build \
               -DCMAKE_BUILD_TYPE=${{ env.BUILD_TYPE }} \
+              -DLIBTEX_BUILD_TESTS=ON \
               -DLIBTEX_COVER=ON
 
     - name: Build

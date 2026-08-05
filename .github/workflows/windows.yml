@@ -23,12 +23,19 @@ jobs:
             cmake-args: -G Ninja
             pkgtgt: package
 
+          - name: Windows Clang
+            os: windows-latest
+            compiler: clang-cl
+            cflags: -Wall -Wextra -Wno-microsoft-enum-forward-reference
+            cmake-args: -G Ninja -DCMAKE_C_COMPILER=clang-cl
+            pkgtgt: package
+
     steps:
     - name: Checkout repository
       uses: actions/checkout@v6
 
     - name: Generate project files
-      run: cmake -S . -B ../build ${{ matrix.cmake-args }} -D CMAKE_BUILD_TYPE=${{ matrix.build-config || 'Release' }}
+      run: cmake -S . -B ../build ${{ matrix.cmake-args }} -DCMAKE_BUILD_TYPE=${{ matrix.build-config || 'Release' }} -D LIBTEX_BUILD_TESTS=ON
       env:
         CC: ${{ matrix.compiler }}
         CFLAGS: ${{ matrix.cflags }}
