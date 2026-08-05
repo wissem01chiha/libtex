@@ -23,6 +23,13 @@ jobs:
             cmake-args: -G Ninja
             pkgtgt: package
 
+          - name: Windows Clang
+            os: windows-latest
+            compiler: clang-cl
+            cflags: -Wall -Wextra -Wno-microsoft-enum-forward-reference
+            cmake-args: -G Ninja -DCMAKE_C_COMPILER=clang-cl
+            pkgtgt: package
+
     steps:
     - name: Checkout repository
       uses: actions/checkout@v6
