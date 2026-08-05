@@ -36,6 +36,34 @@ START_TEST(test_list_item_create_delete)
 }
 END_TEST
 
+START_TEST(test_list_item_add_content)
+{
+  tex_error_t    err = TEX_ENONE;
+  tex_list_item *itm = list_item_create(&err);
+  ck_assert_int_eq(err, TEX_ENONE);
+
+  tex_content* cnt = content_create(&err);
+  ck_assert_int_eq(err, TEX_ENONE);
+
+  // add some text to the cnt object
+  ck_assert_int_eq(content_add(cnt, "this is our first list item fill text "), TEX_ENONE);
+
+  ck_assert_int_eq(list_item_add_content(itm,cnt), TEX_ENONE);
+
+  // elemets shouled be not null now 
+  ck_assert_ptr_nonnull(itm->elements);
+  tex_element* ele = itm->elements;
+  ck_assert_int_eq(ele->type, TEX_ELE_CONTENT);
+
+  tex_content* ct = ele->data;
+  ck_assert_str_eq(ct->data, "this is our first list item fill text ");
+
+  tex_error_t lerr = list_item_delete(itm);
+  ck_assert_int_eq(lerr, TEX_ENONE);
+}
+END_TEST
+
+
 Suite *list_suite(void)
 {
   Suite *s       = suite_create("tex_content");
@@ -43,6 +71,7 @@ Suite *list_suite(void)
 
   tcase_add_test(tc_core, test_list_create_delete);
   tcase_add_test(tc_core, test_list_item_create_delete);
+  tcase_add_test(tc_core, test_list_item_add_content);
 
   suite_add_tcase(s, tc_core);
   return s;

@@ -3,10 +3,17 @@
 
 #pragma once
 
+#include <stddef.h>
+#include <stdbool.h>
+#include "texexport.h"
+#include "texerrno.h"
+
 #ifdef __cplusplus
 extern "C"
 {
 #endif
+
+
 
 #ifdef __cplusplus
 };

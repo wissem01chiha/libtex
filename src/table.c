@@ -54,6 +54,20 @@ tex_error_t table_set_caption(tex_table *tab, const char *caption)
   return TEX_ENONE;
 }
 
+tex_error_t table_set_label(tex_table *tab, const char *label)
+{
+  if (tab == NULL)
+  {
+    return TEX_ENULL_TABLE;
+  }
+  if (label == NULL)
+  {
+    return TEX_ENULL_TABLE_LABEL;
+  }
+
+  return TEX_ENONE;
+}
+
 int table_write(const tex_table *tab,
                 char            *buffer,
                 size_t           buffer_size,

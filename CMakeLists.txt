@@ -69,6 +69,7 @@ set(tex_sources
     src/figure.c
     src/language.c
     src/list.c
+    src/package.c
     src/section.c
     src/table.c
     src/get_date.c
