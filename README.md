@@ -16,15 +16,15 @@ libtex is a C library for writing [Latex](https://www.latex-project.org/) .tex f
 
 ## Features
 
-- Convert JSON files directly into LaTeX list environments.
+- Convert json files directly into latex list environments.
 
 - Retrieve author, date, and location details to save editing time.
 
-- Generate LaTeX‑compatible tables from row data or CSV input.
+- Generate latex‑compatible tables from row data or csv input.
 
-- [WIP] Provide built‑in plotting and advanced figure handling for LaTeX documents.
+- [WIP] Provide built‑in plotting and advanced figure handling for latex documents.
 
-- Create LaTeX‑compatible TikZ graphs directly from input data.
+- [WIP] Create LaTeX‑compatible tikz graphs directly from input data.
 
 ## Installation
 
