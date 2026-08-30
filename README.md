@@ -43,7 +43,7 @@ This may require [Sphinx](https://www.sphinx-doc.org/en/master/index.html) insta
 pip install -U sphinx
 ```
 
-> **Note**  
+> > [!NOTE]  
 > Windows users need to use `make.bat` instead of plain `make`.
 
 ### Official documentation

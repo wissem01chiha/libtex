@@ -115,6 +115,7 @@ set(tex_test_sources
     test/test_document_regress.c
     test/test_list.c
     test/test_list_item.c
+    test/test_package_option.c
 )
 
 set(tex_test_assets
