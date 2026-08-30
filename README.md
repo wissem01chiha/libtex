@@ -1,4 +1,6 @@
-![libtex][libtex_banner]
+<p align="center">
+  <img src="docs/src/image/banner.png" alt="libtex" height="200"/>
+</p>
 
 [![Ubuntu](https://github.com/wissem01chiha/libtex/actions/workflows/ubuntu.yml/badge.svg)](https://github.com/wissem01chiha/libtex/actions/workflows/ubuntu.yml)
 [![MacOS](https://github.com/wissem01chiha/libtex/actions/workflows/macos.yml/badge.svg)](https://github.com/wissem01chiha/libtex/actions/workflows/macos.yml)
@@ -11,21 +13,19 @@
 
 ## Overview
 
-libtex is a C library for writing [LaTeX](https://www.latex-project.org/) `.tex` files, designed to be a small utility library for C or C++ projects needing a standardized way to write scientific reports with minimal code. libtex aims to provide features that simplify document formatting and integration of external sources into the document. However, this depends on community contributions and may progress slowly, as it is currently maintained with low priority.
+libtex is a C99 library for writing [LaTeX](https://www.latex-project.org/) `.tex` files, designed to be a small utility library for C or C++ projects needing a standardized way to write scientific reports with minimal code. libtex aims to provide features that simplify document formatting and integration of external sources into the document. However, this depends on community contributions and may progress slowly, as it is currently maintained with low priority.
 
-# Feature highlights
+## Feature highlights
 
-- Convert JSON files directly into LaTeX list environments.
+- Convert Json files directly into LaTeX list environments.
 - Retrieve author, date, and location details to save editing time.
-- Generate LaTeX‑compatible tables from row data or [CSV](https://en.wikipedia.org/wiki/Comma-separated_values) input.
-- [WIP] Provide built‑in plotting and advanced figure handling for LaTeX documents.
-- [WIP] Create LaTeX‑compatible [TikZ](https://tikz.dev/editor/) graphs directly from row input data.
+- Generate LaTeX‑compatible tables from row data or [csv](https://en.wikipedia.org/wiki/Comma-separated_values) input.
+- Provide built‑in plotting and advanced figure handling for LaTeX documents.
+- Create Latex‑compatible [Tikz](https://tikz.dev/editor/) graphs directly from row input data.
 
 ## Versioning
 
-libtex follows the [semantic versioning](http://semver.org/) scheme.  
-The API change and backwards compatibility rules are those indicated by SemVer.  
-The library will keep a stable ABI across major releases.
+libtex follows the [semantic versioning](http://semver.org/) scheme. The API change and backwards compatibility rules are those indicated by SemVer. The library will keep a stable ABI across major releases.
 
 ## Documentation
 
@@ -37,7 +37,7 @@ To build documentation as HTML run:
 make html
 ```
 
-This may require [Sphinx]() installed on your system:
+This may require [Sphinx](https://www.sphinx-doc.org/en/master/index.html) installed on your system:
 
 ```bash
 pip install -U sphinx
@@ -50,10 +50,12 @@ pip install -U sphinx
 
 ## Supported Platforms
 
-|  System | Supported versions | Supported Compilers | Notes |
-|---|---|---|---|
-| Windows | MSVC 2017         | 3.22.1        | |
-| Linux   | GCC 8             | Latest        | |
+| **System** | **Supported Versions** | **Supported Compilers** | **Notes** |
+|------------|-------------------------|--------------------------|-----------|
+| **Lubuntu (Linux)** | 20.04 LTS, 22.04 LTS | GCC 9–11, Clang 12–14 | GCC is default; Clang optional for cross-platform consistency |
+| **MacOS** | 12 (Monterey), 13 (Ventura), 14 (Sonoma) | Clang (Xcode toolchain) | Apple ships Clang by default; GCC rarely used |
+| **Windows** | Windows 10, Windows 11 | MSVC 2019–2022, Clang (LLVM for Windows) | MSVC is standard; Clang support recently added in CI |
+
 
 Other platforms or compilers have not yet been tested. Please open an issue on [GitHub Issues](https://github.com/wissem01chiha/libtex/issues) for any suspected bugs.
 
@@ -82,7 +84,7 @@ To build libtex from source you need a version of CMake (3.12–3.31) and [Git](
 
 ### Running tests
 
-In order to run all unit and regression libtex tests, using [CTest]()
+In order to run all unit and regression libtex tests, using [CTest](https://cmake.org/cmake/help/latest/manual/ctest.1.html)
 
 ```bash
 ctest -C Release --output-on-failure --max-width 120
@@ -98,6 +100,3 @@ libtex source code is licensed under the BSD 2-Clause License. Check the [LICENS
 file for full terms.
 
 Additional copyright and licensing information for non‑code materials is maintained in the [COPYRIGHTS](./COPYRIGHTS.md) file
-
-[libtex_banner]: docs/src/image/banner.png
-[cmake]: https://cmake.org/

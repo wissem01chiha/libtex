@@ -3,7 +3,7 @@
 
 cmake_minimum_required(VERSION 3.12...3.31)
 
-project(tex LANGUAGES C)
+project(tex VERSION 0.1.1 LANGUAGES C)
 
 list(APPEND CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/cmake")
 
@@ -13,7 +13,11 @@ include(CheckCCompilerFlag)
 include(GNUInstallDirs)
 include(CTest)
 
-set(PROJECT_VERSION "0.1.1")
+set(LIBTEX_VERSION_MAJOR "${PROJECT_VERSION_MAJOR}")
+set(LIBTEX_VERSION_MINOR "${PROJECT_VERSION_MINOR}")
+set(LIBTEX_VERSION_PATCH "${PROJECT_VERSION_PATCH}")
+set(LIBTEX_VERSION_STRING "${PROJECT_VERSION_MAJOR}.${PROJECT_VERSION_MINOR}.${PROJECT_VERSION_PATCH}")
+
 set(PROJECT_HOMEPAGE_URL "https://github.com/wissem01chiha/libtex")
 set(PROJECT_DESCRIPTION "A C library for writing Latex tex files.")
 set(PROJECT_AUTHOR "Wissem Chiha")
@@ -130,7 +134,8 @@ if(MSVC)
 endif()
 
 configure_file(${CMAKE_CURRENT_SOURCE_DIR}/texconf.h.in
-${PROJECT_BINARY_DIR}/texconf.h)
+               ${PROJECT_BINARY_DIR}/texconf.h
+               @ONLY)
 
 if(LIBTEX_BUILD_SHARED)
     add_library(${PROJECT_NAME} SHARED ${tex_sources})

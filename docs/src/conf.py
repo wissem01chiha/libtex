@@ -20,8 +20,7 @@ sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..',
 # ones.
 extensions = [
     'sphinx_copybutton',
-    'myst_parser',
-    "breathe"
+    'myst_parser'
 ]
 
 # Add any paths that contain templates here, relative to this directory.
@@ -32,13 +31,6 @@ source_suffix = {
     '.rst': 'restructuredtext',
     '.md': 'markdown',
 }
-
-breathe_projects = {
-    "libtex": "../Doxygen/xml"   
-}
-
-breathe_default_project = "libtex"
-
 # The encoding of source files.
 #source_encoding = 'utf-8-sig'
 
