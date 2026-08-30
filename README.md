@@ -43,7 +43,7 @@ This may require [Sphinx](https://www.sphinx-doc.org/en/master/index.html) insta
 pip install -U sphinx
 ```
 
-> > [!NOTE]  
+> [!NOTE]  
 > Windows users need to use `make.bat` instead of plain `make`.
 
 ### Official documentation
@@ -55,7 +55,6 @@ pip install -U sphinx
 | **Lubuntu (Linux)** | 20.04 LTS, 22.04 LTS | GCC 9–11, Clang 12–14 | GCC is default; Clang optional for cross-platform consistency |
 | **MacOS** | 12 (Monterey), 13 (Ventura), 14 (Sonoma) | Clang (Xcode toolchain) | Apple ships Clang by default; GCC rarely used |
 | **Windows** | Windows 10, Windows 11 | MSVC 2019–2022, Clang (LLVM for Windows) | MSVC is standard; Clang support recently added in CI |
-
 
 Other platforms or compilers have not yet been tested. Please open an issue on [GitHub Issues](https://github.com/wissem01chiha/libtex/issues) for any suspected bugs.
 
@@ -73,14 +72,14 @@ To build libtex from source you need a version of CMake (3.12–3.31) and [Git](
 
 ###  Configure Options
 
-| Option                | Description                                               | Default | Supported Since |
-|------------------------|-----------------------------------------------------------|---------|-----------------|
-| LIBTEX_BUILD_SHARED    | Build libtex as a shared library                          | OFF     |   0.1.0         |
-| LIBTEX_BUILD_TOOLS     | Build command-line tools distributed with libtex          | ON      |   0.1.0         |
-| LIBTEX_BUILD_TESTS     | Build unit and integration tests                          | ON      |   0.1.0         |
-| LIBTEX_INSTALL         | Enable installation targets                               | OFF     |    0.1.0        |
-| LIBTEX_COVER           | Enable code coverage reporting (GCC/Clang)                | OFF     |    0.1.0        |
-| LIBTEX_ASAN            | Enable AddressSanitizer (ASan) for runtime checks         | ON      |    0.1.0        |
+| Option                | Description                                               | Default | 
+|------------------------|-----------------------------------------------------------|---------|
+| LIBTEX_BUILD_SHARED    | Build libtex as a shared library                          | OFF     |  
+| LIBTEX_BUILD_TOOLS     | Build command-line tools distributed with libtex          | ON      |  
+| LIBTEX_BUILD_TESTS     | Build unit and integration tests                          | ON      |   
+| LIBTEX_INSTALL         | Enable installation targets                               | OFF     |   
+| LIBTEX_COVER           | Enable code coverage reporting (GCC/Clang)                | OFF     |    
+| LIBTEX_ASAN            | Enable AddressSanitizer (ASan) for runtime checks         | ON      |    
 
 ### Running tests
 
