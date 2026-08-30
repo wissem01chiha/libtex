@@ -1,7 +1,4 @@
----
-title: Contributing Guide 
----
-
+# Contributing Guide
 
 ## Commit message formatting
 

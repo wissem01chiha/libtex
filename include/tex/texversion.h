@@ -3,16 +3,14 @@
 
 #pragma once
 
+#include "texconf.h"
+
 #ifdef __cplusplus
 extern "C"
 {
 #endif
 
-#define LIBTEX_VERSION_MAJOR 0
-#define LIBTEX_VERSION_MINOR 1
-#define LIBTEX_VERSION_PATCH 0
-
-#define LIBTEX_VERSION_STRING "0.1.0"
+#define LIBTEX_VERSION_STRING "0.1.1"
 
 #ifdef __cplusplus
 };

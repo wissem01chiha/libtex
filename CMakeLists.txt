@@ -5,7 +5,6 @@ cmake_minimum_required(VERSION 3.12...3.31)
 
 project(tex LANGUAGES C)
 
-
 list(APPEND CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/cmake")
 
 include(CMakePackageConfigHelpers)
@@ -16,13 +15,8 @@ include(CTest)
 
 set(PROJECT_VERSION "0.1.1")
 set(PROJECT_HOMEPAGE_URL "https://github.com/wissem01chiha/libtex")
-set(PROJECT_DESCRIPTION "A C library for writing Latex Tex files.")
-
-set(CPACK_PACKAGE_VENDOR "libtex")
-set(CPACK_PACKAGE_DESCRIPTION_FILE ${CMAKE_SOURCE_DIR}/README.md)
-set(CPACK_RESOURCE_FILE_LICENSE ${CMAKE_SOURCE_DIR}/LICENSE.md)
-set(CPACK_RESOURCE_FILE_README ${CMAKE_SOURCE_DIR}/README.md)
-set(CPACK_COMPONENTS_ALL Development Documentation Runtime)
+set(PROJECT_DESCRIPTION "A C library for writing Latex tex files.")
+set(PROJECT_AUTHOR "Wissem Chiha")
 
 set(CTEST_OUTPUT_ON_FAILURE TRUE)
 set(CMAKE_C_VISIBILITY_PRESET hidden)
@@ -35,13 +29,12 @@ set(CMAKE_SUPPRESS_DEVELOPER_WARNINGS ON)
 set(CMAKE_WARN_DEPRECATED OFF CACHE BOOL "suppress cmake deprecation message")
 
 option(LIBTEX_BUILD_SHARED "Build shared lib" OFF)
-option(LIBTEX_BUILD_TOOLS "Build tools in the script directory" ON)
-option(LIBTEX_BUILD_TESTS "Build tests" OFF)
-option(LIBTEX_BUILD_REGRESS "Build regression tests" ON)
-option(LIBTEX_BUILD_DOC "Build documentation" ON)
-option(LIBTEX_INSTALL "Install libtex files" ON)
-option(LIBTEX_COVER "Enable coverage reporting" OFF)
-option(LIBTEX_ASAN "Enable AddressSanitizer (ASan)" ON)
+option(LIBTEX_BUILD_TOOLS  "Build tools in the script directory" ON)
+option(LIBTEX_BUILD_TESTS  "Build tests" OFF)
+option(LIBTEX_BUILD_DOC    "Build documentation" ON)
+option(LIBTEX_INSTALL      "Install libtex files" ON)
+option(LIBTEX_COVER        "Enable coverage reporting" OFF)
+option(LIBTEX_ASAN         "Enable AddressSanitizer (ASan)" ON)
 
 if (CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT)
     set(CMAKE_INSTALL_PREFIX "${CMAKE_CURRENT_BINARY_DIR}/install"
@@ -203,9 +196,9 @@ foreach(asset ${tex_test_assets})
     )
 endforeach()
 
-set(tex_pc "${CMAKE_CURRENT_BINARY_DIR}/tex.pc")
+set(tex_pc "${CMAKE_CURRENT_BINARY_DIR}/libtex.pc")
 configure_file(
-    ${CMAKE_CURRENT_SOURCE_DIR}/tex.pc.in
+    ${CMAKE_CURRENT_SOURCE_DIR}/libtex.pc.in
     ${tex_pc}
     @ONLY
 )
@@ -265,11 +258,14 @@ if(LIBTEX_INSTALL)
     )
 endif()
 
-set(CPACK_PACKAGE_NAME "libtex-${PROJECT_VERSION}")
 set(CPACK_GENERATOR "ZIP")
-set(CPACK_PACKAGE_VENDOR "Wissem Chiha")
-set(CPACK_PACKAGE_DESCRIPTION_SUMMARY "A C library for writing Latex Tex files.")
-set(CMAKE_PROJECT_HOMEPAGE_URL "https://github.com/wissem01chiha/libtex")
+set(CPACK_PACKAGE_NAME "libtex-${PROJECT_VERSION}")
+set(CPACK_PACKAGE_VENDOR ${PROJECT_AUTHOR})
+set(CPACK_PACKAGE_DESCRIPTION_SUMMARY ${PROJECT_DESCRIPTION})
+set(CMAKE_PROJECT_HOMEPAGE_URL  ${PROJECT_HOMEPAGE_URL})
+set(CPACK_PACKAGE_DESCRIPTION_FILE ${CMAKE_SOURCE_DIR}/README.md)
+set(CPACK_RESOURCE_FILE_README ${CMAKE_SOURCE_DIR}/README.md)
+set(CPACK_COMPONENTS_ALL Development Documentation Runtime)
 set(CPACK_RESOURCE_FILE_LICENSE "${PROJECT_SOURCE_DIR}/LICENSE.md")
 set(CPACK_PACKAGE_VERSION_MAJOR "${PROJECT_VERSION_MAJOR}")
 set(CPACK_PACKAGE_VERSION_MINOR "${PROJECT_VERSION_MINOR}")
