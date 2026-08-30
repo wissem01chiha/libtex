@@ -7,7 +7,7 @@
 
 #ifndef TEX_EXTERN
 #  ifdef _WIN32
-#    if defined(TEX_BUILD_SHARED)
+#    if defined(LIBTEX_BUILD_SHARED)
 /* Building shared library. */
 #      define TEX_EXTERN __declspec(dllexport)
 #    elif defined(USING_TEX_SHARED)

@@ -48,6 +48,11 @@ extern "C"
   TEX_EXTERN tex_package_option *package_option_create(tex_error_t *err);
 
   /**
+   * Delete a tex_package_option based object
+   */
+  TEX_EXTERN tex_error_t package_option_delete(tex_package_option *opt);
+
+  /**
    * Set the value of a given package option object
    */
   TEX_EXTERN tex_error_t package_option_set_value(tex_package_option *opt,

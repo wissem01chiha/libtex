@@ -39,5 +39,7 @@ const char *tex_language_to_string(tex_language_t lang)
 
 tex_package *language_package(tex_language_t lang, tex_error_t *err)
 {
-  return NULL;
+  tex_package *pkg = package_create(err);
+
+  return pkg;
 }

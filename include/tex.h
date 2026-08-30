@@ -25,5 +25,4 @@
 #include "tex/texutil.h"
 #include "tex/texexport.h"
 #include "tex/content.h"
-#include "tex/texversion.h"
 #include "tex/texcolor.h"
