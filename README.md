@@ -1,6 +1,7 @@
-<p align="center">
-  <img src="docs/src/image/banner.png" alt="libtex" height="200"/>
-</p>
+>[!CAUTION]
+> Project is Under active rework and not ready for production use ! 
+
+# libtex
 
 [![Ubuntu](https://github.com/wissem01chiha/libtex/actions/workflows/ubuntu.yml/badge.svg)](https://github.com/wissem01chiha/libtex/actions/workflows/ubuntu.yml)
 [![MacOS](https://github.com/wissem01chiha/libtex/actions/workflows/macos.yml/badge.svg)](https://github.com/wissem01chiha/libtex/actions/workflows/macos.yml)
@@ -13,15 +14,7 @@
 
 ## Overview
 
-libtex is a C99 library for writing [LaTeX](https://www.latex-project.org/) `.tex` files, designed to be a small utility library for C or C++ projects needing a standardized way to write scientific reports with minimal code. libtex aims to provide features that simplify document formatting and integration of external sources into the document. However, this depends on community contributions and may progress slowly, as it is currently maintained with low priority.
-
-## Feature highlights
-
-- Convert Json files directly into LaTeX list environments.
-- Retrieve author, date, and location details to save editing time.
-- Generate LaTeX‑compatible tables from row data or [csv](https://en.wikipedia.org/wiki/Comma-separated_values) input.
-- Provide built‑in plotting and advanced figure handling for LaTeX documents.
-- Create Latex‑compatible [Tikz](https://tikz.dev/editor/) graphs directly from row input data.
+libtex is a C99 library for writing [Latex](https://www.latex-project.org/) `.tex` files, wriitn at begining for the in[vcov]() project, but can eb integrated in any project, designed to be a small utility library for C or C++ projects needing a standardized way to write scientific reports with minimal code. libtex aims to provide features that simplify document formatting and integration of external sources into the document. However, this depends on community contributions and may progress slowly, as it is currently maintained with low priority.
 
 ## Versioning
 
@@ -46,9 +39,19 @@ pip install -U sphinx
 > [!NOTE]  
 > Windows users need to use `make.bat` instead of plain `make`.
 
-### Official documentation
+## Downloading
 
-## Supported Platforms
+libtex can be downloaded from the [GitHub repository](https://github.com/wissem01chiha/libtex)
+
+For quick integration, the easiest way is to download the precompiled installation package for your platform, available on the release page.
+
+## Build Instructions
+
+libtex uses [cmake](https://cmake.org/) as its main build system. Support for other build systems or workflows may be subject to discussion.
+
+To build libtex from source you need a recent version of CMake (3.12–3.31) and [git](https://git-scm.com/install/) installed.
+
+### Supported Platforms
 
 | **System** | **Supported Versions** | **Supported Compilers** | **Notes** |
 |------------|-------------------------|--------------------------|-----------|
@@ -58,19 +61,7 @@ pip install -U sphinx
 
 Other platforms or compilers have not yet been tested. Please open an issue on [GitHub Issues](https://github.com/wissem01chiha/libtex/issues) for any suspected bugs.
 
-## Downloading
-
-libtex can be downloaded from the [GitHub repository](https://github.com/wissem01chiha/libtex)
-
-For quick integration, the easiest way is to download the precompiled installation package for your platform, available on the release page.
-
-## Build Instructions
-
-libtex uses [cmake](https://cmake.org/) as its main build system.Support for other build systems or workflows may be subject to discussion.
-
-To build libtex from source you need a version of CMake (3.12–3.31) and [Git]().
-
-###  Configure Options
+### Configure Options
 
 | Option                | Description                                               | Default | 
 |------------------------|-----------------------------------------------------------|---------|
@@ -98,4 +89,4 @@ See [Contributing](.github/CONTRIBUTING.md) guide for more informations.
 libtex source code is licensed under the BSD 2-Clause License. Check the [LICENSE](LICENSE.md)
 file for full terms.
 
-Additional copyright and licensing information for non‑code materials is maintained in the [COPYRIGHTS](./COPYRIGHTS.md) file
+Additional copyright and licensing information for non‑code materials is maintained in the [COPYRIGHTS](./COPYRIGHTS.md) file.
